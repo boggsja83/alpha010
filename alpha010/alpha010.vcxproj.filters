@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Model">
+      <UniqueIdentifier>{bf75a074-bc9e-49e8-9497-a3876bd6ffbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller">
+      <UniqueIdentifier>{c12b80e5-620b-411b-a3b5-ff2ddcef4554}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View">
+      <UniqueIdentifier>{e522c107-6fc8-4228-b858-ec62bdb4da4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Utility">
+      <UniqueIdentifier>{8cc16095-1ffe-48e9-990b-46c498fee4eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Utility\Logger">
+      <UniqueIdentifier>{d268d131-2291-4fe0-81c8-0b0c1650abda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\System">
+      <UniqueIdentifier>{52aea1fa-8f7e-4150-a9b8-43b0e1fe01b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\View">
+      <UniqueIdentifier>{46d3b986-eb53-4fc3-8ddf-4d96567bdac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\View\ViewAsset">
+      <UniqueIdentifier>{1752ccf9-0969-40ca-b918-b8e6c1dde03c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\View\RenderMap">
+      <UniqueIdentifier>{3482e7de-f46c-4e1b-b975-896c881e1cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\AssetManager">
+      <UniqueIdentifier>{920d15b0-12c0-4c77-8a36-5a631a620b32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Utility\QuickSort">
+      <UniqueIdentifier>{2295352a-9dab-4cb8-b168-d375b5515ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\State">
+      <UniqueIdentifier>{3ae81b85-2027-43e5-8bdf-9b86b6d32ddf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SDL_.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Controller\System</Filter>
+    </ClCompile>
+    <ClCompile Include="View_Asset.cpp">
+      <Filter>Model\View\ViewAsset</Filter>
+    </ClCompile>
+    <ClCompile Include="Render_List.cpp">
+      <Filter>Model\View\RenderMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset_Mgr.cpp">
+      <Filter>Controller\AssetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SDP.cpp">
+      <Filter>Model\State</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SDL_.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Model\Utility\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Controller\System</Filter>
+    </ClInclude>
+    <ClInclude Include="View_Asset.h">
+      <Filter>Model\View\ViewAsset</Filter>
+    </ClInclude>
+    <ClInclude Include="Render_List.h">
+      <Filter>Model\View\RenderMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset_Mgr.h">
+      <Filter>Controller\AssetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Quick_Sort.h">
+      <Filter>Model\Utility\QuickSort</Filter>
+    </ClInclude>
+    <ClInclude Include="SDP.h">
+      <Filter>Model\State</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
