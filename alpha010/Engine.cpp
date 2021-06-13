@@ -2,11 +2,21 @@
 
 uint8_t ss::engine::init()
 {
+    log("engine::init()");
     //int test[] = {1,54,86,92,42,21,70,14,11,23,65,98,015,11,525,2,45,53,6,7,8,};
     //int n = sizeof(test) / sizeof(test[0]);
 
-    uint8_t ret = 0xFF;
-    ret = init_locals();
+    ret_ = 0xFF;
+
+    ret_ = init_locals();
+    if (ret_) { return ret_; }
+
+    ret_ = push_state(&st_em);
+
+    On_ = true;
+    ret_ = loop();
+
+    
 
 
     //SDL_Texture* ttt = nullptr;
@@ -38,35 +48,54 @@ uint8_t ss::engine::init()
 
     //r = quickSort(test, 0, n-1);
 
-    return ret;
+    return ret_;
 }
 
 uint8_t ss::engine::init_locals()
 {
+    log("engine::init_locals()");
+
     On_ = false;
+    ret_ = 0xFF;
 
     return uint8_t();
 }
 
 uint8_t ss::engine::destroy()
 {
+    log("engine::destroy()");
     return uint8_t();
 }
 
 uint8_t ss::engine::loop()
 {
-    return uint8_t();
+    log("engine::loop()");
+    
+    while (On_)
+    {
+        ret_ = input();
+        ret_ = draw();
+
+
+        On_ = false;
+    }
+
+    return ret_;
 }
 
 uint8_t ss::engine::input()
 {
+    log("engine::input()");
     //poll events
     //broadcast to appropriate entities
-    return uint8_t();
+
+    
+    return input_state();
 }
 
 uint8_t ss::engine::draw()
 {
+    log("engine::draw()");
     // draw all assets?
-    return uint8_t();
+    return draw_state();
 }

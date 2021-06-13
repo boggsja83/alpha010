@@ -34,16 +34,31 @@
     <Filter Include="Model\Utility\QuickSort">
       <UniqueIdentifier>{2295352a-9dab-4cb8-b168-d375b5515ebf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Model\State">
+    <Filter Include="Model\DesignPatterns">
+      <UniqueIdentifier>{c3c02920-7b02-4503-872e-8e209433486a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\DesignPatterns\State">
       <UniqueIdentifier>{3ae81b85-2027-43e5-8bdf-9b86b6d32ddf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\States">
+      <UniqueIdentifier>{e703095e-bf7b-4b33-8b52-6cf34f1e9d27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\States\Engine">
+      <UniqueIdentifier>{5771359f-29a3-43d4-92a4-1c754b3f265f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\StateManager">
+      <UniqueIdentifier>{bd24fbdb-132a-4bbf-8d62-df636c070dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\States\StateManager">
+      <UniqueIdentifier>{631606c2-41aa-44eb-94cb-25a5a425cd10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\Entry">
+      <UniqueIdentifier>{12f75299-cf31-4599-aca7-93e44d8cd6b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDL_.cpp">
       <Filter>View</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Controller</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Controller\System</Filter>
@@ -58,7 +73,19 @@
       <Filter>Controller\AssetManager</Filter>
     </ClCompile>
     <ClCompile Include="SDP.cpp">
-      <Filter>Model\State</Filter>
+      <Filter>Model\DesignPatterns\State</Filter>
+    </ClCompile>
+    <ClCompile Include="ST_ENG_Menu.cpp">
+      <Filter>Model\States\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Mgr.cpp">
+      <Filter>Controller\StateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ST_STMGR_Eng_Menu.cpp">
+      <Filter>Model\States\StateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Controller\Entry</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +111,16 @@
       <Filter>Model\Utility\QuickSort</Filter>
     </ClInclude>
     <ClInclude Include="SDP.h">
-      <Filter>Model\State</Filter>
+      <Filter>Model\DesignPatterns\State</Filter>
+    </ClInclude>
+    <ClInclude Include="ST_ENG_Menu.h">
+      <Filter>Model\States\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Mgr.h">
+      <Filter>Controller\StateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ST_STMGR_Eng_Menu.h">
+      <Filter>Model\States\StateManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

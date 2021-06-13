@@ -14,13 +14,11 @@ namespace ss
 
 	static int rand_int(int _lo, int _hi)
 	{
-		
-		int r = rand() % ++_hi + _lo;
-		return r;
+		return  rand() % ++_hi + _lo;
 	}
 
 	template<typename T>
-	static int partition(T _t[], int _lo, int _hi)
+	static int qs_part(T _t[], int _lo, int _hi)
 	{
 		T p = _t[_hi];
 
@@ -39,17 +37,17 @@ namespace ss
 	}
 
 	template<typename T>
-	static int quickSort(T _t[], int _lo, int _hi)
+	static int qs(T _t[], int _lo, int _hi)
 	{
 		int _p = -1;
 		int r = -1;
 
 		if (_lo < _hi)
 		{
-			_p = partition(_t, _lo, _hi);
+			_p = qs_part(_t, _lo, _hi);
 
-			r = quickSort(_t, _lo, _p - 1);
-			r = quickSort(_t, _p + 1, _hi);
+			r = qs(_t, _lo, _p - 1);
+			r = qs(_t, _p + 1, _hi);
 		}
 		return 0;
 	}

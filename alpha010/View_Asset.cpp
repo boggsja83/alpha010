@@ -2,14 +2,13 @@
 
 uint8_t ss::view_asset::init()
 {
-    //raw_text = nullptr;
-
+    log("view_asset::init()");
     return uint8_t();
 }
 
 uint8_t ss::view_asset::destroy()
 {
-    //return sdl_::destroy_text(raw_text);
+    log("view_asset::destroy()");
     return 0x0;
 }
 

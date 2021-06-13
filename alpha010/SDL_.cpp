@@ -80,7 +80,7 @@ uint8_t ss::sdl_::init_locals()
 	return 0x0;
 }
 
-int ss::sdl_::init_sdl_video()
+int ss::sdl_::init_sdl_video() const
 {
 	SDL_ClearError();
 	int r = SDL_InitSubSystem(SDL_INIT_VIDEO);
@@ -99,7 +99,7 @@ int ss::sdl_::init_sdl_video()
 	}
 }
 
-uint8_t ss::sdl_::init_sdl_img()
+uint8_t ss::sdl_::init_sdl_img() const
 {
 	//Initialize PNG loading
 	Uint32 flags = IMG_INIT_PNG;
@@ -117,7 +117,7 @@ uint8_t ss::sdl_::init_sdl_img()
 	}
 }
 
-SDL_Window* ss::sdl_::create_win(const char* _title, int _x, int _y, int _w, int _h, Uint32 _flags)
+SDL_Window* ss::sdl_::create_win(char const* _title, int _x, int _y, int _w, int _h, Uint32 _flags) const
 {
 	SDL_Window* temp = nullptr;
 
@@ -150,7 +150,7 @@ SDL_Window* ss::sdl_::create_win(const char* _title, int _x, int _y, int _w, int
 	return temp;
 }
 
-SDL_Renderer* ss::sdl_::create_rend(SDL_Window* _win, int _index, Uint32 _flags)
+SDL_Renderer* ss::sdl_::create_rend(SDL_Window* _win, int _index, Uint32 _flags) const
 {
 	SDL_Renderer* temp = nullptr;
 	SDL_ClearError();
@@ -171,7 +171,7 @@ SDL_Renderer* ss::sdl_::create_rend(SDL_Window* _win, int _index, Uint32 _flags)
 	return temp;
 }
 
-SDL_Surface* ss::sdl_::create_surf_from_path(const char* _path)
+SDL_Surface* ss::sdl_::create_surf_from_path(char const* _path) const
 {
 	//SDL_Surface *IMG_Load(const char *file)
 
@@ -191,7 +191,7 @@ SDL_Surface* ss::sdl_::create_surf_from_path(const char* _path)
 	return temp;
 }
 
-SDL_Texture* ss::sdl_::create_text(SDL_Renderer* _rend, Uint32 _format, int _access, int _w, int _h)
+SDL_Texture* ss::sdl_::create_text(SDL_Renderer* _rend, Uint32 _format, int _access, int _w, int _h) const
 {
 	// format can be whole lot of things...
 	// 
@@ -220,7 +220,7 @@ SDL_Texture* ss::sdl_::create_text(SDL_Renderer* _rend, Uint32 _format, int _acc
 	return text;
 }
 
-SDL_Texture* ss::sdl_::create_text_from_surf(SDL_Renderer* _rend, SDL_Surface* _surf)
+SDL_Texture* ss::sdl_::create_text_from_surf(SDL_Renderer* _rend, SDL_Surface* _surf) const
 {
 	SDL_Texture* t = nullptr;
 
@@ -240,7 +240,7 @@ SDL_Texture* ss::sdl_::create_text_from_surf(SDL_Renderer* _rend, SDL_Surface* _
 	return t;
 }
 
-SDL_Texture* ss::sdl_::create_text_from_path(SDL_Renderer* _rend, const char* _path)
+SDL_Texture* ss::sdl_::create_text_from_path(SDL_Renderer* _rend, char const* _path) const
 {
 	SDL_Surface* temp_s = nullptr;
 	SDL_Texture* temp_t = nullptr;
@@ -278,13 +278,13 @@ int ss::sdl_::draw()
 
 	int r = rend_cpy(Rend_, Texture_, NULL, NULL);
 	if (r) return r;
-	switch (r)
-	{
-	case -1:
-		break;
-	default:
-		break;
-	}
+	//switch (r)
+	//{
+	//case -1:
+	//	break;
+	//default:
+	//	break;
+	//}
 
 	//qSDL_UpdateWindowSurface(Win_);
 	SDL_RenderPresent(Rend_);
@@ -292,7 +292,7 @@ int ss::sdl_::draw()
 	return r;
 }
 
-int ss::sdl_::set_rend_targ(SDL_Renderer* _r, SDL_Texture* _t)
+int ss::sdl_::set_rend_targ(SDL_Renderer* _r, SDL_Texture* _t) const
 {
 	SDL_GetError();
 	int r = SDL_SetRenderTarget(_r, _t);
@@ -309,7 +309,7 @@ int ss::sdl_::set_rend_targ(SDL_Renderer* _r, SDL_Texture* _t)
 	return r;
 }
 
-int32_t ss::sdl_::get_pixel_format(SDL_RendererInfo* _ri)
+int32_t ss::sdl_::get_pixel_format(SDL_RendererInfo* _ri) const
 {
 	//int n = _ri->num_texture_formats;
 	//Uint32 u = 0;
@@ -323,7 +323,7 @@ int32_t ss::sdl_::get_pixel_format(SDL_RendererInfo* _ri)
 	return _ri->texture_formats[0];
 }
 
-int ss::sdl_::get_rend_info(SDL_Renderer* _r, SDL_RendererInfo* _ri)
+int ss::sdl_::get_rend_info(SDL_Renderer* _r, SDL_RendererInfo* _ri) const
 {
 	//int SDL_GetRendererInfo(SDL_Renderer * renderer,
 	//	SDL_RendererInfo * info)
@@ -341,7 +341,7 @@ int ss::sdl_::get_rend_info(SDL_Renderer* _r, SDL_RendererInfo* _ri)
 	return r;
 }
 
-int ss::sdl_::query_text(SDL_Texture* _text, Uint32* _format, int* _access, int* _w, int* _h)
+int ss::sdl_::query_text(SDL_Texture* _text, Uint32* _format, int* _access, int* _w, int* _h) const
 {
 	//int SDL_QueryTexture(SDL_Texture * texture,
 	//	Uint32 * format, int* access,
@@ -369,7 +369,7 @@ int ss::sdl_::query_text(SDL_Texture* _text, Uint32* _format, int* _access, int*
 	return r;
 }
 
-int ss::sdl_::rend_cpy(SDL_Renderer* _rend, SDL_Texture* _text, const SDL_Rect* _src, const SDL_Rect* _dst)
+int ss::sdl_::rend_cpy(SDL_Renderer* _rend, SDL_Texture* _text, SDL_Rect const* _src, SDL_Rect const* _dst) const
 {
 	SDL_ClearError();
 	int r = SDL_RenderCopy(_rend, _text, _src, _dst);
@@ -404,7 +404,7 @@ uint8_t ss::sdl_::destroy()
 	return 0x0;
 }
 
-uint8_t ss::sdl_::destroy_win(SDL_Window* _w)
+uint8_t ss::sdl_::destroy_win(SDL_Window* _w) const
 {
 	SDL_ClearError();
 	SDL_DestroyWindow(_w);
@@ -423,7 +423,7 @@ uint8_t ss::sdl_::destroy_win(SDL_Window* _w)
 	}
 }
 
-uint8_t ss::sdl_::destroy_rend(SDL_Renderer* _r)
+uint8_t ss::sdl_::destroy_rend(SDL_Renderer* _r) const
 {
 	SDL_ClearError();
 	SDL_DestroyRenderer(_r);
@@ -442,7 +442,7 @@ uint8_t ss::sdl_::destroy_rend(SDL_Renderer* _r)
 	}
 }
 
-uint8_t ss::sdl_::destroy_text(SDL_Texture* _t)
+uint8_t ss::sdl_::destroy_text(SDL_Texture* _t) const
 {
 	SDL_ClearError();
 	SDL_DestroyTexture(_t);
@@ -450,7 +450,7 @@ uint8_t ss::sdl_::destroy_text(SDL_Texture* _t)
 	if (s == "")
 	{
 		// good
-		log("destroy_text(" << _t << ")");
+		log("destroy_text(" << std::hex << (int32_t)_t << ")");
 		return 0x0;
 	}
 	else
@@ -461,7 +461,7 @@ uint8_t ss::sdl_::destroy_text(SDL_Texture* _t)
 	}
 }
 
-uint8_t ss::sdl_::destroy_surf(SDL_Surface* _s)
+uint8_t ss::sdl_::destroy_surf(SDL_Surface* _s) const
 {
 	// safe to pass null to
 
@@ -480,7 +480,7 @@ uint8_t ss::sdl_::destroy_surf(SDL_Surface* _s)
 	}
 }
 
-uint8_t ss::sdl_::destroy_sdl()
+uint8_t ss::sdl_::destroy_sdl() const
 {
 	SDL_ClearError();
 	SDL_Quit();
@@ -499,7 +499,7 @@ uint8_t ss::sdl_::destroy_sdl()
 	}
 }
 
-uint8_t ss::sdl_::destroy_sdl_video()
+uint8_t ss::sdl_::destroy_sdl_video() const
 {
 	SDL_ClearError();
 	SDL_QuitSubSystem(SDL_INIT_VIDEO);
@@ -518,7 +518,7 @@ uint8_t ss::sdl_::destroy_sdl_video()
 	}
 }
 
-uint8_t ss::sdl_::destroy_sdl_image()
+uint8_t ss::sdl_::destroy_sdl_image() const
 {
 	std::string s = IMG_GetError();
 	IMG_Quit();

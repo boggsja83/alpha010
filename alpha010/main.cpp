@@ -1,12 +1,14 @@
 #include "Engine.h"
 
+using namespace ss;
+
 int main(int argc, char* argv[])
 {
 	system("cls");
-	ss::engine sL1m;
+	ss::engine sl1m;
 
-	SDL_Delay(10000);
-	
+	SDL_Delay(5000);
+
 
 
 	//sdl_ view_;

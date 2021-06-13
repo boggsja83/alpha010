@@ -2,12 +2,12 @@
 
 uint8_t ss::render_list::init()
 {
-
+	log("render_list::init()");
 	return 0x0;
 }
 
 uint8_t ss::render_list::destroy()
 {
-
+	log("render_list::destroy()");
 	return 0x0;
 }

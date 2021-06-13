@@ -3,7 +3,7 @@
 
 #include "Logger.h"
 
-#include <array>
+#include <stack>
 
 namespace ss
 {
@@ -24,13 +24,16 @@ namespace ss
 			log("~state");
 		}
 
-		virtual uint8_t enter() =0 ;
-		virtual uint8_t pause() = 0;
-		virtual uint8_t resume() = 0;
-		virtual uint8_t exit() = 0;
+		//virtual uint8_t init() = 0;
+		//virtual uint8_t destroy() = 0;
 
-		virtual uint8_t input() = 0;
-		virtual uint8_t draw() = 0;
+		virtual uint8_t enter()	 const = 0;
+		virtual uint8_t pause()	 const = 0;
+		virtual uint8_t resume() const = 0;
+		virtual uint8_t exit()	 const = 0;
+								 
+		virtual uint8_t draw()	 const = 0;
+		virtual uint8_t input()	 const = 0;
 	};	// END state
 
 	class state_holder
@@ -40,23 +43,30 @@ namespace ss
 		state_holder()
 		{
 			log("state_holder()");
+			uint8_t r = init();
 		}
 		~state_holder()
 		{
 			log("~state_holder()");
+			uint8_t r = destroy();
 		}
 
+		// general state functions
 		virtual uint8_t pop_state();
-		virtual uint8_t push_state(const state*);
+		virtual uint8_t push_state(state*);
 
-		virtual uint8_t enter_state();
-		virtual uint8_t pause_state();
-		virtual uint8_t resume_state();
-		virtual uint8_t exit_state();
+		virtual uint8_t enter_state() const;
+		virtual uint8_t pause_state() const;
+		virtual uint8_t resume_state() const;
+		virtual uint8_t exit_state() const;
 
-		virtual uint8_t input_state();//??
-		virtual uint8_t draw_state();//??
+		// specific state functions for this project
+		virtual uint8_t input_state() const;//??
+		virtual uint8_t draw_state() const;//??
 
-		std::array<state, MAX_STATE_STACK_SIZE> Stack_;
+		//d::array<state, MAX_STATE_STACK_SIZE> Stack_;
+		std::stack<state*> Stack_;
+		uint8_t init();
+		uint8_t destroy();
 	};
 }	// END	state_mgr
