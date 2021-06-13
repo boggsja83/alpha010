@@ -58,7 +58,7 @@ uint8_t ss::engine::init_locals()
     On_ = false;
     ret_ = 0xFF;
 
-    return uint8_t();
+    return 0;
 }
 
 uint8_t ss::engine::destroy()
@@ -88,6 +88,8 @@ uint8_t ss::engine::input()
     log("engine::input()");
     //poll events
     //broadcast to appropriate entities
+    //prob not broadcast.  just state::update 
+    //called by state_holder::update()
 
     
     return input_state();
