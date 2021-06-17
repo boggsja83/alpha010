@@ -1,5 +1,8 @@
 #pragma once
+
+#include "Logger.h"
 #include "SDP.h"
+#include "VA_eng_menu.h"
 
 namespace ss
 {
@@ -9,13 +12,13 @@ namespace ss
     private:
     public:
         // BEGIN    state inherits
-        virtual uint8_t enter() const override;
-        virtual uint8_t pause() const override;
-        virtual uint8_t resume() const override;
-        virtual uint8_t exit() const override;
+        virtual uint8_t enter()  override;
+        virtual uint8_t pause()  override;
+        virtual uint8_t resume()  override;
+        virtual uint8_t exit()  override;
 
-        virtual uint8_t input() const override;
-        virtual uint8_t draw() const override;
+        virtual uint8_t input()  override;
+        virtual uint8_t draw()  override;
         // END      state inherits
 
         st_eng_menu()
@@ -32,7 +35,9 @@ namespace ss
         uint8_t init();
         uint8_t destroy();
         
-        char const* asset_name;
+        //this will be asset instead
+        //char const* asset_name;
+        va_eng_menu va_em;
 
     }; // END  class st_eng_menu
 } // END    namespace

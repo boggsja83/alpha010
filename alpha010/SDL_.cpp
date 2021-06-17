@@ -54,7 +54,7 @@ uint8_t ss::sdl_::init_locals()
 	height_win = 600;
 	x_win = 200;
 	y_win = 200;
-	flags_win = (int32_t)(SDL_WINDOW_SHOWN);// | SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI);
+	flags_win = (int32_t)(SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);// | SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI);
 
 	r_surf = (int8_t)0xFF;
 	g_surf = (int8_t)0x00;

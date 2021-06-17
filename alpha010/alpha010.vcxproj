@@ -135,9 +135,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="SDP.cpp" />
-    <ClCompile Include="State_Mgr.cpp" />
-    <ClCompile Include="ST_ENG_Menu.cpp" />
-    <ClCompile Include="ST_STMGR_Eng_Menu.cpp" />
+    <ClCompile Include="ST_eng_menu.cpp" />
+    <ClCompile Include="VA_eng_menu.cpp" />
     <ClCompile Include="View_Asset.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,9 +147,8 @@
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="SDP.h" />
-    <ClInclude Include="State_Mgr.h" />
-    <ClInclude Include="ST_ENG_Menu.h" />
-    <ClInclude Include="ST_STMGR_Eng_Menu.h" />
+    <ClInclude Include="ST_eng_menu.h" />
+    <ClInclude Include="VA_eng_menu.h" />
     <ClInclude Include="View_Asset.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

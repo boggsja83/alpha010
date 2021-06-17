@@ -46,14 +46,17 @@
     <Filter Include="Model\States\Engine">
       <UniqueIdentifier>{5771359f-29a3-43d4-92a4-1c754b3f265f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controller\StateManager">
-      <UniqueIdentifier>{bd24fbdb-132a-4bbf-8d62-df636c070dcc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Model\States\StateManager">
-      <UniqueIdentifier>{631606c2-41aa-44eb-94cb-25a5a425cd10}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Controller\Entry">
       <UniqueIdentifier>{12f75299-cf31-4599-aca7-93e44d8cd6b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Assets">
+      <UniqueIdentifier>{5180612f-d904-4c93-b6cc-5c40cf24b92a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Assets\View">
+      <UniqueIdentifier>{61a70fb0-a3d0-4bce-aea3-e9cc1d7d5dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Assets\View\EngMenu">
+      <UniqueIdentifier>{302995be-9e47-424d-a531-468404ffdfea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,17 +78,14 @@
     <ClCompile Include="SDP.cpp">
       <Filter>Model\DesignPatterns\State</Filter>
     </ClCompile>
-    <ClCompile Include="ST_ENG_Menu.cpp">
+    <ClCompile Include="ST_eng_menu.cpp">
       <Filter>Model\States\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="State_Mgr.cpp">
-      <Filter>Controller\StateManager</Filter>
-    </ClCompile>
-    <ClCompile Include="ST_STMGR_Eng_Menu.cpp">
-      <Filter>Model\States\StateManager</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Controller\Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="VA_eng_menu.cpp">
+      <Filter>Model\Assets\View\EngMenu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,14 +113,11 @@
     <ClInclude Include="SDP.h">
       <Filter>Model\DesignPatterns\State</Filter>
     </ClInclude>
-    <ClInclude Include="ST_ENG_Menu.h">
+    <ClInclude Include="ST_eng_menu.h">
       <Filter>Model\States\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="State_Mgr.h">
-      <Filter>Controller\StateManager</Filter>
-    </ClInclude>
-    <ClInclude Include="ST_STMGR_Eng_Menu.h">
-      <Filter>Model\States\StateManager</Filter>
+    <ClInclude Include="VA_eng_menu.h">
+      <Filter>Model\Assets\View\EngMenu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

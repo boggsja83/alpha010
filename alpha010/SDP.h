@@ -17,23 +17,23 @@ namespace ss
 	public:
 		state()
 		{
-			log("state");
+			log("state()");
 		}
 		~state()
 		{
-			log("~state");
+			log("~state()");
 		}
 
 		//virtual uint8_t init() = 0;
 		//virtual uint8_t destroy() = 0;
 
-		virtual uint8_t enter()	 const = 0;
-		virtual uint8_t pause()	 const = 0;
-		virtual uint8_t resume() const = 0;
-		virtual uint8_t exit()	 const = 0;
+		virtual uint8_t enter()	 = 0;
+		virtual uint8_t pause()	 = 0;
+		virtual uint8_t resume() = 0;
+		virtual uint8_t exit()	 = 0;
 								 
-		virtual uint8_t draw()	 const = 0;
-		virtual uint8_t input()	 const = 0;
+		virtual uint8_t draw()	 = 0;
+		virtual uint8_t input()	 = 0;
 	};	// END state
 
 	class state_holder

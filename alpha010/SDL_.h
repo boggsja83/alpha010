@@ -9,7 +9,7 @@
 
 namespace ss
 {
-
+	// this should really be a bunch of static functions
 	class sdl_
 	{
 		// BEGIN	Singleton Stack

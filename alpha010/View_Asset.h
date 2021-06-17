@@ -32,13 +32,13 @@ namespace ss
 		uint8_t			destroy();
 		//uint8_t			draw();
 
-		const char*		asset_name;
-		//const char*		asset_path;
+		char const*		asset_name;
+		char const*		asset_path;
 
 		SDL_Rect		src_rect;
 		SDL_Rect		dst_rect;
 		
-		uint8_t			z_order;
+		uint8_t			z_ord;
 
 		//SDL_Texture*	raw_text;
 
