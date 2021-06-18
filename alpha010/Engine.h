@@ -2,10 +2,11 @@
 
 #include "Logger.h"
 
-#include "SDL_.h"
 #include "SDP.h"
 
-#include "ST_ENG_Menu.h"
+#include "ViewController.h"
+
+#include "STengMenu.h"
 
 //#include "Asset_Mgr.h"
 //#include "View_Asset.h"
@@ -53,7 +54,9 @@ namespace ss
 		uint8_t destroy();
 
 		// view controller
-		sdl_ sdl_inst;
+		//sdl_ sdl_inst;
+		ViewController View_;
+
 
 		// input controller
 		

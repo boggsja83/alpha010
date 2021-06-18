@@ -2,7 +2,6 @@
 
 #include "Logger.h"
 #include "SDP.h"
-#include "VA_eng_menu.h"
 
 namespace ss
 {
@@ -37,7 +36,6 @@ namespace ss
         
         //this will be asset instead
         //char const* asset_name;
-        va_eng_menu va_em;
 
     }; // END  class st_eng_menu
 } // END    namespace

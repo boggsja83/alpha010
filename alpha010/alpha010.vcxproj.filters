@@ -10,29 +10,8 @@
     <Filter Include="View">
       <UniqueIdentifier>{e522c107-6fc8-4228-b858-ec62bdb4da4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Model\Utility">
-      <UniqueIdentifier>{8cc16095-1ffe-48e9-990b-46c498fee4eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Model\Utility\Logger">
-      <UniqueIdentifier>{d268d131-2291-4fe0-81c8-0b0c1650abda}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Controller\System">
       <UniqueIdentifier>{52aea1fa-8f7e-4150-a9b8-43b0e1fe01b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Model\View">
-      <UniqueIdentifier>{46d3b986-eb53-4fc3-8ddf-4d96567bdac5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Model\View\ViewAsset">
-      <UniqueIdentifier>{1752ccf9-0969-40ca-b918-b8e6c1dde03c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Model\View\RenderMap">
-      <UniqueIdentifier>{3482e7de-f46c-4e1b-b975-896c881e1cf7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Controller\AssetManager">
-      <UniqueIdentifier>{920d15b0-12c0-4c77-8a36-5a631a620b32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Model\Utility\QuickSort">
-      <UniqueIdentifier>{2295352a-9dab-4cb8-b168-d375b5515ebf}</UniqueIdentifier>
     </Filter>
     <Filter Include="Model\DesignPatterns">
       <UniqueIdentifier>{c3c02920-7b02-4503-872e-8e209433486a}</UniqueIdentifier>
@@ -46,78 +25,75 @@
     <Filter Include="Model\States\Engine">
       <UniqueIdentifier>{5771359f-29a3-43d4-92a4-1c754b3f265f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controller\Entry">
+    <Filter Include="Controller\Application">
       <UniqueIdentifier>{12f75299-cf31-4599-aca7-93e44d8cd6b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Model\Assets">
-      <UniqueIdentifier>{5180612f-d904-4c93-b6cc-5c40cf24b92a}</UniqueIdentifier>
+    <Filter Include="View\Model">
+      <UniqueIdentifier>{9861055e-eabc-4399-9c33-33ff2fc7edb9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Model\Assets\View">
-      <UniqueIdentifier>{61a70fb0-a3d0-4bce-aea3-e9cc1d7d5dce}</UniqueIdentifier>
+    <Filter Include="View\Controller">
+      <UniqueIdentifier>{ea730c81-3345-4e14-8b35-9854bec9aa49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Model\Assets\View\EngMenu">
-      <UniqueIdentifier>{302995be-9e47-424d-a531-468404ffdfea}</UniqueIdentifier>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{8cc16095-1ffe-48e9-990b-46c498fee4eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Logger">
+      <UniqueIdentifier>{d268d131-2291-4fe0-81c8-0b0c1650abda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\QuickSort">
+      <UniqueIdentifier>{2295352a-9dab-4cb8-b168-d375b5515ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View\Wrapper">
+      <UniqueIdentifier>{7c3a218c-dcf6-475a-8529-bb92d10b4031}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SDL_.cpp">
-      <Filter>View</Filter>
-    </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Controller\System</Filter>
-    </ClCompile>
-    <ClCompile Include="View_Asset.cpp">
-      <Filter>Model\View\ViewAsset</Filter>
-    </ClCompile>
-    <ClCompile Include="Render_List.cpp">
-      <Filter>Model\View\RenderMap</Filter>
-    </ClCompile>
-    <ClCompile Include="Asset_Mgr.cpp">
-      <Filter>Controller\AssetManager</Filter>
     </ClCompile>
     <ClCompile Include="SDP.cpp">
       <Filter>Model\DesignPatterns\State</Filter>
     </ClCompile>
-    <ClCompile Include="ST_eng_menu.cpp">
+    <ClCompile Include="STengMenu.cpp">
       <Filter>Model\States\Engine</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Controller\Entry</Filter>
+      <Filter>Controller\Application</Filter>
     </ClCompile>
-    <ClCompile Include="VA_eng_menu.cpp">
-      <Filter>Model\Assets\View\EngMenu</Filter>
+    <ClCompile Include="SDLwrapper.cpp">
+      <Filter>View\Wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewController.cpp">
+      <Filter>View\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SDL_.h">
-      <Filter>View</Filter>
-    </ClInclude>
     <ClInclude Include="Logger.h">
-      <Filter>Model\Utility\Logger</Filter>
+      <Filter>Utility\Logger</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
       <Filter>Controller\System</Filter>
     </ClInclude>
-    <ClInclude Include="View_Asset.h">
-      <Filter>Model\View\ViewAsset</Filter>
-    </ClInclude>
-    <ClInclude Include="Render_List.h">
-      <Filter>Model\View\RenderMap</Filter>
-    </ClInclude>
-    <ClInclude Include="Asset_Mgr.h">
-      <Filter>Controller\AssetManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Quick_Sort.h">
-      <Filter>Model\Utility\QuickSort</Filter>
+    <ClInclude Include="QuickSort.h">
+      <Filter>Utility\QuickSort</Filter>
     </ClInclude>
     <ClInclude Include="SDP.h">
       <Filter>Model\DesignPatterns\State</Filter>
     </ClInclude>
-    <ClInclude Include="ST_eng_menu.h">
+    <ClInclude Include="STengMenu.h">
       <Filter>Model\States\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="VA_eng_menu.h">
-      <Filter>Model\Assets\View\EngMenu</Filter>
+    <ClInclude Include="WinProp.h">
+      <Filter>View\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="RendProp.h">
+      <Filter>View\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewController.h">
+      <Filter>View\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLwrapper.h">
+      <Filter>View\Wrapper</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
