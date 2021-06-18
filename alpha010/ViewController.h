@@ -15,13 +15,13 @@ namespace ss
 		{ 
 			log("ViewController()"); 
 			rt ret = init(); 
-			log("ViewController::init() ret: "<<(int)ret<<", "<<e_ss_ret_m[(int)ret]);
+			log("ViewController::init() ret: "<<(int)ret<<", "<<rt_ret_m[(int)ret]);
 		}
 		~ViewController() 
 		{ 
 			log("ViewController()"); 
 			rt ret = destroy(); 
-			log("ViewController::destroy() ret: " << (int)ret << ", " << e_ss_ret_m[(int)ret]);
+			log("ViewController::destroy() ret: " << (int)ret << ", " << rt_ret_m[(int)ret]);
 		}
 
 		rt init();

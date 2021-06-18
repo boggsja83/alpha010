@@ -3,7 +3,7 @@
 namespace ss
 {
 	// (this was just for enum not enum class...) C-style way, C++ doesnt really care (e_ret_t or blank there)
-	typedef enum class e_ss_ret_t
+	typedef enum class rt_ret_t
 	{
 		SUCCESS,					INITIAL,
 		
@@ -12,8 +12,6 @@ namespace ss
 		FAIL_SET_REND_DRAW_COLOR,	FAIL_SET_REND_TARG,
 
 		FAIL_GET_RENDER_INFO,
-
-		FAIL_QUERY_TEXT,
 
 		FAIL_INIT_SDL,				FAIL_INIT_SDL_VIDEO,	FAIL_INIT_IMG,
 		
@@ -24,6 +22,7 @@ namespace ss
 		FAIL_DESTROY_SURF,			FAIL_DESTROY_SDL,		FAIL_DESTROY_SDL_VIDEO,
 		FAIL_DESTROY_SDL_IMG,
 
+		FAIL_QUERY_TEXT,
 		FAIL_FILL_RECT,
 		FAIL_UPDATE_WIN_SURF,
 		FAIL_REND_CPY,
@@ -34,7 +33,7 @@ namespace ss
 					//...unless i make levels like FAIL_INIT_SDL=200; starts 200 level...
 	} rt;
 
-	static char const *const e_ss_ret_m[] =
+	static char const *const rt_ret_m[] =
 	{
 		"SUCCESS",					"INITIAL",
 
@@ -43,8 +42,6 @@ namespace ss
 		"FAIL_SET_REND_DRAW_COLOR",	"FAIL_SET_REND_TARG",
 
 		"FAIL_GET_RENDER_INFO",
-
-		"FAIL_QUERY_TEXT",
 
 		"FAIL_INIT_SDL",			"FAIL_INIT_SDL_VIDEO",	"FAIL_INIT_IMG",
 
@@ -55,12 +52,13 @@ namespace ss
 		"FAIL_DESTROY_SURF",		"FAIL_DESTROY_SDL",		"FAIL_DESTROY_SDL_VIDEO",
 		"FAIL_DESTROY_SDL_IMG",
 
+		"FAIL_QUERY_TEXT",
 		"FAIL_FILL_RECT",
 		"FAIL_UPDATE_WIN_SURF",
 		"FAIL_REND_CPY",
 
 
-		"RET_T_COUNT/not really used(bufferoverflow-ish)"
+		"RET_T_COUNT"
 	};
 
 

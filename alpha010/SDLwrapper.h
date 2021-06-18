@@ -249,9 +249,9 @@ namespace ss
 	SDL_Surface* ss::get_win_surf(SDL_Window* _win)
 	{
 		SDL_ClearError();
-		SDL_Surface* ret = SDL_GetWindowSurface(_win);
-		if (!ret) { log("ss::get_win_surf(" << _win << ") error: " << SDL_GetError()); }
-		return ret;
+		SDL_Surface* temp_s = SDL_GetWindowSurface(_win);
+		if (!temp_s) { log("ss::get_win_surf(" << _win << ") error: " << SDL_GetError()); }
+		return temp_s;
 	}
 
 	ss::rt ss::update_win_surf(SDL_Window* _win)
@@ -263,11 +263,10 @@ namespace ss
 			log("ss:update_win_surf(" << _win << ") error: " << SDL_GetError()); 
 			return rt::FAIL_UPDATE_WIN_SURF;
 		}
-
 		return rt::SUCCESS;
 	}
 
-	ss::rt rend_cpy(SDL_Renderer* _rend, SDL_Texture* _text, SDL_Rect const* _src, SDL_Rect const* _dst)
+	ss::rt ss::rend_cpy(SDL_Renderer* _rend, SDL_Texture* _text, SDL_Rect const* _src, SDL_Rect const* _dst)
 	{
 		SDL_ClearError();
 		int ret = SDL_RenderCopy(_rend, _text, _src, _dst);
@@ -339,8 +338,6 @@ namespace ss
 
 	ss::rt ss::destroy_surf(SDL_Surface* _s)
 	{
-		// safe to pass null to
-
 		SDL_ClearError();
 		SDL_FreeSurface(_s);
 		std::string s = SDL_GetError();

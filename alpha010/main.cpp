@@ -9,11 +9,8 @@ int main(int argc, char* argv[])
 	ss::engine sl1m;
 
 
-	//for (int i=0;i<=(int)ss::e_ss_ret_t::RET_T_COUNT;++i)
-	//{
-	//	log(i <<": "<<e_ss_ret_m[i]);
-	//}
-
+	for (int i=0;i<=(int)ss::rt_ret_t::RET_T_COUNT;++i) log(i <<": "<<rt_ret_m[i]);
+	
 
 	SDL_Delay(2000);
 
