@@ -1,29 +1,29 @@
 #include "SDP.h"
 
-uint8_t ss::state_holder::pop_state()
+ss::rt ss::state_holder::pop_state()
 {
-	uint8_t r = 0xFF;
+	rt ret = rt::INITIAL;
 
-	if (Stack_.empty()) { return r; }
+	if (Stack_.empty()) { return ret; }
 
-	r = Stack_.top()->exit();
-	if (r) { return r; }
+	ret = Stack_.top()->exit();
+	if (ret!=rt::SUCCESS) { return ret; }
 
 	Stack_.pop();
 		
-	if (!Stack_.empty()) { r = Stack_.top()->resume(); }
+	if (!Stack_.empty()) { ret = Stack_.top()->resume(); }
 		
-	return r;
+	return ret;
 }
 
-uint8_t ss::state_holder::push_state(state* _state)
+ss::rt ss::state_holder::push_state(state* _state)
 {
-	uint8_t r = 0xFF;
+	rt ret = rt::INITIAL;
 
 	if(!Stack_.empty())
 	{
-		r = Stack_.top()->pause();
-		if (r) { return r; }
+		ret = Stack_.top()->pause();
+		if (ret!=rt::SUCCESS) { return ret; }
 	}
 
 	Stack_.push(_state);
@@ -31,48 +31,48 @@ uint8_t ss::state_holder::push_state(state* _state)
 	return Stack_.top()->enter();
 }
 
-uint8_t ss::state_holder::enter_state() const
+ss::rt ss::state_holder::enter_state() const
 {
-	if (Stack_.empty()) { return 0xFF; }
+	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->enter();
 }
 
-uint8_t ss::state_holder::pause_state() const
+ss::rt ss::state_holder::pause_state() const
 {
-	if (Stack_.empty()) { return 0xFF; }
+	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->pause();
 }
 
-uint8_t ss::state_holder::resume_state() const
+ss::rt ss::state_holder::resume_state() const
 {
-	if (Stack_.empty()) { return 0xFF; }
+	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->resume();
 }
 
-uint8_t ss::state_holder::exit_state() const
+ss::rt ss::state_holder::exit_state() const
 {
-	if (Stack_.empty()) { return 0xFF; }
+	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->exit();
 }
 
-uint8_t ss::state_holder::input_state() const
+ss::rt ss::state_holder::input_state() const
 {
-	if (Stack_.empty()) { return 0xFF; }
+	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->input();
 }
 
-uint8_t ss::state_holder::draw_state() const
+ss::rt ss::state_holder::draw_state() const
 {
-	if (Stack_.empty()) { return 0xFF; }
+	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->draw();
 }
 
-uint8_t ss::state_holder::init()
+ss::rt ss::state_holder::init()
 {
-	return uint8_t();
+	return rt();
 }
 
-uint8_t ss::state_holder::destroy()
+ss::rt ss::state_holder::destroy()
 {
-	return uint8_t();
+	return rt();
 }

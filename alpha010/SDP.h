@@ -1,7 +1,7 @@
 #pragma once
 // State Design Pattern
 
-#include "Logger.h"
+#include "ALL.h"
 
 #include <stack>
 
@@ -27,13 +27,13 @@ namespace ss
 		//virtual uint8_t init() = 0;
 		//virtual uint8_t destroy() = 0;
 
-		virtual uint8_t enter()	 = 0;
-		virtual uint8_t pause()	 = 0;
-		virtual uint8_t resume() = 0;
-		virtual uint8_t exit()	 = 0;
+		virtual rt enter()	 = 0;
+		virtual rt pause()	 = 0;
+		virtual rt resume() = 0;
+		virtual rt exit()	 = 0;
 								 
-		virtual uint8_t draw()	 = 0;
-		virtual uint8_t input()	 = 0;
+		virtual rt draw()	 = 0;
+		virtual rt input()	 = 0;
 	};	// END state
 
 	class state_holder
@@ -43,30 +43,30 @@ namespace ss
 		state_holder()
 		{
 			log("state_holder()");
-			uint8_t r = init();
+			rt ret = init();
 		}
 		~state_holder()
 		{
 			log("~state_holder()");
-			uint8_t r = destroy();
+			rt ret = destroy();
 		}
 
 		// general state functions
-		virtual uint8_t pop_state();
-		virtual uint8_t push_state(state*);
+		virtual rt pop_state();
+		virtual rt push_state(state*);
 
-		virtual uint8_t enter_state() const;
-		virtual uint8_t pause_state() const;
-		virtual uint8_t resume_state() const;
-		virtual uint8_t exit_state() const;
+		virtual rt enter_state() const;
+		virtual rt pause_state() const;
+		virtual rt resume_state() const;
+		virtual rt exit_state() const;
 
 		// specific state functions for this project
-		virtual uint8_t input_state() const;//??
-		virtual uint8_t draw_state() const;//??
+		virtual rt input_state() const;//??
+		virtual rt draw_state() const;//??
 
 		//d::array<state, MAX_STATE_STACK_SIZE> Stack_;
 		std::stack<state*> Stack_;
-		uint8_t init();
-		uint8_t destroy();
+		rt init();
+		rt destroy();
 	};
 }	// END	state_mgr

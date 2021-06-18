@@ -1,20 +1,20 @@
 #include "Engine.h"
 
-uint8_t ss::engine::init()
+ss::rt ss::engine::init()
 {
     log("engine::init()");
     //int test[] = {1,54,86,92,42,21,70,14,11,23,65,98,015,11,525,2,45,53,6,7,8,};
     //int n = sizeof(test) / sizeof(test[0]);
 
-    ret_ = 0xFF;
+    rt ret = rt::INITIAL;
 
-    ret_ = init_locals();
-    if (ret_) { return ret_; }
+    ret = init_locals();
+    if (ret!=rt::SUCCESS) { return ret; }
 
-    ret_ = push_state(&st_em);
+    ret = push_state(&st_em);
 
     On_ = true;
-    ret_ = loop();
+    ret = loop();
 
     
 
@@ -48,42 +48,44 @@ uint8_t ss::engine::init()
 
     //r = quickSort(test, 0, n-1);
 
-    return ret_;
+    return ret;
 }
 
-uint8_t ss::engine::init_locals()
+ss::rt ss::engine::init_locals()
 {
     log("engine::init_locals()");
 
     On_ = false;
-    ret_ = 0xFF;
+    //ret_ = 0xFF;
 
-    return 0;
+    return rt::SUCCESS;
 }
 
-uint8_t ss::engine::destroy()
+ss::rt ss::engine::destroy()
 {
     log("engine::destroy()");
-    return uint8_t();
+    return rt::SUCCESS;
 }
 
-uint8_t ss::engine::loop()
+ss::rt ss::engine::loop()
 {
+    rt ret = rt::INITIAL;
+
     log("engine::loop()");
     
     while (On_)
     {
-        ret_ = input();
-        ret_ = draw();
+        ret = input();
+        ret = draw();
 
 
         On_ = false;
     }
 
-    return ret_;
+    return ret;
 }
 
-uint8_t ss::engine::input()
+ss::rt ss::engine::input()
 {
     log("engine::input()");
     //poll events
@@ -95,9 +97,9 @@ uint8_t ss::engine::input()
     return input_state();
 }
 
-uint8_t ss::engine::draw()
+ss::rt ss::engine::draw()
 {
     log("engine::draw()");
-    // draw all assets?
+   
     return draw_state();
 }

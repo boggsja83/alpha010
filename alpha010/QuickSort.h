@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Logger.h"
+#include "ALL.h"
 #include <utility>
 #include <cstdlib>
 
@@ -39,15 +39,15 @@ namespace ss
 	template<typename T>
 	static int qs(T _t[], int _lo, int _hi)
 	{
-		int _p = -1;
+		int p = -1;
 		int r = -1;
 
 		if (_lo < _hi)
 		{
-			_p = qs_part(_t, _lo, _hi);
+			p = qs_part(_t, _lo, _hi);
 
-			r = qs(_t, _lo, _p - 1);
-			r = qs(_t, _p + 1, _hi);
+			r = qs(_t, _lo, p - 1);
+			r = qs(_t, p + 1, _hi);
 		}
 		return 0;
 	}

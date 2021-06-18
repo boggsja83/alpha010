@@ -10,9 +10,6 @@
     <Filter Include="View">
       <UniqueIdentifier>{e522c107-6fc8-4228-b858-ec62bdb4da4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controller\System">
-      <UniqueIdentifier>{52aea1fa-8f7e-4150-a9b8-43b0e1fe01b3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Model\DesignPatterns">
       <UniqueIdentifier>{c3c02920-7b02-4503-872e-8e209433486a}</UniqueIdentifier>
     </Filter>
@@ -46,10 +43,19 @@
     <Filter Include="View\Wrapper">
       <UniqueIdentifier>{7c3a218c-dcf6-475a-8529-bb92d10b4031}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility\RetType">
+      <UniqueIdentifier>{4c4451cf-d2d9-45b3-88df-f784ad9ff229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\Engine">
+      <UniqueIdentifier>{52aea1fa-8f7e-4150-a9b8-43b0e1fe01b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\All">
+      <UniqueIdentifier>{e7dbcc6c-0369-4e9f-a26f-1e18466cea7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
-      <Filter>Controller\System</Filter>
+      <Filter>Controller\Engine</Filter>
     </ClCompile>
     <ClCompile Include="SDP.cpp">
       <Filter>Model\DesignPatterns\State</Filter>
@@ -72,7 +78,7 @@
       <Filter>Utility\Logger</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>Controller\System</Filter>
+      <Filter>Controller\Engine</Filter>
     </ClInclude>
     <ClInclude Include="QuickSort.h">
       <Filter>Utility\QuickSort</Filter>
@@ -94,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="SDLwrapper.h">
       <Filter>View\Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="ReturnType.h">
+      <Filter>Utility\RetType</Filter>
+    </ClInclude>
+    <ClInclude Include="ALL.h">
+      <Filter>Utility\All</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

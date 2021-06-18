@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Logger.h"
+#include "ALL.h"
 
 #include "WinProp.h"
 #include "RendProp.h"
@@ -8,78 +8,11 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
-
-
-
-	//class sdl_
-	//{
-	//// BEGIN	Constructor/Destructor
-	//public:
-	//	sdl_() 
-	//	{
-	//		log("sdl_()");
-	//		uint8_t r = init();
-	//	}
-	//	~sdl_() 
-	//	{
-	//		log("~sdl_()");
-	//		uint8_t r = destroy();
-	//	}
-	// END		Constructor/Destructor
-
-	// BEGIN	sdl_ details
-	//public:
-		//uint8_t			init();
-		//uint8_t			init_locals();
-
-		//uint8_t			destroy();
-
-		//int				draw();
-
-		// window properties
-		//char const *	title_win;
-		//size_t			width_win;
-		//size_t			height_win;
-		//size_t			x_win;
-		//size_t			y_win;
-		//int32_t			flags_win;
-
-		//int8_t			r_surf;
-		//int8_t			g_surf;
-		//int8_t			b_surf;
-		//SDL_Rect		rect_win;
-
-		// renderer properties
-		//int8_t			index_rend;
-		//int32_t			flags_rend;
-		//SDL_RendererInfo info_rend;
-		//uint32_t		pixel_format_rend;
-
-		//int8_t			r_rend;
-		//int8_t			g_rend;
-		//int8_t			b_rend;
-		
-		//SDL_Window*		Win_;
-		//SDL_Renderer*	Rend_;
-		//SDL_Surface*	Surface_;//dont really need this surface
-		//SDL_Texture*	Texture_;//or this texture
-
-
-		// Use a map<int,std::string> that holds
-		// everything that needs to be rendered
-		// including their z-order
-		// i.e. a render stack
-		// or just add z-order to I_AV_SDL?
-		// and then use an std::string[]/vector<std::string> here?
-
-		// END		sdl_ details
-
-	//}; // END	class
 namespace ss
 {
 	/**********DECLARATIONS**********/
-	static int				init_sdl_video();
-	static uint8_t			init_sdl_img();
+	static rt				init_sdl_video();
+	static rt				init_sdl_img();
 
 	static SDL_Window*		create_win(char const*, int, int, int, int, Uint32);
 	static SDL_Renderer*	create_rend(SDL_Window*, int, Uint32);
@@ -89,73 +22,73 @@ namespace ss
 	static SDL_Texture*		create_text_from_path(SDL_Renderer*, char const*);
 
 	static int32_t			get_pixel_format(SDL_RendererInfo*);
-	static int				get_rend_info(SDL_Renderer*, SDL_RendererInfo*);
-	static int				set_rend_draw_color(SDL_Renderer*, Uint8, Uint8, Uint8, Uint8);
-	static int				set_rend_targ(SDL_Renderer*, SDL_Texture*);
-	static int				rend_cpy(SDL_Renderer*, SDL_Texture*, SDL_Rect const*, SDL_Rect const*);
+	static rt				get_rend_info(SDL_Renderer*, SDL_RendererInfo*);
+	static rt				set_rend_draw_color(SDL_Renderer*, Uint8, Uint8, Uint8, Uint8);
+	static rt				set_rend_targ(SDL_Renderer*, SDL_Texture*);
+	static rt				rend_cpy(SDL_Renderer*, SDL_Texture*, SDL_Rect const*, SDL_Rect const*);
 
-	static int				fill_rect(SDL_Surface*, SDL_Rect*, Uint32);
+	static rt				fill_rect(SDL_Surface*, SDL_Rect*, Uint32);
 
-	static int				query_text(SDL_Texture*, Uint32*, int*, int*, int*);
+	static rt				query_text(SDL_Texture*, Uint32*, int*, int*, int*);
 
-	static SDL_Surface* get_win_surf(SDL_Window* _win);
+	static SDL_Surface*		get_win_surf(SDL_Window* _win);
 	
-	
-	static int				update_win_surf(SDL_Window*);
+	static rt				update_win_surf(SDL_Window*);
 
-	static uint8_t			destroy_win(SDL_Window*);
-	static uint8_t			destroy_rend(SDL_Renderer*);
-	static uint8_t			destroy_text(SDL_Texture*);	
-	static uint8_t			destroy_surf(SDL_Surface*);
-	static uint8_t			destroy_sdl();
-	static uint8_t			destroy_sdl_video();
-	static uint8_t			destroy_sdl_image();
+	static rt				destroy_win(SDL_Window*);
+	static rt				destroy_rend(SDL_Renderer*);
+	static rt				destroy_text(SDL_Texture*);	
+	static rt				destroy_surf(SDL_Surface*);
+	static rt				destroy_sdl();
+	static rt				destroy_sdl_video();
+	static rt				destroy_sdl_image();
 
 	/*----------DEFINITIONS----------*/
 
-	int ss::init_sdl_video()
+	ss::rt ss::init_sdl_video()
 	{
 		SDL_ClearError();
 		int r = SDL_InitSubSystem(SDL_INIT_VIDEO);
 
-		if (r) { log("init_sdl_video error: " << SDL_GetError()); }
-		else { log("init_sdl_video()"); }
-		return r;
+		if (r) {
+			log("init_sdl_video error: " << SDL_GetError()); 
+			return rt::FAIL_INIT_SDL_VIDEO; 
+		}
+		log("init_sdl_video()");
+		return rt::SUCCESS;
 	}
 
-	uint8_t ss::init_sdl_img()
+	ss::rt ss::init_sdl_img()
 	{
-		//Initialize PNG loading
-		Uint32 flags = IMG_INIT_PNG;
 		IMG_GetError();
-		int r = IMG_Init(flags);
-		if ((r & flags) != flags) { log("SDL image could not initialize:" << IMG_GetError()); }
-		else { log("init_sdl_img()"); }
+	
+		uint32_t flags = IMG_INIT_PNG;
+		uint32_t initted = IMG_Init(flags);
 
-		return !r;
+		if ((initted & flags) != flags) 
+		{ 
+			log("init_sdl_img() error: " << IMG_GetError()); 
+			return rt::FAIL_INIT_IMG;
+		}
+		log("init_sdl_img()"); 
+		return rt::SUCCESS;
 	}
 
 	SDL_Window* ss::create_win(char const* _title, int _x, int _y, int _w, int _h, Uint32 _flags)
 	{
-		SDL_Window* temp = nullptr;
+		SDL_Window* temp_w = nullptr;
 
 		SDL_ClearError();
-		temp = SDL_CreateWindow(
+		temp_w = SDL_CreateWindow(
 			_title,
 			_x, _y,
 			_w, _h,
 			_flags
 		);
 
-		if (temp)
-		{
-			log("create_win(): " << temp);
-		}
-		else
-		{
-			log("create_win() error: " << SDL_GetError());
-		}
-		return temp;
+		if (temp_w){ log("create_win(): " << temp_w); }
+		else { log("create_win() error: " << SDL_GetError()); }
+		return temp_w;
 	}
 
 	SDL_Renderer* ss::create_rend(SDL_Window* _win, int _index, Uint32 _flags)
@@ -191,21 +124,21 @@ namespace ss
 		// w width
 		// h height
 
-		SDL_Texture* text = nullptr;
+		SDL_Texture* temp_t = nullptr;
 
 		SDL_ClearError();
-		text = SDL_CreateTexture(_rend, _format, _access, _w, _h);
-		if (text) { log("create_text(): " << text); }
+		temp_t = SDL_CreateTexture(_rend, _format, _access, _w, _h);
+		if (temp_t) { log("create_text(): " << temp_t); }
 		else { log("create_text() error: " << SDL_GetError()); }
-		return text;
+		return temp_t;
 	}
 
 	SDL_Texture* ss::create_text_from_surf(SDL_Renderer* _rend, SDL_Surface* _surf)
 	{
 		SDL_ClearError();
-		SDL_Texture* t = SDL_CreateTextureFromSurface(_rend, _surf);
-		if (!t) { log("create_text_from_surf(" << _rend << ", " << _surf << ") error: " << SDL_GetError()); }
-		return t;
+		SDL_Texture* temp_t = SDL_CreateTextureFromSurface(_rend, _surf);
+		if (!temp_t) { log("create_text_from_surf(" << _rend << ", " << _surf << ") error: " << SDL_GetError()); }
+		return temp_t;
 	}
 
 	SDL_Texture* ss::create_text_from_path(SDL_Renderer* _rend, char const* _path)
@@ -217,7 +150,7 @@ namespace ss
 		if (temp_s)
 		{
 			temp_t = create_text_from_surf(_rend, temp_s);
-			uint8_t r = destroy_surf(temp_s);
+			rt ret = destroy_surf(temp_s);
 
 			if (!temp_t) { log("create_text_from_path() failed to create texture: " << _path); }
 		}
@@ -226,20 +159,28 @@ namespace ss
 		return temp_t;
 	}
 
-	int ss::set_rend_draw_color(SDL_Renderer* _rend, uint8_t _r, uint8_t _g, uint8_t _b, uint8_t _a)
+	ss::rt ss::set_rend_draw_color(SDL_Renderer* _rend, uint8_t _r, uint8_t _g, uint8_t _b, uint8_t _a)
 	{
 		SDL_ClearError();
 		int ret = SDL_SetRenderDrawColor(_rend, _r, _g, _b, _a);
-		if (ret) { log("set_rend_draw_color failed: " << SDL_GetError()); }
-		return ret;
+		if (ret)
+		{ 
+			log("set_rend_draw_color failed: " << SDL_GetError()); 
+			return rt::FAIL_SET_REND_DRAW_COLOR;
+		}
+		return rt::SUCCESS;
 	}
 
-	int ss::set_rend_targ(SDL_Renderer* _r, SDL_Texture* _t)
+	ss::rt ss::set_rend_targ(SDL_Renderer* _r, SDL_Texture* _t)
 	{
 		SDL_ClearError();
-		int r = SDL_SetRenderTarget(_r, _t);
-		if (r) { log("set_rend_targ(" << _r << ", " << _t << ") error: " << SDL_GetError()); }
-		return r;
+		int ret = SDL_SetRenderTarget(_r, _t);
+		if (ret) 
+		{ 
+			log("set_rend_targ(" << _r << ", " << _t << ") error: " << SDL_GetError());
+			return rt::FAIL_SET_REND_TARG;
+		}
+		return rt::SUCCESS;
 	}
 
 	int32_t ss::get_pixel_format(SDL_RendererInfo* _ri)
@@ -256,33 +197,41 @@ namespace ss
 		return _ri->texture_formats[0];
 	}
 
-	int ss::get_rend_info(SDL_Renderer* _r, SDL_RendererInfo* _ri)
+	ss::rt ss::get_rend_info(SDL_Renderer* _r, SDL_RendererInfo* _ri)
 	{
 		SDL_ClearError();
-		int r = SDL_GetRendererInfo(_r, _ri);
-		if (r) { log("get_rend_info(" << _r << ", " << _ri << ") error: " << SDL_GetError()); }
-		return r;
+		int ret = SDL_GetRendererInfo(_r, _ri);
+		if (ret) 
+		{ 
+			log("get_rend_info(" << _r << ", " << _ri << ") error: " << SDL_GetError()); 
+			return rt::FAIL_GET_RENDER_INFO;
+		}
+		return rt::SUCCESS;
 	}
 
-	int ss::fill_rect(SDL_Surface* _src, SDL_Rect* _rect, Uint32 _color)
+	ss::rt ss::fill_rect(SDL_Surface* _src, SDL_Rect* _rect, Uint32 _color)
 	{
 		SDL_ClearError();
 		int ret = SDL_FillRect(_src, _rect, _color);
-		if (ret) { log("ss::fill_rect(" << _src << ", " << _rect << ", " << _color << ") error: " << SDL_GetError()); }
-		return ret;
+		if (ret) 
+		{ 
+			log("ss::fill_rect(" << _src << ", " << _rect << ", " << _color << ") error: " << SDL_GetError()); 
+			return rt::FAIL_FILL_RECT;
+		}
+		return rt::SUCCESS;
 	}
 
-	int ss::query_text(SDL_Texture* _text, Uint32* _format, int* _access, int* _w, int* _h)
+	ss::rt ss::query_text(SDL_Texture* _text, Uint32* _format, int* _access, int* _w, int* _h)
 	{
 		//int SDL_QueryTexture(SDL_Texture * texture,
 		//	Uint32 * format, int* access,
 		//	int* w, int* h);
 
-		int r = -1;
+		int ret = -1;
 
 		SDL_ClearError();
-		r = SDL_QueryTexture(_text, _format, _access, _w, _h);
-		if (r)
+		ret = SDL_QueryTexture(_text, _format, _access, _w, _h);
+		if (ret)
 		{
 			//bad
 			log("query_text(" <<
@@ -292,7 +241,7 @@ namespace ss
 				_w << ", " << _h <<
 				") error: " << SDL_GetError());
 		}
-		return r;
+		return rt::SUCCESS;
 	}
 
 	SDL_Surface* ss::get_win_surf(SDL_Window* _win)
@@ -303,23 +252,32 @@ namespace ss
 		return ret;
 	}
 
-	int ss::update_win_surf(SDL_Window* _win)
+	ss::rt ss::update_win_surf(SDL_Window* _win)
 	{
 		SDL_ClearError();
 		int ret = SDL_UpdateWindowSurface(_win);
-		if (ret) { log("ss:update_win_surf(" << _win << ") error: " << SDL_GetError()); }
-		return ret;
+		if (ret) 
+		{ 
+			log("ss:update_win_surf(" << _win << ") error: " << SDL_GetError()); 
+			return rt::FAIL_UPDATE_WIN_SURF;
+		}
+
+		return rt::SUCCESS;
 	}
 
-	int ss::rend_cpy(SDL_Renderer* _rend, SDL_Texture* _text, SDL_Rect const* _src, SDL_Rect const* _dst)
+	ss::rt rend_cpy(SDL_Renderer* _rend, SDL_Texture* _text, SDL_Rect const* _src, SDL_Rect const* _dst)
 	{
 		SDL_ClearError();
 		int ret = SDL_RenderCopy(_rend, _text, _src, _dst);
-		if (ret) { log("rend_cpy(" << _rend << ", " << _text << ", " << _src << ", " << _dst << ") error: " << SDL_GetError()); }
-		return ret;
+		if (ret) 
+		{ 
+			log("rend_cpy(" << _rend << ", " << _text << ", " << _src << ", " << _dst << ") error: " << SDL_GetError()); 
+			return rt::FAIL_REND_CPY;
+		}
+		return rt::SUCCESS;
 	}
 
-	uint8_t ss::destroy_win(SDL_Window* _w)
+	ss::rt ss::destroy_win(SDL_Window* _w)
 	{
 		SDL_ClearError();
 		SDL_DestroyWindow(_w);
@@ -328,17 +286,17 @@ namespace ss
 		{
 			// good
 			log("destroy_win(" << _w << ")");
-			return 0x00;
+			return rt::SUCCESS;
 		}
 		else
 		{
 			// bad
 			log("destroy_win error: " << s);
-			return 0xFF;
+			return rt::FAIL_DESTROY_WIN;
 		}
 	}
 
-	uint8_t ss::destroy_rend(SDL_Renderer* _r)
+	ss::rt ss::destroy_rend(SDL_Renderer* _r)
 	{
 		SDL_ClearError();
 		SDL_DestroyRenderer(_r);
@@ -347,17 +305,17 @@ namespace ss
 		{
 			// good
 			log("destroy_rend(" << _r << ")");
-			return 0x0;
+			return rt::SUCCESS;
 		}
 		else
 		{
 			// bad
 			log("destroy_rend(" << _r << ") error: " << s);
-			return 0xFF;
+			return rt::FAIL_DESTROY_REND;
 		}
 	}
 
-	uint8_t ss::destroy_text(SDL_Texture* _t)
+	ss::rt ss::destroy_text(SDL_Texture* _t)
 	{
 		SDL_ClearError();
 		SDL_DestroyTexture(_t);
@@ -366,17 +324,17 @@ namespace ss
 		{
 			// good
 			log("destroy_text(" << std::hex << (int32_t)_t << ")");
-			return 0x0;
+			return rt::SUCCESS;
 		}
 		else
 		{
 			// bad
 			log("destroy_text(" << _t << ") error: " << s);
-			return 0xF;
+			return rt::FAIL_DESTROY_TEXT;
 		}
 	}
 
-	uint8_t ss::destroy_surf(SDL_Surface* _s)
+	ss::rt ss::destroy_surf(SDL_Surface* _s)
 	{
 		// safe to pass null to
 
@@ -386,16 +344,16 @@ namespace ss
 		if (s.size() == 0)
 		{
 			log("destroy_surf(" << _s << ")");
-			return 0x0;
+			return rt::SUCCESS;
 		}
 		else
 		{
 			log("destroy_surf(" << _s << ") error: " << s);
-			return 0xF;
+			return rt::FAIL_DESTROY_SURF;
 		}
 	}
 
-	uint8_t ss::destroy_sdl()
+	ss::rt ss::destroy_sdl()
 	{
 		SDL_ClearError();
 		SDL_Quit();
@@ -404,17 +362,17 @@ namespace ss
 		{
 			//good
 			log("destroy_sdl() " << s);
-			return 0x0;
+			return rt::SUCCESS;
 		}
 		else
 		{
 			//bad
 			log("destroy_sdl() error: " << s);
-			return 0xF;
+			return rt::FAIL_DESTROY_SDL;
 		}
 	}
 
-	uint8_t ss::destroy_sdl_video()
+	ss::rt ss::destroy_sdl_video()
 	{
 		SDL_ClearError();
 		SDL_QuitSubSystem(SDL_INIT_VIDEO);
@@ -423,17 +381,17 @@ namespace ss
 		{
 			//good
 			log("destroy_sdl_video() " << s);
-			return 0x0;
+			return rt::SUCCESS;
 		}
 		else
 		{
 			//bad
 			log("destroy_sdl_error() error: " << s);
-			return 0xF;
+			return rt::FAIL_DESTROY_SDL_VIDEO;
 		}
 	}
 
-	uint8_t ss::destroy_sdl_image()
+	ss::rt ss::destroy_sdl_image()
 	{
 		IMG_GetError();
 		IMG_Quit();
@@ -442,13 +400,13 @@ namespace ss
 		{
 			//good
 			log("destroy_sdl_image() " << s);
-			return 0x0;
+			return rt::SUCCESS;
 		}
 		else
 		{
 			//bad
 			log("destroy_sdl_image() error: " << s);
-			return 0xF;
+			return rt::FAIL_DESTROY_SDL_IMG;
 		}
 	}
 

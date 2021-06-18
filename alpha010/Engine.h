@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Logger.h"
+#include "ALL.h"
 
 #include "SDP.h"
 
@@ -40,18 +40,18 @@ namespace ss
 		engine()
 		{
 			log("engine()");
-			uint8_t r = init();
+			rt ret = init();
 		}
 		~engine()
 		{
 			log("~engine()");
-			uint8_t r = destroy();
+			rt ret = destroy();
 		}
 
 		// engine() functions
-		uint8_t init();
-		uint8_t init_locals();
-		uint8_t destroy();
+		rt init();
+		rt init_locals();
+		rt destroy();
 
 		// view controller
 		//sdl_ sdl_inst;
@@ -63,9 +63,9 @@ namespace ss
 		// audio controller
 		
 		// game loop
-		uint8_t loop();
-		uint8_t input();
-		uint8_t draw();
+		rt loop();
+		rt input();
+		rt draw();
 		bool On_;
 
 		// asset manager
@@ -74,7 +74,7 @@ namespace ss
 		st_eng_menu st_em;
 
 		// return types
-		uint8_t ret_;
+		//uint8_t ret_;
 
 	}; // END	engine class
 } // END ss

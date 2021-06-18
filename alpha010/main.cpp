@@ -1,3 +1,4 @@
+#include "ALL.h"
 #include "Engine.h"
 
 using namespace ss;
@@ -7,7 +8,7 @@ int main(int argc, char* argv[])
 	system("cls");
 	ss::engine sl1m;
 
-	SDL_Delay(5000);
+	SDL_Delay(2000);
 
 
 

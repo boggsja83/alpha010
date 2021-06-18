@@ -137,8 +137,10 @@
     <ClCompile Include="ViewController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ALL.h" />
     <ClInclude Include="QuickSort.h" />
     <ClInclude Include="RendProp.h" />
+    <ClInclude Include="ReturnType.h" />
     <ClInclude Include="SDLwrapper.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Engine.h" />

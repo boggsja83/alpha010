@@ -1,33 +1,34 @@
 #include "ViewController.h"
 
-uint8_t ss::ViewController::init()
+ss::rt ss::ViewController::init()
 {
-	uint8_t ret = 0xFF;
+	rt ret = rt::INITIAL;
+	//int reti = -1;
 
 	log("ViewController::init()");
 
 	ret = init_locals();
-	if (ret) { return ret; }
+	if (ret!=rt::SUCCESS) { return ret; }
 
 	ret = init_sdl_video();
-	if (ret) { return ret; }
+	if (ret != rt::SUCCESS) { return ret; }
 
 	ret = init_sdl_img();
-	if (ret) { return ret; }
+	if (ret != rt::SUCCESS) { return ret; }
 
 	Win_ = create_win(title_win, x_win, y_win, width_win, height_win, flags_win);
-	if (!Win_) return 0xAA;
+	if (!Win_) return rt::FAIL_CREATE_WIN;
 
 	Rend_ = create_rend(Win_, index_rend, flags_rend);
-	if (!Rend_) return 0xDD;
+	if (!Rend_) return rt::FAIL_CREATE_REND;
 
+	// draw window surface (red)
 	Surface_ = get_win_surf(Win_);
 	SDL_FillRect(Surface_, &rect_win,
 		SDL_MapRGB(Surface_->format, r_surf, g_surf, b_surf));
-
 	ret = update_win_surf(Win_);
 
-	// green renderer
+	// set renderer color (green)
 	ret = set_rend_draw_color(Rend_, r_rend, g_rend, b_rend, a_rend);
 
 	// set renderer info
@@ -42,7 +43,7 @@ uint8_t ss::ViewController::init()
 	return ret;
 }
 
-uint8_t ss::ViewController::init_locals()
+ss::rt ss::ViewController::init_locals()
 {
 	log("ViewController::init_locals()");
 	Win_		= nullptr;
@@ -50,12 +51,12 @@ uint8_t ss::ViewController::init_locals()
 	Texture_	= nullptr;
 	Surface_	= nullptr;
 
-	return uint8_t();
+	return rt();
 }
 
-uint8_t ss::ViewController::destroy()
+ss::rt ss::ViewController::destroy()
 {
-	uint8_t ret = 0xFF;
+	rt ret = rt::INITIAL;
 
 	log("ViewController::destroy()");
 	

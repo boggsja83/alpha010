@@ -1,51 +1,51 @@
 #include "STengMenu.h"
 
-uint8_t ss::st_eng_menu::enter() 
+ss::rt ss::st_eng_menu::enter()
 {
 	log("st_eng_menu::enter()");
-	return uint8_t();
+	return rt();
 }
 
-uint8_t ss::st_eng_menu::pause() 
+ss::rt ss::st_eng_menu::pause()
 {
 	log("st_eng_menu::pause()");
-	return uint8_t();
+	return rt();
 }
 
-uint8_t ss::st_eng_menu::resume() 
+ss::rt ss::st_eng_menu::resume()
 {
 	log("st_eng_menu::resume()");
-	return uint8_t();
+	return rt();
 }
 
-uint8_t ss::st_eng_menu::exit() 
+ss::rt ss::st_eng_menu::exit()
 {
 	log("st_eng_menu::exit()");
-	return uint8_t();
+	return rt();
 }
 
-uint8_t ss::st_eng_menu::input() 
+ss::rt ss::st_eng_menu::input()
 {
 	log("st_eng_menu::input()");
-	return uint8_t();
+	return rt();
 }
 
-uint8_t ss::st_eng_menu::draw() 
+ss::rt ss::st_eng_menu::draw()
 {
 	log("st_eng_menu::draw()");
-	return uint8_t();
+	return rt();
 }
 
-uint8_t ss::st_eng_menu::init()
+ss::rt ss::st_eng_menu::init()
 {
 	log("st_eng_menu::init()");
 	//asset_name = "eng-menu";
 	
-	return uint8_t();
+	return rt();
 }
 
-uint8_t ss::st_eng_menu::destroy()
+ss::rt ss::st_eng_menu::destroy()
 {
 	log("st_eng_menu::destroy()");
-	return uint8_t();
+	return rt();
 }
