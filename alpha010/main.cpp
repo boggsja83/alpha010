@@ -8,6 +8,13 @@ int main(int argc, char* argv[])
 	system("cls");
 	ss::engine sl1m;
 
+
+	//for (int i=0;i<=(int)ss::e_ss_ret_t::RET_T_COUNT;++i)
+	//{
+	//	log(i <<": "<<e_ss_ret_m[i]);
+	//}
+
+
 	SDL_Delay(2000);
 
 

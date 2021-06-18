@@ -4,7 +4,7 @@ ss::rt ss::state_holder::pop_state()
 {
 	rt ret = rt::INITIAL;
 
-	if (Stack_.empty()) { return ret; }
+	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 
 	ret = Stack_.top()->exit();
 	if (ret!=rt::SUCCESS) { return ret; }

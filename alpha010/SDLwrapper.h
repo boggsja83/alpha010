@@ -291,7 +291,7 @@ namespace ss
 		else
 		{
 			// bad
-			log("destroy_win error: " << s);
+			log("destroy_win() error: " << s);
 			return rt::FAIL_DESTROY_WIN;
 		}
 	}
@@ -399,7 +399,7 @@ namespace ss
 		if (s.size() == 0)
 		{
 			//good
-			log("destroy_sdl_image() " << s);
+			log("destroy_sdl_image()");
 			return rt::SUCCESS;
 		}
 		else
