@@ -8,12 +8,11 @@
 
 namespace ss
 {
-
 	class ViewController
 	{
 	public:
 		ViewController() { log("ViewController()"); uint8_t ret = init(); }
-		~ViewController() { log("~ViewController()"); uint8_t ret = destroy(); }
+		~ViewController() { log("ViewController()"); uint8_t ret = destroy(); }
 
 		uint8_t init();
 		uint8_t init_locals();
