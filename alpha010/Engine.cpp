@@ -12,6 +12,7 @@ ss::rt ss::engine::init()
     if (ret!=rt::SUCCESS) { return ret; }
 
     ret = push_state(&st_em);
+    if (ret != rt::SUCCESS) return ret;
 
     On_ = true;
     ret = loop();
@@ -76,8 +77,10 @@ ss::rt ss::engine::loop()
     while (On_)
     {
         ret = input();
+        if (ret != rt::SUCCESS) return ret;
+        
         ret = draw();
-
+        if (ret != rt::SUCCESS) return ret;
 
         On_ = false;
     }

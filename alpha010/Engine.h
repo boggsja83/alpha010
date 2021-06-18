@@ -41,11 +41,13 @@ namespace ss
 		{
 			log("engine()");
 			rt ret = init();
+			log("engine::init() ret: "<<(int)ret<<", "<<e_ss_ret_m[(int)ret]);
 		}
 		~engine()
 		{
 			log("~engine()");
 			rt ret = destroy();
+			log("engine::destroy() ret: " << (int)ret << ", " << e_ss_ret_m[(int)ret]);
 		}
 
 		// engine() functions

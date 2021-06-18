@@ -25,8 +25,12 @@ ss::rt ss::ViewController::init()
 
 	// draw window surface (red)
 	Surface_ = get_win_surf(Win_);
-	SDL_FillRect(Surface_, &rect_win,
+	if (!Surface_) { return rt::FAIL_CREATE_SURF; }
+
+	ret = fill_rect(Surface_, &rect_win,
 		SDL_MapRGB(Surface_->format, r_surf, g_surf, b_surf));
+	if (ret != rt::SUCCESS) return ret;
+
 	ret = update_win_surf(Win_);
 	if (ret != rt::SUCCESS) { return ret; }
 
@@ -62,16 +66,30 @@ ss::rt ss::ViewController::init_locals()
 ss::rt ss::ViewController::destroy()
 {
 	rt ret = rt::INITIAL;
+	rt temp_rt = rt::SUCCESS;
 
 	log("ViewController::destroy()");
 	
 	ret = destroy_surf(Surface_);//dont need this.  this surface will be deleted from win_ automatically (right now because how i have it, Surface_ is "created"by get_win_surf(...))
-	ret = destroy_text(Texture_);
-	ret = destroy_rend(Rend_);
-	ret = destroy_win(Win_);
-	ret = destroy_sdl_image();
-	ret = destroy_sdl_video();
-	ret = destroy_sdl();
+	if (ret != rt::SUCCESS) temp_rt = ret;
 
-	return ret;
+	ret = destroy_text(Texture_);
+	if (ret != rt::SUCCESS) temp_rt = ret;
+
+	ret = destroy_rend(Rend_);
+	if (ret != rt::SUCCESS) temp_rt = ret;
+
+	ret = destroy_win(Win_);
+	if (ret != rt::SUCCESS) temp_rt = ret;
+
+	ret = destroy_sdl_image();
+	if (ret != rt::SUCCESS) temp_rt = ret; 
+	
+	ret = destroy_sdl_video();
+	if (ret != rt::SUCCESS) temp_rt = ret;
+
+	ret = destroy_sdl();
+	if (ret != rt::SUCCESS) temp_rt = ret;
+
+	return temp_rt;
 }

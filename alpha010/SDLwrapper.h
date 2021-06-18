@@ -27,7 +27,7 @@ namespace ss
 	static rt				set_rend_targ(SDL_Renderer*, SDL_Texture*);
 	static rt				rend_cpy(SDL_Renderer*, SDL_Texture*, SDL_Rect const*, SDL_Rect const*);
 
-	static rt				fill_rect(SDL_Surface*, SDL_Rect*, Uint32);
+	static rt				fill_rect(SDL_Surface*, SDL_Rect const *, Uint32);
 
 	static rt				query_text(SDL_Texture*, Uint32*, int*, int*, int*);
 
@@ -209,7 +209,7 @@ namespace ss
 		return rt::SUCCESS;
 	}
 
-	ss::rt ss::fill_rect(SDL_Surface* _src, SDL_Rect* _rect, Uint32 _color)
+	ss::rt ss::fill_rect(SDL_Surface* _src, const SDL_Rect* _rect, Uint32 _color)
 	{
 		SDL_ClearError();
 		int ret = SDL_FillRect(_src, _rect, _color);
@@ -218,6 +218,7 @@ namespace ss
 			log("ss::fill_rect(" << _src << ", " << _rect << ", " << _color << ") error: " << SDL_GetError()); 
 			return rt::FAIL_FILL_RECT;
 		}
+		//return rt::SUCCESS;
 		return rt::SUCCESS;
 	}
 
@@ -240,6 +241,7 @@ namespace ss
 				_access << ", " <<
 				_w << ", " << _h <<
 				") error: " << SDL_GetError());
+			return rt::FAIL_QUERY_TEXT;
 		}
 		return rt::SUCCESS;
 	}
@@ -287,6 +289,7 @@ namespace ss
 			// good
 			log("destroy_win(" << _w << ")");
 			return rt::SUCCESS;
+			//return rt::FAIL_DESTROY_WIN;
 		}
 		else
 		{

@@ -11,8 +11,18 @@ namespace ss
 	class ViewController
 	{
 	public:
-		ViewController() { log("ViewController()"); rt ret = init(); }
-		~ViewController() { log("ViewController()"); rt ret = destroy(); }
+		ViewController() 
+		{ 
+			log("ViewController()"); 
+			rt ret = init(); 
+			log("ViewController::init() ret: "<<(int)ret<<", "<<e_ss_ret_m[(int)ret]);
+		}
+		~ViewController() 
+		{ 
+			log("ViewController()"); 
+			rt ret = destroy(); 
+			log("ViewController::destroy() ret: " << (int)ret << ", " << e_ss_ret_m[(int)ret]);
+		}
 
 		rt init();
 		rt init_locals();
