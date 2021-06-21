@@ -3,7 +3,7 @@
 ss::rt ss::ViewController::init()
 {
 	rt ret = rt::INITIAL;
-	rt rr = rt();
+	//rt rr = rt();
 	//int reti = -1;
 
 	log("ViewController::init()");
@@ -60,7 +60,7 @@ ss::rt ss::ViewController::init_locals()
 	Texture_	= nullptr;
 	Surface_	= nullptr;
 
-	return rt();
+	return rt::SUCCESS;
 }
 
 ss::rt ss::ViewController::destroy()

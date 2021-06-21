@@ -43,14 +43,17 @@
     <Filter Include="View\Wrapper">
       <UniqueIdentifier>{7c3a218c-dcf6-475a-8529-bb92d10b4031}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utility\RetType">
-      <UniqueIdentifier>{4c4451cf-d2d9-45b3-88df-f784ad9ff229}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Controller\Engine">
       <UniqueIdentifier>{52aea1fa-8f7e-4150-a9b8-43b0e1fe01b3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Utility\All">
       <UniqueIdentifier>{e7dbcc6c-0369-4e9f-a26f-1e18466cea7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View\Model\Interface">
+      <UniqueIdentifier>{a929ea1e-7f49-4e80-8921-72556d318c7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Types">
+      <UniqueIdentifier>{e095d65b-ee42-493b-b113-c15d0d5bdec0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +73,9 @@
       <Filter>View\Wrapper</Filter>
     </ClCompile>
     <ClCompile Include="ViewController.cpp">
+      <Filter>View\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="TextResManager.cpp">
       <Filter>View\Controller</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,11 +107,26 @@
     <ClInclude Include="SDLwrapper.h">
       <Filter>View\Wrapper</Filter>
     </ClInclude>
-    <ClInclude Include="ReturnType.h">
-      <Filter>Utility\RetType</Filter>
-    </ClInclude>
     <ClInclude Include="ALL.h">
       <Filter>Utility\All</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRes.h">
+      <Filter>View\Model\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="PosType.h">
+      <Filter>Utility\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="DimType.h">
+      <Filter>Utility\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="ReturnType.h">
+      <Filter>Utility\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="RectType.h">
+      <Filter>Utility\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="TextResManager.h">
+      <Filter>View\Controller</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

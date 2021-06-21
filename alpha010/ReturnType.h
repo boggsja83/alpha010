@@ -2,13 +2,18 @@
 
 namespace ss
 {
+
+	static int8_t constexpr rerr8 = static_cast<int8_t>(0xFF);
+
 	// (this was just for enum not enum class...) C-style way, C++ doesnt really care (e_ret_t or blank there)
-	typedef enum class rt_ret_t
+	typedef enum class ec_ret_t:int8_t
 	{
 		SUCCESS,					INITIAL,
 		
-		STATE_STACK_EMPTY,
+		STATE_STACK_EMPTY,			ALREADY_IN_LIST,		OUT_OF_BOUNDS,
 		
+		FAIL_GENERIC,
+
 		FAIL_SET_REND_DRAW_COLOR,	FAIL_SET_REND_TARG,
 
 		FAIL_GET_RENDER_INFO,
@@ -28,7 +33,7 @@ namespace ss
 		FAIL_REND_CPY,
 
 
-		RET_T_COUNT	//if this is last, will always be number of member elements in enum
+		COUNT_RET_T	//if this is last, will always be number of member elements in enum
 					//not including this as an entry
 					//...unless i make levels like FAIL_INIT_SDL=200; starts 200 level...
 	} rt;
@@ -37,7 +42,9 @@ namespace ss
 	{
 		"SUCCESS",					"INITIAL",
 
-		"STATE_STACK_EMPTY",
+		"STATE_STACK_EMPTY",		"ALREADY_IN_LIST",		"OUT_OF_BOUNDS",
+
+		"FAIL_GENERIC",
 
 		"FAIL_SET_REND_DRAW_COLOR",	"FAIL_SET_REND_TARG",
 
@@ -58,8 +65,21 @@ namespace ss
 		"FAIL_REND_CPY",
 
 
-		"RET_T_COUNT"
+		"COUNT_RET_T"
 	};
 
+	static constexpr char const * c2m(int8_t _code)
+	{
+		if ( (_code >= 0) && (_code < static_cast<int8_t>(rt::COUNT_RET_T)) )
+			return rt_ret_m[_code];
+		else return "RET_CODE_OUT_OF_BOUNDS";
+	}
+
+	static constexpr char const* c2m(int _code)
+	{
+		if ((_code >= 0) && (_code < static_cast<int8_t>(rt::COUNT_RET_T)))
+			return rt_ret_m[_code];
+		else return "RET_CODE_OUT_OF_BOUNDS";
+	}
 
 } // END	namespace ss

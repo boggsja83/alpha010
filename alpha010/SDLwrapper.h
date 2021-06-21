@@ -2,8 +2,8 @@
 
 #include "ALL.h"
 
-#include "WinProp.h"
-#include "RendProp.h"
+//#include "WinProp.h"
+//#include "RendProp.h"
 
 #include "SDL.h"
 #include "SDL_image.h"
@@ -151,6 +151,7 @@ namespace ss
 		{
 			temp_t = create_text_from_surf(_rend, temp_s);
 			rt ret = destroy_surf(temp_s);
+			//if (ret != rt::SUCCESS) { return nullptr; }
 
 			if (!temp_t) { log("create_text_from_path() failed to create texture: " << _path); }
 		}
@@ -183,6 +184,9 @@ namespace ss
 		return rt::SUCCESS;
 	}
 
+	//figure out better way of handling this, because now
+	//it just returns first available format
+	//out of all available
 	int32_t ss::get_pixel_format(SDL_RendererInfo* _ri)
 	{
 		//int n = _ri->num_texture_formats;
@@ -194,6 +198,8 @@ namespace ss
 		//}
 		//
 		//return u;
+
+		/*return -2424;*/
 		return _ri->texture_formats[0];
 	}
 

@@ -3,8 +3,6 @@
 ss::rt ss::engine::init()
 {
     log("engine::init()");
-    //int test[] = {1,54,86,92,42,21,70,14,11,23,65,98,015,11,525,2,45,53,6,7,8,};
-    //int n = sizeof(test) / sizeof(test[0]);
 
     rt ret = rt::INITIAL;
 
@@ -12,14 +10,18 @@ ss::rt ss::engine::init()
     if (ret!=rt::SUCCESS) { return ret; }
 
     ret = push_state(&st_em);
-    if (ret != rt::SUCCESS) return ret;
+    if (ret != rt::SUCCESS) { return ret; }
 
     On_ = true;
     ret = loop();
-
+ 
+    return ret;
+}
     
 
-
+    //int test[] = {1,54,86,92,42,21,70,14,11,23,65,98,015,11,525,2,45,53,6,7,8,};
+    //int n = sizeof(test) / sizeof(test[0]);
+    // 
     //SDL_Texture* ttt = nullptr;
     //std::array<std::pair<int, SDL_Texture*>,100> arr;
     //
@@ -49,8 +51,7 @@ ss::rt ss::engine::init()
 
     //r = quickSort(test, 0, n-1);
 
-    return ret;
-}
+
 
 ss::rt ss::engine::init_locals()
 {
