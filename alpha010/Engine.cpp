@@ -114,7 +114,7 @@ ss::rt ss::engine::draw()
    
     rt ret = rt::INITIAL;
     ret = rend_cpy(View_.get_r(),TRM_.get_nf()->text(),NULL,NULL);
-    if (ret != rt::SUCCESS)return ret;
+    if (ret != rt::SUCCESS) return ret;
     
     SDL_RenderPresent(View_.get_r());
 
