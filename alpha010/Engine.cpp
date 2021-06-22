@@ -7,13 +7,13 @@ ss::rt ss::engine::init()
     rt ret = rt::INITIAL;
 
     ret = init_locals();
-    if (ret!=rt::SUCCESS) { return ret; }
+    if (ret != rt::SUCCESS) { return ret; }
 
     ret = push_state(&st_em);
     if (ret != rt::SUCCESS) { return ret; }
 
-    On_ = true;
-    ret = loop();
+    //On_ = true;
+    //ret = loop();
  
     return ret;
 }
@@ -56,11 +56,16 @@ ss::rt ss::engine::init()
 ss::rt ss::engine::init_locals()
 {
     log("engine::init_locals()");
+    
+    rt ret = rt::INITIAL;
 
     On_ = false;
-    //ret_ = 0xFF;
+    
+    TRM_.set_rend(View_.get_r());
+    ret = TRM_.reset();//sets TRM_::NF_ (not found TextRes)
+    //if (ret != rt::SUCCESS) return ret;
 
-    return rt::SUCCESS;
+    return ret;// rt::SUCCESS;
 }
 
 ss::rt ss::engine::destroy()
@@ -75,6 +80,8 @@ ss::rt ss::engine::loop()
 
     log("engine::loop()");
     
+    On_ = true;
+
     while (On_)
     {
         ret = input();
@@ -105,5 +112,11 @@ ss::rt ss::engine::draw()
 {
     log("engine::draw()");
    
+    rt ret = rt::INITIAL;
+    ret = rend_cpy(View_.get_r(),TRM_.get_nf()->text(),NULL,NULL);
+    if (ret != rt::SUCCESS)return ret;
+    
+    SDL_RenderPresent(View_.get_r());
+
     return draw_state();
 }

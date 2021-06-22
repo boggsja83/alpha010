@@ -8,6 +8,8 @@
 
 #include "STengMenu.h"
 
+
+#include "TextResManager.h"
 //#include "Asset_Mgr.h"
 //#include "View_Asset.h"
 
@@ -41,13 +43,13 @@ namespace ss
 		{
 			log("engine()");
 			rt ret = init();
-			log("engine::init() ret: "<<(int)ret<<", "<<rt_ret_m[(int)ret]);
+			log("engine::init() ret: " << c2m(ret));
 		}
 		~engine()
 		{
 			log("~engine()");
 			rt ret = destroy();
-			log("engine::destroy() ret: " << (int)ret << ", " << rt_ret_m[(int)ret]);
+			log("engine::destroy() ret: " << c2m(ret));
 		}
 
 		// engine() functions
@@ -70,13 +72,12 @@ namespace ss
 		rt draw();
 		bool On_;
 
-		// asset manager
+		// texture resource manager
+		TextResManager	TRM_;
 
 		// class engine states
 		st_eng_menu st_em;
 
-		// return types
-		//uint8_t ret_;
 
 	}; // END	engine class
 } // END ss

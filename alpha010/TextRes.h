@@ -11,12 +11,12 @@ namespace ss
 	public:
 		TextRes() 
 		{
-			log("ITextRes()");
+			log("TextRes()");
 			rt ret = init();
 		}
 		~TextRes()
 		{
-			log("~ITextRes()");
+			log("~TextRes()");
 			rt ret = destroy();
 		}
 
@@ -31,7 +31,8 @@ namespace ss
 		inline bool operator==(const TextRes& _rhs)
 		{
 			//only care about paths being equal??
-			//if (this->Name_ != _rhs.Name_) { return false; }
+			//(we cant have same names either...)
+			if (this->Name_ != _rhs.Name_) { return false; }
 			if (this->Path_ != _rhs.Path_) { return false; }
 
 			// does texture check need to be included here??
@@ -51,12 +52,14 @@ namespace ss
 
 	rt TextRes::init()
 	{
+		log("TextRes::init()");
 		Texture_ = nullptr;
 		return rt::SUCCESS;
 	}
 
 	rt TextRes::destroy()
 	{
+		log("TextRes::destroy()");
 		// actual resource is deleted by a controller
 		// Texture_ just remains a pointer for reference, 
 		// not responsible for tracking [resides in textresmanager

@@ -33,6 +33,8 @@ ss::rt ss::st_eng_menu::input()
 ss::rt ss::st_eng_menu::draw()
 {
 	log("st_eng_menu::draw()");
+	// temporary testing class TextResManager
+	
 	return rt();
 }
 

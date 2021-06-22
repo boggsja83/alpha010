@@ -12,11 +12,11 @@ namespace ss
 		
 		STATE_STACK_EMPTY,			ALREADY_IN_LIST,		OUT_OF_BOUNDS,
 		
-		FAIL_GENERIC,
+		NOT_IN_LIST,				FAIL_GENERIC,
 
 		FAIL_SET_REND_DRAW_COLOR,	FAIL_SET_REND_TARG,
 
-		FAIL_GET_RENDER_INFO,
+		FAIL_GET_REND_INFO,
 
 		FAIL_INIT_SDL,				FAIL_INIT_SDL_VIDEO,	FAIL_INIT_IMG,
 		
@@ -44,11 +44,11 @@ namespace ss
 
 		"STATE_STACK_EMPTY",		"ALREADY_IN_LIST",		"OUT_OF_BOUNDS",
 
-		"FAIL_GENERIC",
+		"NOT_IN_LIST",				"FAIL_GENERIC",
 
 		"FAIL_SET_REND_DRAW_COLOR",	"FAIL_SET_REND_TARG",
 
-		"FAIL_GET_RENDER_INFO",
+		"FAIL_GET_REND_INFO",
 
 		"FAIL_INIT_SDL",			"FAIL_INIT_SDL_VIDEO",	"FAIL_INIT_IMG",
 
@@ -68,6 +68,21 @@ namespace ss
 		"COUNT_RET_T"
 	};
 
+	static constexpr char const* c2m(rt _code)
+	{
+		size_t temp_s = static_cast<size_t>(_code);
+		if ((temp_s >= 0) && (temp_s < static_cast<size_t>(rt::COUNT_RET_T)))
+			return rt_ret_m[temp_s];
+		else return "RET_CODE_OUT_OF_BOUNDS";
+	}
+
+	static constexpr char const* c2m(size_t _code)
+	{
+		if ((_code >= 0) && (_code < static_cast<size_t>(rt::COUNT_RET_T)))
+			return rt_ret_m[_code];
+		else return "RET_CODE_OUT_OF_BOUNDS";
+	}
+
 	static constexpr char const * c2m(int8_t _code)
 	{
 		if ( (_code >= 0) && (_code < static_cast<int8_t>(rt::COUNT_RET_T)) )
@@ -77,7 +92,7 @@ namespace ss
 
 	static constexpr char const* c2m(int _code)
 	{
-		if ((_code >= 0) && (_code < static_cast<int8_t>(rt::COUNT_RET_T)))
+		if ((_code >= 0) && (_code < static_cast<int>(rt::COUNT_RET_T)))
 			return rt_ret_m[_code];
 		else return "RET_CODE_OUT_OF_BOUNDS";
 	}

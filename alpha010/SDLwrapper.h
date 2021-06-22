@@ -210,7 +210,7 @@ namespace ss
 		if (ret) 
 		{ 
 			log("get_rend_info(" << _r << ", " << _ri << ") error: " << SDL_GetError()); 
-			return rt::FAIL_GET_RENDER_INFO;
+			return rt::FAIL_GET_REND_INFO;
 		}
 		return rt::SUCCESS;
 	}
