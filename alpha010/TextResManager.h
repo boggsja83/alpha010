@@ -25,16 +25,13 @@ namespace ss
 			log("TextResManager::destroy() ret: " << c2m(ret));
 		}
 
-		inline TextRes* get_nf() { return &NF_; }
+		inline TextRes* get_nf() { return &NotFound_; }
 
 		rt load_nf();
 		rt push_tr(TextRes&);
 		rt reset();
-		inline void set_rend(SDL_Renderer* _rend) 
-		{ 
-			log("TextResManager::set_rend(SDL_Renderer* "<<_rend<<")");
-			Rend_ = _rend; return; 
-		}
+
+		void set_rend(SDL_Renderer* const _rend);
 		
 
 		//need remove funcc tions for removing from list
@@ -60,14 +57,15 @@ namespace ss
 		rt init();
 		rt destroy();
 
-		std::vector<TextRes*> TextRes_;
+		std::vector<TextRes*> TRvec;
 
 		SDL_Renderer* Rend_;//NEED TO SET THIS EXTERNALLY[try constructor first...]
+		bool isRendSet;
 
-		TextRes NF_;
-		const char* NFN_ = "not-found";
-		const char* NFP_ = "not-found.png";
-		//std::vector<TextRes> TextRes_;
+		TextRes NotFound_;
+		char const* NotFound_name = "not-found";
+		char const* NotFound_path = "not-found.png";
+		
 	}; // END	class TextResManager
 
 } // END	namespace ss

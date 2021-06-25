@@ -10,12 +10,6 @@
     <Filter Include="View">
       <UniqueIdentifier>{e522c107-6fc8-4228-b858-ec62bdb4da4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Model\DesignPatterns">
-      <UniqueIdentifier>{c3c02920-7b02-4503-872e-8e209433486a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Model\DesignPatterns\State">
-      <UniqueIdentifier>{3ae81b85-2027-43e5-8bdf-9b86b6d32ddf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Model\States">
       <UniqueIdentifier>{e703095e-bf7b-4b33-8b52-6cf34f1e9d27}</UniqueIdentifier>
     </Filter>
@@ -52,28 +46,34 @@
     <Filter Include="Utility\Types">
       <UniqueIdentifier>{e095d65b-ee42-493b-b113-c15d0d5bdec0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility\DesignPatterns">
+      <UniqueIdentifier>{c3c02920-7b02-4503-872e-8e209433486a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\DesignPatterns\State">
+      <UniqueIdentifier>{3ae81b85-2027-43e5-8bdf-9b86b6d32ddf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\States\Engine\MainMenu">
+      <UniqueIdentifier>{a26fd1bf-ea53-4c08-ba7c-d521650f9b29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
       <Filter>Controller\Engine</Filter>
     </ClCompile>
     <ClCompile Include="SDP.cpp">
-      <Filter>Model\DesignPatterns\State</Filter>
-    </ClCompile>
-    <ClCompile Include="STengMenu.cpp">
-      <Filter>Model\States\Engine</Filter>
+      <Filter>Utility\DesignPatterns\State</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Controller\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="SDLwrapper.cpp">
-      <Filter>View\Wrapper</Filter>
     </ClCompile>
     <ClCompile Include="ViewController.cpp">
       <Filter>View\Controller</Filter>
     </ClCompile>
     <ClCompile Include="TextResManager.cpp">
       <Filter>View\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="STengMenu.cpp">
+      <Filter>Model\States\Engine\MainMenu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,10 +87,7 @@
       <Filter>Utility\QuickSort</Filter>
     </ClInclude>
     <ClInclude Include="SDP.h">
-      <Filter>Model\DesignPatterns\State</Filter>
-    </ClInclude>
-    <ClInclude Include="STengMenu.h">
-      <Filter>Model\States\Engine</Filter>
+      <Filter>Utility\DesignPatterns\State</Filter>
     </ClInclude>
     <ClInclude Include="WinProp.h">
       <Filter>View\Model</Filter>
@@ -124,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="TextRes.h">
       <Filter>View\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="STengMenu.h">
+      <Filter>Model\States\Engine\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="TRL_MainMenu.h">
+      <Filter>Model\States\Engine\MainMenu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

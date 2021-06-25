@@ -5,10 +5,10 @@ namespace ss
 
 	static int8_t constexpr rerr8 = static_cast<int8_t>(0xFF);
 
-	// (this was just for enum not enum class...) C-style way, C++ doesnt really care (e_ret_t or blank there)
+	// (this was just for enum not enum class...[i think]) C-style way, C++ doesnt really care (e_ret_t or blank there)
 	typedef enum class ec_ret_t:int8_t
 	{
-		SUCCESS,					INITIAL,
+		SUCCESS,					INITIAL,				NF_ALREADY_EXISTS,
 		
 		STATE_STACK_EMPTY,			ALREADY_IN_LIST,		OUT_OF_BOUNDS,
 		
@@ -40,7 +40,7 @@ namespace ss
 
 	static char const *const rt_ret_m[] =
 	{
-		"SUCCESS",					"INITIAL",
+		"SUCCESS",					"INITIAL",				"NF_ALREADY_EXISTS",
 
 		"STATE_STACK_EMPTY",		"ALREADY_IN_LIST",		"OUT_OF_BOUNDS",
 

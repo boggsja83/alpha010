@@ -1,6 +1,6 @@
 #include "Engine.h"
 
-ss::rt ss::engine::init()
+ss::rt ss::Engine::init()
 {
     log("engine::init()");
 
@@ -9,12 +9,19 @@ ss::rt ss::engine::init()
     ret = init_locals();
     if (ret != rt::SUCCESS) { return ret; }
 
-    ret = push_state(&st_em);
+    ret = push_state(&ST_em_);
     if (ret != rt::SUCCESS) { return ret; }
 
-    //On_ = true;
-    //ret = loop();
- 
+    // load texture resources for state
+    ret = TRM_.push_tr(ST_em_.trl_main.menu_bg);
+    if (ret!= rt::SUCCESS) return ret;
+    
+    ret = TRM_.push_tr(ST_em_.trl_main.test_tr);
+    if (ret != rt::SUCCESS) return ret;
+
+    ret = TRM_.push_tr(ST_em_.trl_main.test2);
+    if (ret != rt::SUCCESS) return ret;
+
     return ret;
 }
     
@@ -53,7 +60,7 @@ ss::rt ss::engine::init()
 
 
 
-ss::rt ss::engine::init_locals()
+ss::rt ss::Engine::init_locals()
 {
     log("engine::init_locals()");
     
@@ -68,13 +75,13 @@ ss::rt ss::engine::init_locals()
     return ret;// rt::SUCCESS;
 }
 
-ss::rt ss::engine::destroy()
+ss::rt ss::Engine::destroy()
 {
     log("engine::destroy()");
     return rt::SUCCESS;
 }
 
-ss::rt ss::engine::loop()
+ss::rt ss::Engine::loop()
 {
     rt ret = rt::INITIAL;
 
@@ -96,7 +103,7 @@ ss::rt ss::engine::loop()
     return ret;
 }
 
-ss::rt ss::engine::input()
+ss::rt ss::Engine::input()
 {
     log("engine::input()");
     //poll events
@@ -108,10 +115,12 @@ ss::rt ss::engine::input()
     return input_state();
 }
 
-ss::rt ss::engine::draw()
+ss::rt ss::Engine::draw()
 {
     log("engine::draw()");
    
+    SDL_RenderClear(View_.get_r());
+
     rt ret = rt::INITIAL;
     ret = rend_cpy(View_.get_r(),TRM_.get_nf()->text(),NULL,NULL);
     if (ret != rt::SUCCESS) return ret;

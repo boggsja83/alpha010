@@ -11,17 +11,17 @@ namespace ss
 	// static needed?
 	static const uint8_t MAX_STATE_STACK_SIZE = 10;
 
-	class state
+	class State
 	{
 	private:
 	public:
-		state()
+		State()
 		{
-			log("state()");
+			log("State()");
 		}
-		~state()
+		~State()
 		{
-			log("~state()");
+			log("~State()");
 		}
 
 		//virtual uint8_t init() = 0;
@@ -36,24 +36,24 @@ namespace ss
 		virtual rt input()	 = 0;
 	};	// END state
 
-	class state_holder
+	class State_Holder
 	{
 	private:
 	public:
-		state_holder()
+		State_Holder()
 		{
-			log("state_holder()");
+			log("State_Holder()");
 			rt ret = init();
 		}
-		~state_holder()
+		~State_Holder()
 		{
-			log("~state_holder()");
+			log("~State_Holder()");
 			rt ret = destroy();
 		}
 
 		// general state functions
 		virtual rt pop_state();
-		virtual rt push_state(state*);
+		virtual rt push_state(State*);
 
 		virtual rt enter_state() const;
 		virtual rt pause_state() const;
@@ -65,7 +65,7 @@ namespace ss
 		virtual rt draw_state() const;//??
 
 		//d::array<state, MAX_STATE_STACK_SIZE> Stack_;
-		std::stack<state*> Stack_;
+		std::stack<State*> Stack_;
 		rt init();
 		rt destroy();
 	};

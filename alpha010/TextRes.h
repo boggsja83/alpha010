@@ -24,11 +24,12 @@ namespace ss
 		inline char const* path() const { return Path_; }
 		inline SDL_Texture* text() const { return Texture_; }
 
-		inline void name(char const* _n) { Name_ = _n; }
-		inline void path(char const* _p) { Path_ = _p; }
+		inline void name(char const* _n) { Name_ = const_cast<char*>(_n); }
+		inline void path(char const* _p) { Path_ = const_cast<char*>(_p); }
+		//inline void text(SDL_Texture const * _t) { Texture_ = const_cast<SDL_Texture*>(_t); }
 		inline void text(SDL_Texture* _t) { Texture_ = _t; }
 
-		inline bool operator==(const TextRes& _rhs)
+		inline bool operator==(TextRes const &_rhs)
 		{
 			//only care about paths being equal??
 			//(we cant have same names either...)

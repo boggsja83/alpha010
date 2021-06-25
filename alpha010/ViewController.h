@@ -15,23 +15,23 @@ namespace ss
 		{ 
 			log("ViewController()"); 
 			rt ret = init(); 
-			log("ViewController::init() ret: "<<(int)ret<<", "<<rt_ret_m[(int)ret]);
+			log("ViewController::init() ret: " << c2m(ret));
 		}
 		~ViewController() 
 		{ 
 			log("~ViewController()"); 
 			rt ret = destroy(); 
-			log("ViewController::destroy() ret: " << (int)ret << ", " << rt_ret_m[(int)ret]);
+			log("ViewController::destroy() ret: " << c2m(ret));
 		}
 
 		rt		init();
 		rt		init_locals();
 		rt		destroy();
 
-		inline SDL_Window*		get_w();
-		inline SDL_Renderer*	get_r();
-		inline SDL_Texture*		get_t();
-		inline SDL_Surface*		get_s();
+		inline SDL_Window*		get_w() const { return Win_; }
+		inline SDL_Renderer*	get_r() const { return Rend_; }
+		inline SDL_Texture*		get_t() const { return Texture_; }
+		inline SDL_Surface*		get_s() const { return Surface_; }
 		
 	private:
 		SDL_Window*		Win_;
@@ -41,9 +41,9 @@ namespace ss
 
 	}; // END	class ViewController
 
-	SDL_Window* ViewController::get_w() { return Win_; }
-	SDL_Renderer* ViewController::get_r() { return Rend_; }
-	SDL_Texture* ViewController::get_t() { return Texture_; }
-	SDL_Surface* ViewController::get_s() { return Surface_; }
+	//SDL_Window* ViewController::get_w() { return Win_; }
+	//SDL_Renderer* ViewController::get_r() { return Rend_; }
+	//SDL_Texture* ViewController::get_t() { return Texture_; }
+	//SDL_Surface* ViewController::get_s() { return Surface_; }
 
 }// END		namespace ss

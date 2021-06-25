@@ -1,12 +1,17 @@
 #pragma once
 
+#include <vector>
+
 #include "ALL.h"
 #include "SDP.h"
 
+#include "TextRes.h"
+#include "TRL_MainMenu.h"
+
 namespace ss
 {
-    class st_eng_menu :
-        public state
+    class ST_eng_menu :
+        public State
     {
     private:
     public:
@@ -20,19 +25,23 @@ namespace ss
         virtual rt draw()  override;
         // END      state inherits
 
-        st_eng_menu()
+        ST_eng_menu()
         {
-            log("st_eng_menu()");
+            log("ST_eng_menu()");
             rt ret = init();
         }
-        ~st_eng_menu()
+        ~ST_eng_menu()
         {
-            log("~st_eng_menu()");
+            log("~ST_eng_menu()");
             rt ret = destroy();
         }
 
         rt init();
         rt destroy();
 
-    }; // END  class st_eng_menu
-} // END    namespace
+        TRL_MainMenu trl_main;
+        //std::vector<TextRes> TRvec;
+
+        char const* text_name = "menu-main";
+    }; // END  class ST_eng_menu
+} // END    namespace ss

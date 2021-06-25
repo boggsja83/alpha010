@@ -8,7 +8,6 @@
 
 #include "STengMenu.h"
 
-
 #include "TextResManager.h"
 //#include "Asset_Mgr.h"
 //#include "View_Asset.h"
@@ -17,8 +16,8 @@
 
 namespace ss
 {
-	class engine :
-		public state_holder
+	class Engine :
+		public State_Holder
 	{
 	public:
 		// BEGIN	state_holder inherits
@@ -39,17 +38,17 @@ namespace ss
 		// END		state_holder inherits
 
 
-		engine()
+		Engine()
 		{
-			log("engine()");
+			log("Engine()");
 			rt ret = init();
-			log("engine::init() ret: " << c2m(ret));
+			log("Engine::init() ret: " << c2m(ret));
 		}
-		~engine()
+		~Engine()
 		{
-			log("~engine()");
+			log("~Engine()");
 			rt ret = destroy();
-			log("engine::destroy() ret: " << c2m(ret));
+			log("Engine::destroy() ret: " << c2m(ret));
 		}
 
 		// engine() functions
@@ -58,7 +57,6 @@ namespace ss
 		rt destroy();
 
 		// view controller
-		//sdl_ sdl_inst;
 		ViewController View_;
 
 
@@ -66,17 +64,17 @@ namespace ss
 		
 		// audio controller
 		
+		// texture resource manager
+		TextResManager	TRM_;
+
+		// class engine states
+		ST_eng_menu ST_em_;
+
 		// game loop
 		rt loop();
 		rt input();
 		rt draw();
 		bool On_;
-
-		// texture resource manager
-		TextResManager	TRM_;
-
-		// class engine states
-		st_eng_menu st_em;
 
 
 	}; // END	engine class

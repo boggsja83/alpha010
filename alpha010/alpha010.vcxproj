@@ -129,7 +129,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SDLwrapper.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="SDP.cpp" />
@@ -152,6 +151,7 @@
     <ClInclude Include="SDP.h" />
     <ClInclude Include="STengMenu.h" />
     <ClInclude Include="TextResManager.h" />
+    <ClInclude Include="TRL_MainMenu.h" />
     <ClInclude Include="ViewController.h" />
     <ClInclude Include="WinProp.h" />
   </ItemGroup>

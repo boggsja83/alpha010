@@ -38,6 +38,7 @@ namespace ss
 	static rt				destroy_win(SDL_Window*);
 	static rt				destroy_rend(SDL_Renderer*);
 	static rt				destroy_text(SDL_Texture*);	
+	//static SDL_Texture*				destroy_text(SDL_Texture*);
 	static rt				destroy_surf(SDL_Surface*);
 	static rt				destroy_sdl();
 	static rt				destroy_sdl_video();
@@ -62,8 +63,8 @@ namespace ss
 	{
 		IMG_GetError();
 	
-		uint32_t flags = IMG_INIT_PNG;
-		uint32_t initted = IMG_Init(flags);
+		int32_t flags = IMG_INIT_PNG;
+		int32_t initted = IMG_Init(flags);
 
 		if ((initted & flags) != flags) 
 		{ 
@@ -323,6 +324,7 @@ namespace ss
 		}
 	}
 
+	//ss::rt ss::destroy_text(SDL_Texture* _t)
 	ss::rt ss::destroy_text(SDL_Texture* _t)
 	{
 		SDL_ClearError();
@@ -332,6 +334,7 @@ namespace ss
 		{
 			// good
 			log("destroy_text(" << std::hex << (int32_t)_t << ")");
+			//_t = nullptr;
 			return rt::SUCCESS;
 		}
 		else
@@ -340,6 +343,7 @@ namespace ss
 			log("destroy_text(" << _t << ") error: " << s);
 			return rt::FAIL_DESTROY_TEXT;
 		}
+		//return _t;
 	}
 
 	ss::rt ss::destroy_surf(SDL_Surface* _s)

@@ -8,17 +8,26 @@ int main(int argc, char* argv[])
 	system("cls");
 	rt ret = rt::INITIAL;
 
-	ss::engine sl1m;
+	ss::Engine sl1m;
 
 	ret = sl1m.loop();
 	if (ret != rt::SUCCESS) log(c2m(ret));
 
+	int j = 666;
+	int k = 21;
+	int const l = 43;
+	int* const ip = &j;
+	int const* ic = &l;
+	
+	j = 453;
+	*ip = 4;
+	ic = ip;
+	//ip = k;
+	//ip = ic;
 
 
-
-
-	//for (int i=0;i<(int)ss::ec_ret_t::COUNT_RET_T;++i)
-	//	log(i <<": "<<c2m(i));
+	for (int i=0;i<(int)ss::ec_ret_t::COUNT_RET_T;++i)
+		log(i <<": "<<c2m(i));
 
 	//log(c2m(432));
 	//int8_t jk = 127;
