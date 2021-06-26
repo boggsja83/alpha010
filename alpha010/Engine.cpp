@@ -122,9 +122,11 @@ ss::rt ss::Engine::draw()
     SDL_RenderClear(View_.get_r());
 
     rt ret = rt::INITIAL;
-    ret = rend_cpy(View_.get_r(),TRM_.get_nf()->text(),NULL,NULL);
-    if (ret != rt::SUCCESS) return ret;
+    //ret = rend_cpy(View_.get_r(),TRM_.get_nf()->text(),NULL,NULL);
+    //if (ret != rt::SUCCESS) return ret;
     
+    ret = rend_cpy(View_.get_r(), TRM_.get_tr_n("test_2")->text(), NULL, NULL );
+
     SDL_RenderPresent(View_.get_r());
 
     return draw_state();

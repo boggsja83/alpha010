@@ -16,7 +16,7 @@ namespace ss
 		}
 		~TextRes()
 		{
-			log("~TextRes()");
+			log("~TextRes(): " << this);
 			rt ret = destroy();
 		}
 
@@ -26,8 +26,8 @@ namespace ss
 
 		inline void name(char const* _n) { Name_ = const_cast<char*>(_n); }
 		inline void path(char const* _p) { Path_ = const_cast<char*>(_p); }
-		//inline void text(SDL_Texture const * _t) { Texture_ = const_cast<SDL_Texture*>(_t); }
-		inline void text(SDL_Texture* _t) { Texture_ = _t; }
+		inline void text(SDL_Texture const * _t) { Texture_ = const_cast<SDL_Texture*>(_t); }
+		//inline void text(SDL_Texture* _t) { Texture_ = _t; }
 
 		inline bool operator==(TextRes const &_rhs)
 		{

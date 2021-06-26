@@ -13,6 +13,9 @@ int main(int argc, char* argv[])
 	ret = sl1m.loop();
 	if (ret != rt::SUCCESS) log(c2m(ret));
 
+	ret = sl1m.TRM_.reset();
+	if (ret != rt::SUCCESS) log(c2m(ret));
+
 	int j = 666;
 	int k = 21;
 	int const l = 43;

@@ -58,7 +58,6 @@ ss::rt ss::TextResManager::del_t_p(char const* _path)
 	int8_t i = find_tr_p(_path);
 	if (i == rerr8) return rt::NOT_IN_LIST;
 
-	
 	rt ret = destroy_text(TRvec[i]->text());
 	if (ret!=rt::SUCCESS) return rt::FAIL_DESTROY_TEXT;
 	TRvec[i]->text(nullptr);
@@ -107,7 +106,10 @@ ss::rt ss::TextResManager::del_t(size_t _index)
 	
 	rt ret = destroy_text(TRvec[_index]->text());
 	if (ret!=rt::SUCCESS) return rt::FAIL_DESTROY_TEXT;
+
 	TRvec[_index]->text(nullptr);
+
+	log(TRvec[_index]);
 
 	return rt::SUCCESS;
 }
@@ -128,6 +130,8 @@ ss::rt ss::TextResManager::del_all_t()
 		log("TextResManager::reset() destroy_text() WARNING: " << NotFound_.text());
 	else
 	if (ret != rt::SUCCESS) return ret;
+
+	NotFound_.text(nullptr);
 
 	for (size_t i=0; i<TRvec.size(); ++i)
 	{
@@ -212,7 +216,7 @@ ss::rt ss::TextResManager::init()
 	
 	//PUT THIS BACK IN JUST TESTING
 	//RESIZING IN PUSH_TR()!!!!!
-	//TRvec.reserve(20);
+	TRvec.reserve(5);
 
 	NotFound_.name(NotFound_name);
 	NotFound_.path(NotFound_path);

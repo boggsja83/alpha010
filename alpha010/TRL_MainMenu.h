@@ -22,7 +22,7 @@ namespace ss
 			test_tr.path("test.png");
 
 			test2.name("test_2");
-			test2.path("test_2.png");
+			test2.path("test_256.png");
 		}
 		~TRL_MainMenu()
 		{

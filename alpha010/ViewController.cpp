@@ -74,15 +74,19 @@ ss::rt ss::ViewController::destroy()
 	
 	ret = destroy_surf(Surface_);//dont need this.  this surface will be deleted from win_ automatically (right now because how i have it, Surface_ is "created"by get_win_surf(...))
 	if (ret != rt::SUCCESS) temp_rt = ret;
+	else Surface_ = nullptr;
 
 	ret = destroy_text(Texture_);
 	if (ret != rt::SUCCESS) temp_rt = ret;
+	else Texture_ = nullptr;
 
 	ret = destroy_rend(Rend_);
 	if (ret != rt::SUCCESS) temp_rt = ret;
+	else Rend_ =  nullptr;
 
 	ret = destroy_win(Win_);
 	if (ret != rt::SUCCESS) temp_rt = ret;
+	else Win_ = nullptr;
 
 	ret = destroy_sdl_image();
 	if (ret != rt::SUCCESS) temp_rt = ret; 
