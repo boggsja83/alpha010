@@ -3,6 +3,8 @@
 
 using namespace ss;
 
+void testes(int*);
+
 int main(int argc, char* argv[])
 {
 	system("cls");
@@ -13,15 +15,16 @@ int main(int argc, char* argv[])
 	ret = sl1m.loop();
 	if (ret != rt::SUCCESS) log(c2m(ret));
 
-	ret = sl1m.TRM_.reset();
-	if (ret != rt::SUCCESS) log(c2m(ret));
+	//ret = sl1m.TRM_.reset();
+	//if (ret != rt::SUCCESS) log(c2m(ret));
 
 	int j = 666;
 	int k = 21;
 	int const l = 43;
 	int* const ip = &j;
 	int const* ic = &l;
-	
+	int* r = &k;
+	testes(r);
 	j = 453;
 	*ip = 4;
 	ic = ip;
@@ -29,8 +32,8 @@ int main(int argc, char* argv[])
 	//ip = ic;
 
 
-	for (int i=0;i<(int)ss::ec_ret_t::COUNT_RET_T;++i)
-		log(i <<": "<<c2m(i));
+	//for (int i=0;i<(int)ss::ec_ret_t::COUNT_RET_T;++i)
+	//	log(i <<": "<<c2m(i));
 
 	//log(c2m(432));
 	//int8_t jk = 127;
@@ -50,7 +53,7 @@ int main(int argc, char* argv[])
 	//std::cout << "int8_t min is: " << static_cast<int>(INT8_MIN)<<std::endl;
 	//std::cout << "int16_t min is: " << static_cast<int>(INT16_MIN)<<std::endl;
 
-	SDL_Delay(2000);
+	//SDL_Delay(2000);
 
 
 
@@ -84,4 +87,10 @@ int main(int argc, char* argv[])
 
 
 	return 0;
+}
+
+void testes(int* _ip)
+{
+	*_ip = 666;
+	return;
 }

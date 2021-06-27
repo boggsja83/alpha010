@@ -36,8 +36,8 @@ ss::rt ss::TextResManager::push_tr(TextRes& _tr)
 ss::rt ss::TextResManager::reset()
 {
 	log("TextResManager::reset()");
-	rt ret = del_all_t();
-	if (ret != rt::SUCCESS) return ret;
+	//rt ret = del_all_t();
+	//if (ret != rt::SUCCESS) return ret;
 
 	TRvec.clear();
 
@@ -58,7 +58,9 @@ ss::rt ss::TextResManager::del_t_p(char const* _path)
 	int8_t i = find_tr_p(_path);
 	if (i == rerr8) return rt::NOT_IN_LIST;
 
-	rt ret = destroy_text(TRvec[i]->text());
+	//TextRes* temp = TRvec[i];
+	SDL_Texture* temp_t = TRvec[i]->text();
+	rt ret = destroy_text(temp_t);
 	if (ret!=rt::SUCCESS) return rt::FAIL_DESTROY_TEXT;
 	TRvec[i]->text(nullptr);
 
@@ -72,7 +74,9 @@ ss::rt ss::TextResManager::del_t_n(char const* _name)
 	int8_t i = find_tr_n(_name);
 	if (i == rerr8) return rt::NOT_IN_LIST;
 	//return destroy_text(TRvec[i]->text());
-	rt ret = destroy_text(TRvec[i]->text());
+	rt ret = destroy_text(
+		static_cast<SDL_Texture*>( TRvec[i]->text() ) 
+	);
 	if (ret!=rt::SUCCESS) return rt::FAIL_DESTROY_TEXT;
 	TRvec[i]->text(nullptr);
 	
@@ -102,14 +106,11 @@ ss::rt ss::TextResManager::del_t(size_t _index)
 {
 	log("TextResManager::del_t("<<_index<<")");
 	if (_index<0 || _index>TRvec.size()) return rt::OUT_OF_BOUNDS;
-	//return destroy_text(TRvec[_index]->text());
 	
 	rt ret = destroy_text(TRvec[_index]->text());
 	if (ret!=rt::SUCCESS) return rt::FAIL_DESTROY_TEXT;
 
 	TRvec[_index]->text(nullptr);
-
-	log(TRvec[_index]);
 
 	return rt::SUCCESS;
 }
@@ -126,10 +127,10 @@ ss::rt ss::TextResManager::del_all_t()
 	//SDL_Texture* temp_t = nullptr;
 
 	ret = destroy_text(NotFound_.text());
-	if (ret!=rt::SUCCESS)
-		log("TextResManager::reset() destroy_text() WARNING: " << NotFound_.text());
-	else
-	if (ret != rt::SUCCESS) return ret;
+	//if (ret!=rt::SUCCESS)
+	//	log("TextResManager::reset() destroy_text() WARNING: " << NotFound_.text());
+	//else
+	//if (ret != rt::SUCCESS) return ret;
 
 	NotFound_.text(nullptr);
 
@@ -230,5 +231,6 @@ ss::rt ss::TextResManager::init()
 ss::rt ss::TextResManager::destroy()
 {
 	log("TextResManager::destroy()");
-	return del_all_t();
+	//return del_all_t();
+	return rt::SUCCESS;
 }

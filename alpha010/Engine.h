@@ -38,7 +38,7 @@ namespace ss
 		// END		state_holder inherits
 
 
-		Engine()
+		Engine() : ST_em_(View_.rend()), TRM_(View_.rend())
 		{
 			log("Engine()");
 			rt ret = init();
@@ -50,6 +50,8 @@ namespace ss
 			rt ret = destroy();
 			log("Engine::destroy() ret: " << c2m(ret));
 		}
+
+		//Engine() :ST_em_(View_.rend()) {}
 
 		// engine() functions
 		rt init();

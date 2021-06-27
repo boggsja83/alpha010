@@ -2,7 +2,7 @@
 
 #include "ALL.h"
 
-#include "SDL.h"
+#include "SDLwrapper.h"
 
 namespace ss
 {
@@ -20,14 +20,17 @@ namespace ss
 			rt ret = destroy();
 		}
 
-		inline char const* name() const { return Name_; }
-		inline char const* path() const { return Path_; }
-		inline SDL_Texture* text() const { return Texture_; }
+		inline char const* name() { return Name_; }
+		inline char const* path() { return Path_; }
+		inline SDL_Texture* text() { return Texture_; }
 
-		inline void name(char const* _n) { Name_ = const_cast<char*>(_n); }
-		inline void path(char const* _p) { Path_ = const_cast<char*>(_p); }
-		inline void text(SDL_Texture const * _t) { Texture_ = const_cast<SDL_Texture*>(_t); }
+		inline void name(char const* _n) { Name_ = _n; }
+		inline void path(char const* _p) { Path_ = _p; }
+		inline void text(SDL_Texture * _t) { Texture_ = _t; }
 		//inline void text(SDL_Texture* _t) { Texture_ = _t; }
+
+		inline rt load_text(SDL_Renderer*);
+		inline rt delete_text();
 
 		inline bool operator==(TextRes const &_rhs)
 		{
@@ -61,9 +64,26 @@ namespace ss
 	rt TextRes::destroy()
 	{
 		log("TextRes::destroy()");
-		// actual resource is deleted by a controller
-		// Texture_ just remains a pointer for reference, 
-		// not responsible for tracking [resides in textresmanager
+		return delete_text();
+	}
+
+	rt TextRes::load_text(SDL_Renderer* _rend)
+	{
+		Texture_ = create_text_from_path(_rend, Path_);
+		if (Texture_) return rt::SUCCESS;
+		else return rt::FAIL_CREATE_TEXT;
+	}
+
+	rt TextRes::delete_text()
+	{
+		rt ret = rt::INITIAL;
+
+		if (Texture_)
+		{
+			ret = destroy_text(Texture_);
+			if (ret != rt::SUCCESS) return ret;
+		}
+		Texture_ = nullptr;
 		return rt::SUCCESS;
 	}
 } // END	namespace ss

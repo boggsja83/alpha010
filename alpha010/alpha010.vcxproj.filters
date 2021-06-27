@@ -125,8 +125,11 @@
     <ClInclude Include="STengMenu.h">
       <Filter>Model\States\Engine\MainMenu</Filter>
     </ClInclude>
-    <ClInclude Include="TRL_MainMenu.h">
+    <ClInclude Include="TRLengMenu.h">
       <Filter>Model\States\Engine\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="TRL.h">
+      <Filter>View\Model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

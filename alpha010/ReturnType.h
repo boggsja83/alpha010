@@ -4,6 +4,7 @@ namespace ss
 {
 
 	static int8_t constexpr rerr8 = static_cast<int8_t>(0xFF);
+	static uint16_t constexpr rerr_sizet = static_cast<uint16_t>(0xFFFF);
 
 	// (this was just for enum not enum class...[i think]) C-style way, C++ doesnt really care (e_ret_t or blank there)
 	typedef enum class ec_ret_t:int8_t
@@ -11,6 +12,8 @@ namespace ss
 		SUCCESS,					INITIAL,				NF_ALREADY_EXISTS,
 		
 		STATE_STACK_EMPTY,			ALREADY_IN_LIST,		OUT_OF_BOUNDS,
+
+		INPUT_RECEIVED,
 		
 		NOT_IN_LIST,				FAIL_GENERIC,
 
@@ -43,6 +46,8 @@ namespace ss
 		"SUCCESS",					"INITIAL",				"NF_ALREADY_EXISTS",
 
 		"STATE_STACK_EMPTY",		"ALREADY_IN_LIST",		"OUT_OF_BOUNDS",
+
+		"INPUT_RECEIVED",
 
 		"NOT_IN_LIST",				"FAIL_GENERIC",
 

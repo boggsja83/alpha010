@@ -2,9 +2,6 @@
 
 #include "ALL.h"
 
-//#include "WinProp.h"
-//#include "RendProp.h"
-
 #include "SDL.h"
 #include "SDL_image.h"
 
@@ -108,7 +105,7 @@ namespace ss
 		SDL_Surface* temp = nullptr;
 		IMG_GetError();
 		temp = IMG_Load(_path);
-		if (temp) { log("create_surf_from_path()"); }
+		if (temp) { /*log("create_surf_from_path()");*/}
 		else { log("create_surf_from_path() error: " << IMG_GetError()); }
 		return temp;
 	}
@@ -324,7 +321,6 @@ namespace ss
 		}
 	}
 
-	//ss::rt ss::destroy_text(SDL_Texture* _t)
 	ss::rt ss::destroy_text(SDL_Texture* _t)
 	{
 		SDL_ClearError();
@@ -333,7 +329,7 @@ namespace ss
 		if (s.size() == 0)
 		{
 			// good
-			log("destroy_text(" << std::hex << (int32_t)_t << ")");
+			log("destroy_text(" << std::hex << (int32_t)&_t << ")");
 			//_t = nullptr;
 			return rt::SUCCESS;
 		}
@@ -353,7 +349,7 @@ namespace ss
 		std::string s = SDL_GetError();
 		if (s.size() == 0)
 		{
-			log("destroy_surf(" << _s << ")");
+			//log("destroy_surf(" << _s << ")");
 			return rt::SUCCESS;
 		}
 		else

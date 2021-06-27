@@ -55,6 +55,7 @@ ss::rt ss::ViewController::init()
 ss::rt ss::ViewController::init_locals()
 {
 	log("ViewController::init_locals()");
+
 	Win_		= nullptr;
 	Rend_		= nullptr;
 	Texture_	= nullptr;

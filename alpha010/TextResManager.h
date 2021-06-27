@@ -18,6 +18,13 @@ namespace ss
 			rt ret = init();
 			log("TextResManager::init() ret: " << c2m(ret));
 		}
+		TextResManager(SDL_Renderer* _rend)
+		{
+			log("TextResManager(SDL_Renderer* "<<_rend<<")");
+			rt ret = init();
+			Rend_ = _rend;
+			log("TextResManager::init() ret: " << c2m(ret));
+		}
 		~TextResManager() 
 		{
 			log("~TextResManager()");
