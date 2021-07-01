@@ -9,7 +9,7 @@ namespace ss
 {
 	// if using this externally, declare extern const uint8_t MAX_...
 	// static needed?
-	static const uint8_t MAX_STATE_STACK_SIZE = 10;
+	//static const uint8_t MAX_STATE_STACK_SIZE = 10;
 
 	class State
 	{
@@ -55,14 +55,14 @@ namespace ss
 		virtual rt pop_state();
 		virtual rt push_state(State*);
 
-		virtual rt enter_state() const;
-		virtual rt pause_state() const;
-		virtual rt resume_state() const;
-		virtual rt exit_state() const;
+		virtual rt enter_state();
+		virtual rt pause_state();
+		virtual rt resume_state();
+		virtual rt exit_state();
 
 		// specific state functions for this project
-		virtual rt input_state() const;//??
-		virtual rt draw_state() const;//??
+		virtual rt input_state();//??
+		virtual rt draw_state();//??
 
 		//d::array<state, MAX_STATE_STACK_SIZE> Stack_;
 		std::stack<State*> Stack_;

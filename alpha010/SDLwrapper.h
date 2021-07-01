@@ -9,6 +9,7 @@ namespace ss
 {
 	/**********DECLARATIONS**********/
 	static rt				init_sdl_video();
+	static rt				init_sdl_input();
 	static rt				init_sdl_img();
 
 	static SDL_Window*		create_win(char const*, int, int, int, int, Uint32);
@@ -32,12 +33,13 @@ namespace ss
 	
 	static rt				update_win_surf(SDL_Window*);
 
-	static rt				destroy_win(SDL_Window*);
-	static rt				destroy_rend(SDL_Renderer*);
-	static rt				destroy_text(SDL_Texture*);	
-	//static SDL_Texture*				destroy_text(SDL_Texture*);
-	static rt				destroy_surf(SDL_Surface*);
+	static rt				destroy_win(SDL_Window*&);
+	static rt				destroy_rend(SDL_Renderer*&);
+	static rt				destroy_text(SDL_Texture*&);	
+	static rt				destroy_surf(SDL_Surface*&);
+
 	static rt				destroy_sdl();
+	static rt				destroy_sdl_input();
 	static rt				destroy_sdl_video();
 	static rt				destroy_sdl_image();
 
@@ -46,14 +48,28 @@ namespace ss
 	ss::rt ss::init_sdl_video()
 	{
 		SDL_ClearError();
-		int r = SDL_InitSubSystem(SDL_INIT_VIDEO);
+		int ret = SDL_InitSubSystem(SDL_INIT_VIDEO);
 
-		if (r) {
+		if (ret) {
 			log("init_sdl_video error: " << SDL_GetError()); 
 			return rt::FAIL_INIT_SDL_VIDEO; 
 		}
 		log("init_sdl_video()");
-		return rt::SUCCESS;
+		return rt::OK;
+	}
+
+	ss::rt ss::init_sdl_input()
+	{
+		SDL_ClearError();
+		int ret = SDL_InitSubSystem(SDL_INIT_EVENTS);
+
+		if (ret)
+		{
+			log("init_sdl_input error: " << SDL_GetError());
+			return rt::FAIL_INIT_SDL_VIDEO;
+		}
+		log("init_sdl_input()");
+		return rt::OK;
 	}
 
 	ss::rt ss::init_sdl_img()
@@ -69,7 +85,7 @@ namespace ss
 			return rt::FAIL_INIT_IMG;
 		}
 		log("init_sdl_img()"); 
-		return rt::SUCCESS;
+		return rt::OK;
 	}
 
 	SDL_Window* ss::create_win(char const* _title, int _x, int _y, int _w, int _h, Uint32 _flags)
@@ -167,7 +183,7 @@ namespace ss
 			log("set_rend_draw_color failed: " << SDL_GetError()); 
 			return rt::FAIL_SET_REND_DRAW_COLOR;
 		}
-		return rt::SUCCESS;
+		return rt::OK;
 	}
 
 	ss::rt ss::set_rend_targ(SDL_Renderer* _r, SDL_Texture* _t)
@@ -179,7 +195,7 @@ namespace ss
 			log("set_rend_targ(" << _r << ", " << _t << ") error: " << SDL_GetError());
 			return rt::FAIL_SET_REND_TARG;
 		}
-		return rt::SUCCESS;
+		return rt::OK;
 	}
 
 	//figure out better way of handling this, because now
@@ -210,7 +226,7 @@ namespace ss
 			log("get_rend_info(" << _r << ", " << _ri << ") error: " << SDL_GetError()); 
 			return rt::FAIL_GET_REND_INFO;
 		}
-		return rt::SUCCESS;
+		return rt::OK;
 	}
 
 	ss::rt ss::fill_rect(SDL_Surface* _src, const SDL_Rect* _rect, Uint32 _color)
@@ -223,7 +239,7 @@ namespace ss
 			return rt::FAIL_FILL_RECT;
 		}
 		//return rt::SUCCESS;
-		return rt::SUCCESS;
+		return rt::OK;
 	}
 
 	ss::rt ss::query_text(SDL_Texture* _text, Uint32* _format, int* _access, int* _w, int* _h)
@@ -247,7 +263,7 @@ namespace ss
 				") error: " << SDL_GetError());
 			return rt::FAIL_QUERY_TEXT;
 		}
-		return rt::SUCCESS;
+		return rt::OK;
 	}
 
 	SDL_Surface* ss::get_win_surf(SDL_Window* _win)
@@ -267,7 +283,7 @@ namespace ss
 			log("ss:update_win_surf(" << _win << ") error: " << SDL_GetError()); 
 			return rt::FAIL_UPDATE_WIN_SURF;
 		}
-		return rt::SUCCESS;
+		return rt::OK;
 	}
 
 	ss::rt ss::rend_cpy(SDL_Renderer* _rend, SDL_Texture* _text, SDL_Rect const* _src, SDL_Rect const* _dst)
@@ -279,10 +295,10 @@ namespace ss
 			log("rend_cpy(" << _rend << ", " << _text << ", " << _src << ", " << _dst << ") error: " << SDL_GetError()); 
 			return rt::FAIL_REND_CPY;
 		}
-		return rt::SUCCESS;
+		return rt::OK;
 	}
 
-	ss::rt ss::destroy_win(SDL_Window* _w)
+	ss::rt ss::destroy_win(SDL_Window* &_w)
 	{
 		SDL_ClearError();
 		SDL_DestroyWindow(_w);
@@ -291,8 +307,8 @@ namespace ss
 		{
 			// good
 			log("destroy_win(" << _w << ")");
-			return rt::SUCCESS;
-			//return rt::FAIL_DESTROY_WIN;
+			_w = nullptr;
+			return rt::OK;
 		}
 		else
 		{
@@ -302,7 +318,7 @@ namespace ss
 		}
 	}
 
-	ss::rt ss::destroy_rend(SDL_Renderer* _r)
+	ss::rt ss::destroy_rend(SDL_Renderer* &_r)
 	{
 		SDL_ClearError();
 		SDL_DestroyRenderer(_r);
@@ -311,7 +327,8 @@ namespace ss
 		{
 			// good
 			log("destroy_rend(" << _r << ")");
-			return rt::SUCCESS;
+			_r = nullptr;
+			return rt::OK;
 		}
 		else
 		{
@@ -321,7 +338,7 @@ namespace ss
 		}
 	}
 
-	ss::rt ss::destroy_text(SDL_Texture* _t)
+	ss::rt ss::destroy_text(SDL_Texture* &_t)
 	{
 		SDL_ClearError();
 		SDL_DestroyTexture(_t);
@@ -329,9 +346,9 @@ namespace ss
 		if (s.size() == 0)
 		{
 			// good
-			log("destroy_text(" << std::hex << (int32_t)&_t << ")");
-			//_t = nullptr;
-			return rt::SUCCESS;
+			log("destroy_text(" << std::hex << _t << ")");
+			_t = nullptr;
+			return rt::OK;
 		}
 		else
 		{
@@ -339,10 +356,9 @@ namespace ss
 			log("destroy_text(" << _t << ") error: " << s);
 			return rt::FAIL_DESTROY_TEXT;
 		}
-		//return _t;
 	}
 
-	ss::rt ss::destroy_surf(SDL_Surface* _s)
+	ss::rt ss::destroy_surf(SDL_Surface* &_s)
 	{
 		SDL_ClearError();
 		SDL_FreeSurface(_s);
@@ -350,7 +366,8 @@ namespace ss
 		if (s.size() == 0)
 		{
 			//log("destroy_surf(" << _s << ")");
-			return rt::SUCCESS;
+			_s = nullptr;
+			return rt::OK;
 		}
 		else
 		{
@@ -368,13 +385,32 @@ namespace ss
 		{
 			//good
 			log("destroy_sdl() " << s);
-			return rt::SUCCESS;
+			return rt::OK;
 		}
 		else
 		{
 			//bad
 			log("destroy_sdl() error: " << s);
 			return rt::FAIL_DESTROY_SDL;
+		}
+	}
+
+	ss::rt ss::destroy_sdl_input()
+	{
+		SDL_ClearError();
+		SDL_QuitSubSystem(SDL_INIT_EVENTS);
+		std::string s = SDL_GetError();
+		if (s.size() == 0)
+		{
+			//good
+			log("destroy_sdl_input() " << s);
+			return rt::OK;
+		}
+		else
+		{
+			//bad
+			log("destroy_sdl_input() error: " << s);
+			return rt::FAIL_DESTROY_SDL_EVENTS;
 		}
 	}
 
@@ -387,7 +423,7 @@ namespace ss
 		{
 			//good
 			log("destroy_sdl_video() " << s);
-			return rt::SUCCESS;
+			return rt::OK;
 		}
 		else
 		{
@@ -406,7 +442,7 @@ namespace ss
 		{
 			//good
 			log("destroy_sdl_image()");
-			return rt::SUCCESS;
+			return rt::OK;
 		}
 		else
 		{
@@ -415,9 +451,5 @@ namespace ss
 			return rt::FAIL_DESTROY_SDL_IMG;
 		}
 	}
+} // END	namespace ss
 
-
-
-
-
-} // END ss

@@ -3,7 +3,7 @@
 
 using namespace ss;
 
-void testes(int*);
+void testes(int*&);
 
 int main(int argc, char* argv[])
 {
@@ -13,21 +13,23 @@ int main(int argc, char* argv[])
 	ss::Engine sl1m;
 
 	ret = sl1m.loop();
-	if (ret != rt::SUCCESS) log(c2m(ret));
+	log("Engine::loop() ret: " << c2m(ret));
 
 	//ret = sl1m.TRM_.reset();
 	//if (ret != rt::SUCCESS) log(c2m(ret));
 
-	int j = 666;
+	int j = 6656;
 	int k = 21;
-	int const l = 43;
-	int* const ip = &j;
-	int const* ic = &l;
+	int const l = 43;		// const int
+	int* const ip = &j;		// const pointer to int [always points to j]
+	int const* ic = &l;		// pointer to const int, points to const int [always]
 	int* r = &k;
 	testes(r);
 	j = 453;
 	*ip = 4;
-	ic = ip;
+	j = 9741;
+ 	ic = ip;
+	
 	//ip = k;
 	//ip = ic;
 
@@ -89,8 +91,9 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-void testes(int* _ip)
+void testes(int* &_ip)
 {
 	*_ip = 666;
+	_ip = nullptr;
 	return;
 }

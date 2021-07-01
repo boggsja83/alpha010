@@ -129,16 +129,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="InputController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="SDP.cpp" />
     <ClCompile Include="STengMenu.cpp" />
-    <ClCompile Include="TextResManager.cpp" />
     <ClCompile Include="ViewController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ALL.h" />
     <ClInclude Include="DimType.h" />
+    <ClInclude Include="InputContext.h" />
+    <ClInclude Include="InputController.h" />
     <ClInclude Include="TextRes.h" />
     <ClInclude Include="PosType.h" />
     <ClInclude Include="QuickSort.h" />
@@ -150,7 +152,6 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="SDP.h" />
     <ClInclude Include="STengMenu.h" />
-    <ClInclude Include="TextResManager.h" />
     <ClInclude Include="TRL.h" />
     <ClInclude Include="TRLengMenu.h" />
     <ClInclude Include="ViewController.h" />

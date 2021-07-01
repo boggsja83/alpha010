@@ -9,19 +9,24 @@
 
 namespace ss
 {
-	typedef struct TRL_ENG_MENU_ : TRL_BASE
+	typedef struct TRL_eng_menu : TRL_BASE
 	{
-		/*--------------------------------------------------*/
-		/*-----------------TRL_BASE Elements----------------*/
-		/*--------------------------------------------------*/
-		//rt	load_all_text(SDL_Renderer*)
-		//rt	delete_all_text();
-		/*--------------------------------------------------*/
-
 		/*--------------------------------------------------*/
 		/*-----------------TRL_BASE Functions---------------*/
 		/*--------------------------------------------------*/
+		//rt			load_all_text()
+		//rt			delete_all_text()
+		//size_t		find_text(char const* _name)
+		//SDL_Texture*	get_text(size_t _index)
+		//SDL_Texture*	get_text(char const* _name)
+		/*--------------------------------------------------*/
+
+		/*--------------------------------------------------*/
+		/*-----------------TRL_BASE Elements----------------*/
+		/*--------------------------------------------------*/
 		//std::vector<TextRes*>		TRvec;
+		//TextRes					NotFound_;
+		//SDL_Renderer*				Rend_;
 		/*--------------------------------------------------*/
 
 		/*--------------------------------------------------*/
@@ -29,10 +34,16 @@ namespace ss
 		/*--------------------------------------------------*/
 		
 		/*--------------------------------------------------*/
-		TRL_ENG_MENU_()
+		TRL_eng_menu() = delete;
+		TRL_eng_menu(TRL_eng_menu&) = delete;
+		void* operator=(TRL_eng_menu const&) = delete;
+		/*--------------------------------------------------*/
+	
+		/*--------------------------------------------------*/
+		TRL_eng_menu(SDL_Renderer* _rend) 
 		/*--------------------------------------------------*/
 		{
-			log("TRL_ENG_MENU_()");
+			log("TRL_eng_menu_("<<_rend<<")");
 
 			menu_main.name("menu-main");
 			menu_main.path("menu-main.png");
@@ -45,11 +56,14 @@ namespace ss
 			test2.name("test_2");
 			test2.path("test_2.png");
 			TRvec.push_back(&test2);
+
+			Rend_=_rend;
+			NotFound_.load_text(Rend_);
 		}
 		/*--------------------------------------------------*/
-		~TRL_ENG_MENU_()
+		~TRL_eng_menu()
 		/*--------------------------------------------------*/
-			{ log("~TRL_ENG_MENU_()"); }
+			{ log("~TRL_eng_menu()"); }
 		/*--------------------------------------------------*/
 
 		/*--------------------------------------------------*/

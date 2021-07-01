@@ -7,6 +7,7 @@
 
 #include "SDLwrapper.h"
 #include "TRLengMenu.h"
+#include "InputController.h"
 
 /*--------------------------------------------------*/
 namespace ss
@@ -29,26 +30,23 @@ namespace ss
 
         virtual rt input()  override;
         virtual rt draw()   override;
-        /*--------------------------------------------------*/
 
         /*--------------------------------------------------*/
         /*---------------Constructors/Destructor------------*/
         /*--------------------------------------------------*/
     public:
         /*--------------------------------------------------*/
-        ST_eng_menu()
+        ST_eng_menu() = delete;
+        ST_eng_menu(ST_eng_menu&) = delete;
+        void* operator=(ST_eng_menu const&) = delete;
+        /*--------------------------------------------------*/
+        ST_eng_menu(SDL_Renderer* _rend, InputController* _input): TRL_(_rend)
         /*--------------------------------------------------*/
         {
-            log("ST_eng_menu()");
-            rt ret = init();
-        }
-        /*--------------------------------------------------*/
-        ST_eng_menu(SDL_Renderer* _rend)
-        /*--------------------------------------------------*/
-        {
-            log("ST_eng_menu(SDL_Renderer* "<<_rend<<')');
+            log("ST_eng_menu(SDL_Renderer* "<<_rend<<", InputController " << _input << ")");
             rt ret = init();
             this->Rend_ = _rend;
+            this->Input_ = _input;
         }
         /*--------------------------------------------------*/
         ~ST_eng_menu()
@@ -72,10 +70,11 @@ namespace ss
         /*-----------------Member Variables-----------------*/
         /*--------------------------------------------------*/
     public:
-        char const*     text_name = "menu-main";
+        char const*     text_name = "test_2";
     private:
         SDL_Renderer*   Rend_;
         TRL_em          TRL_;
+        InputController* Input_;
         /*--------------------------------------------------*/
 
         /*--------------------------------------------------*/
@@ -83,9 +82,9 @@ namespace ss
         /*--------------------------------------------------*/
     public:
         /*--------------------------------------------------*/
-        inline void             rend(SDL_Renderer* _rend) 
+        inline void     rend(SDL_Renderer* _rend) 
         /*--------------------------------------------------*/
-                                    { Rend_=_rend; }
+                            { Rend_=_rend; }
         /*--------------------------------------------------*/
 
         /*--------------------------------------------------*/

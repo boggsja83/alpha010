@@ -55,6 +55,12 @@
     <Filter Include="Model\States\Engine\MainMenu">
       <UniqueIdentifier>{a26fd1bf-ea53-4c08-ba7c-d521650f9b29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Controller\Input">
+      <UniqueIdentifier>{e8486548-4131-4015-84ef-912e74960ed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller\Input\Model">
+      <UniqueIdentifier>{b0d60dca-e19a-4818-9d36-7a81883b596f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -69,11 +75,11 @@
     <ClCompile Include="ViewController.cpp">
       <Filter>View\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="TextResManager.cpp">
-      <Filter>View\Controller</Filter>
-    </ClCompile>
     <ClCompile Include="STengMenu.cpp">
       <Filter>Model\States\Engine\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="InputController.cpp">
+      <Filter>Controller\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +122,6 @@
     <ClInclude Include="RectType.h">
       <Filter>Utility\Types</Filter>
     </ClInclude>
-    <ClInclude Include="TextResManager.h">
-      <Filter>View\Controller</Filter>
-    </ClInclude>
     <ClInclude Include="TextRes.h">
       <Filter>View\Model</Filter>
     </ClInclude>
@@ -130,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="TRL.h">
       <Filter>View\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="InputController.h">
+      <Filter>Controller\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputContext.h">
+      <Filter>Controller\Input\Model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

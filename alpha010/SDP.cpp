@@ -7,7 +7,7 @@ ss::rt ss::State_Holder::pop_state()
 	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 
 	ret = Stack_.top()->exit();
-	if (ret!=rt::SUCCESS) { return ret; }
+	if (ret!=rt::OK) { return ret; }
 
 	Stack_.pop();
 		
@@ -23,7 +23,7 @@ ss::rt ss::State_Holder::push_state(State* _state)
 	if(!Stack_.empty())
 	{
 		ret = Stack_.top()->pause();
-		if (ret!=rt::SUCCESS) { return ret; }
+		if (ret!=rt::OK) { return ret; }
 	}
 
 	Stack_.push(_state);
@@ -31,37 +31,37 @@ ss::rt ss::State_Holder::push_state(State* _state)
 	return Stack_.top()->enter();
 }
 
-ss::rt ss::State_Holder::enter_state() const
+ss::rt ss::State_Holder::enter_state() 
 {
 	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->enter();
 }
 
-ss::rt ss::State_Holder::pause_state() const
+ss::rt ss::State_Holder::pause_state() 
 {
 	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->pause();
 }
 
-ss::rt ss::State_Holder::resume_state() const
+ss::rt ss::State_Holder::resume_state() 
 {
 	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->resume();
 }
 
-ss::rt ss::State_Holder::exit_state() const
+ss::rt ss::State_Holder::exit_state() 
 {
 	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->exit();
 }
 
-ss::rt ss::State_Holder::input_state() const
+ss::rt ss::State_Holder::input_state() 
 {
 	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->input();
 }
 
-ss::rt ss::State_Holder::draw_state() const
+ss::rt ss::State_Holder::draw_state() 
 {
 	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
 	return Stack_.top()->draw();

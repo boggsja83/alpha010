@@ -2,82 +2,92 @@
 
 #include "ALL.h"
 
-#include "SDP.h"
-
-#include "ViewController.h"
-
 #include "STengMenu.h"
-
-#include "TextResManager.h"
-//#include "Asset_Mgr.h"
-//#include "View_Asset.h"
-
-//#include "Quick_Sort.h"
+#include "ViewController.h"
+#include "InputController.h"
 
 namespace ss
 {
 	class Engine :
 		public State_Holder
 	{
+		/*--------------------------------------------------*/
+		/*--------------State_Holder Members ---------------*/
+		/*--------------------------------------------------*/
 	public:
-		// BEGIN	state_holder inherits
-		
-		//virtual uint8_t pop_state();
-		//virtual uint8_t push_state(state*);
-
-		//virtual uint8_t enter_state() const;
-		//virtual uint8_t pause_state() const;
-		//virtual uint8_t resume_state() const;
-		//virtual uint8_t exit_state() const;
-
-		//virtual uint8_t input_state() const;
-		//virtual uint8_t draw_state() const;
-
 		//std::stack<state*> Stack_;
+		/*--------------------------------------------------*/
+
+		/*--------------------------------------------------*/
+		/*--------------State_Holder Functions--------------*/
+		/*--------------------------------------------------*/
+	public:
+		//virtual rt pop_state();
+		//virtual rt push_state(state*);
+
+		//virtual rt enter_state();
+		//virtual rt pause_state();
+		//virtual rt resume_state();
+		//virtual rt exit_state();
+
+		//virtual rt input_state();
+		//virtual rt draw_state();
+		/*--------------------------------------------------*/
 		
-		// END		state_holder inherits
-
-
-		Engine() : ST_em_(View_.rend()), TRM_(View_.rend())
+		/*--------------------------------------------------*/
+		/*--------------Constructor/Destructor--------------*/
+		/*--------------------------------------------------*/
+	public:
+		/*--------------------------------------------------*/
+		Engine() : ST_em_(View_.rend(), &Input_)
+		/*--------------------------------------------------*/
 		{
 			log("Engine()");
 			rt ret = init();
 			log("Engine::init() ret: " << c2m(ret));
 		}
+		/*--------------------------------------------------*/
 		~Engine()
+		/*--------------------------------------------------*/
 		{
 			log("~Engine()");
 			rt ret = destroy();
 			log("Engine::destroy() ret: " << c2m(ret));
 		}
+		/*--------------------------------------------------*/
 
-		//Engine() :ST_em_(View_.rend()) {}
-
-		// engine() functions
+		/*--------------------------------------------------*/
+		/*-----------------Init/Destroy---------------------*/
+		/*--------------------------------------------------*/
+	private:
 		rt init();
 		rt init_locals();
 		rt destroy();
+		/*--------------------------------------------------*/
 
-		// view controller
-		ViewController View_;
+		/*--------------------------------------------------*/
+		/*--------------System Controllers------------------*/
+		/*--------------------------------------------------*/
+	private:
+		ViewController		View_;
+		InputController		Input_;
+		/*--------------------------------------------------*/
 
-
-		// input controller
-		
-		// audio controller
-		
-		// texture resource manager
-		TextResManager	TRM_;
-
-		// class engine states
+		/*--------------------------------------------------*/
+		/*--------------Engine States-----------------------*/
+		/*--------------------------------------------------*/
+	private:
 		ST_eng_menu ST_em_;
+		/*--------------------------------------------------*/
 
 		// game loop
+	public:
 		rt loop();
-		rt input();
-		rt draw();
+	public:
+		//rt input();
+		//rt draw();
+		//virtual rt input_state() override;
 		bool On_;
-
 
 	}; // END	engine class
 } // END ss

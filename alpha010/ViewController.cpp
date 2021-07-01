@@ -3,19 +3,17 @@
 ss::rt ss::ViewController::init()
 {
 	rt ret = rt::INITIAL;
-	//rt rr = rt();
-	//int reti = -1;
 
 	log("ViewController::init()");
 
 	ret = init_locals();
-	if (ret!=rt::SUCCESS) { return ret; }
+	if (ret!=rt::OK) { return ret; }
 
 	ret = init_sdl_video();
-	if (ret != rt::SUCCESS) { return ret; }
+	if (ret != rt::OK) { return ret; }
 
 	ret = init_sdl_img();
-	if (ret != rt::SUCCESS) { return ret; }
+	if (ret != rt::OK) { return ret; }
 
 	Win_ = create_win(title_win, x_win, y_win, width_win, height_win, flags_win);
 	if (!Win_) return rt::FAIL_CREATE_WIN;
@@ -29,18 +27,18 @@ ss::rt ss::ViewController::init()
 
 	ret = fill_rect(Surface_, &rect_win,
 		SDL_MapRGB(Surface_->format, r_surf, g_surf, b_surf));
-	if (ret != rt::SUCCESS) return ret;
+	if (ret != rt::OK) return ret;
 
 	ret = update_win_surf(Win_);
-	if (ret != rt::SUCCESS) { return ret; }
+	if (ret != rt::OK) { return ret; }
 
 	// set renderer color (green)
 	ret = set_rend_draw_color(Rend_, r_rend, g_rend, b_rend, a_rend);
-	if (ret != rt::SUCCESS) { return ret; }
+	if (ret != rt::OK) { return ret; }
 
 	// set renderer info
 	ret = get_rend_info(Rend_, &info_rend);
-	if (ret != rt::SUCCESS) { return ret; }
+	if (ret != rt::OK) { return ret; }
 
 	// set pixel format
 	pixel_format_rend = get_pixel_format(&info_rend);
@@ -61,42 +59,38 @@ ss::rt ss::ViewController::init_locals()
 	Texture_	= nullptr;
 	Surface_	= nullptr;
 
-	return rt::SUCCESS;
+	return rt::OK;
 }
 
 ss::rt ss::ViewController::destroy()
 {
 	rt ret = rt::INITIAL;
-	rt temp_rt = rt::SUCCESS;
+	rt temp_rt = rt::OK;
 
 	SDL_Texture* temp_t = nullptr;
 
 	log("ViewController::destroy()");
 	
 	ret = destroy_surf(Surface_);//dont need this.  this surface will be deleted from win_ automatically (right now because how i have it, Surface_ is "created"by get_win_surf(...))
-	if (ret != rt::SUCCESS) temp_rt = ret;
-	else Surface_ = nullptr;
+	if (ret != rt::OK) temp_rt = ret;
 
 	ret = destroy_text(Texture_);
-	if (ret != rt::SUCCESS) temp_rt = ret;
-	else Texture_ = nullptr;
+	if (ret != rt::OK) temp_rt = ret;
 
 	ret = destroy_rend(Rend_);
-	if (ret != rt::SUCCESS) temp_rt = ret;
-	else Rend_ =  nullptr;
+	if (ret != rt::OK) temp_rt = ret;
 
 	ret = destroy_win(Win_);
-	if (ret != rt::SUCCESS) temp_rt = ret;
-	else Win_ = nullptr;
+	if (ret != rt::OK) temp_rt = ret;
 
 	ret = destroy_sdl_image();
-	if (ret != rt::SUCCESS) temp_rt = ret; 
+	if (ret != rt::OK) temp_rt = ret;
 	
 	ret = destroy_sdl_video();
-	if (ret != rt::SUCCESS) temp_rt = ret;
+	if (ret != rt::OK) temp_rt = ret;
 
 	ret = destroy_sdl();
-	if (ret != rt::SUCCESS) temp_rt = ret;
+	if (ret != rt::OK) temp_rt = ret;
 
 	return temp_rt;
 }
