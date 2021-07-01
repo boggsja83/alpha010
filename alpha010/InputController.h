@@ -1,7 +1,12 @@
 #pragma once
 
+#include <vector>
+#include <array>
+
 #include "ALL.h"
 #include "SDLwrapper.h"
+
+#include "InputContext.h"
 
 /*--------------------------------------------------*/
 namespace ss
@@ -50,15 +55,28 @@ namespace ss
 		/*----------------Member functions------------------*/
 		/*--------------------------------------------------*/
 	public:
-		SDL_Event poll_event();
+		//delete poll_event function
+		//SDL_Event poll_event();
+
+
 		rt input();
+	
+	private:
+		
 		/*--------------------------------------------------*/
 
 		/*--------------------------------------------------*/
 		/*----------------Member variables------------------*/
 		/*--------------------------------------------------*/
 	private:
-		SDL_Event Event_;
+		//SDL_Event	Event_;
+		//ICM			ICM_;
+		std::vector<Uint32>	ET_;
+		
+		std::array<SDL_Event   , 10> EC_;
+		std::array<char const* , 10> EM_;
+
+
 		/*--------------------------------------------------*/
 
 

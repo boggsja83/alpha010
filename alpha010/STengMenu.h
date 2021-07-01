@@ -70,7 +70,7 @@ namespace ss
         /*-----------------Member Variables-----------------*/
         /*--------------------------------------------------*/
     public:
-        char const*     text_name = "test_2";
+        char const*     text_name = "menu-main";
     private:
         SDL_Renderer*   Rend_;
         TRL_em          TRL_;

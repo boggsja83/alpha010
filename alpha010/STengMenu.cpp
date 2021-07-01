@@ -46,26 +46,27 @@ ss::rt ss::ST_eng_menu::input()
 {
 	//log("ST_eng_menu::input()");
 	
+	return Input_->input();
+
+	//SDL_Event ev;
 	//SDL_PollEvent(&ev);
 
-	SDL_Event ev = Input_->poll_event();
+	//switch (ev.type)
+	//{
+	//case SDL_QUIT:
+	//	return rt::QUIT;
+	//	break;
+	//case SDL_KEYDOWN:
+	//	break;
+	//case SDL_KEYUP:
+	//	if (ev.key.keysym.scancode == SDL_SCANCODE_Q) { return rt::QUIT; }
+	//	if (ev.key.keysym.scancode == SDL_SCANCODE_SPACE) return rt::INPUT_RECEIVED;
+	//	break;
+	//default:
+	//	break;
+	//}
 
-	switch (ev.type)
-	{
-	case SDL_QUIT:
-		return rt::QUIT;
-		break;
-	case SDL_KEYDOWN:
-		break;
-	case SDL_KEYUP:
-		if (ev.key.keysym.scancode == SDL_SCANCODE_Q) { return rt::QUIT; }
-		if (ev.key.keysym.scancode == SDL_SCANCODE_SPACE) return rt::INPUT_RECEIVED;
-		break;
-	default:
-		break;
-	}
-
-	return rt::OK;
+	//return rt::OK;
 }
 /*--------------------------------------------------*/
 ss::rt ss::ST_eng_menu::draw()
