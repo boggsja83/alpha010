@@ -149,7 +149,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ALL.h" />
+    <ClInclude Include="ControlMap.h" />
     <ClInclude Include="DimType.h" />
+    <ClInclude Include="ICDengMenu.h" />
     <ClInclude Include="InputContext.h" />
     <ClInclude Include="InputController.h" />
     <ClInclude Include="TextRes.h" />

@@ -11,7 +11,7 @@ ss::rt ss::Engine::init()
 
     ret = push_state(&ST_em_);
     if (ret != rt::OK) { return ret; }
-
+    
     return ret;
 }
 
@@ -38,19 +38,21 @@ ss::rt ss::Engine::loop()
 
     log("Engine::loop()");
     
-    bool oneFrame = true;
+    bool one_frame = true;
     bool user_quit = false;
 
     On_ = true;
     while (On_ && !user_quit)
     {
-        oneFrame = true;
+        SDL_Delay(16);//fake 60fps
+
+        one_frame = true;
         user_quit = false;
-        while(oneFrame && !user_quit)
+        while(one_frame && !user_quit)
         {
             ret = input_state();
             if (ret == rt::INPUT_RECEIVED)
-                oneFrame = false;
+                one_frame = false;
             else if (ret == rt::QUIT)
                 user_quit = true;
         }

@@ -2,20 +2,25 @@
 
 #include <vector>
 #include <array>
+#include <map>
+#include <tuple>
 
 #include "ALL.h"
 #include "SDLwrapper.h"
 
 #include "InputContext.h"
+#include "ControlMap.h"
 
 /*--------------------------------------------------*/
 namespace ss
 /*--------------------------------------------------*/
 {
-
+	typedef std::array<InputContext, static_cast<size_t>(IC::IC_COUNT)> ArrIC;
 /*
 	Level 1		Raw Input
 	Level 2		Convert Raw Input to Context Input
+	-calling function provides list of Contexts
+	-broadcast
 	Level 3		High-level Context Input handling
 */
 
@@ -58,8 +63,7 @@ namespace ss
 		//delete poll_event function
 		//SDL_Event poll_event();
 
-
-		rt input();
+		rt input(ArrIC&);
 	
 	private:
 		
@@ -69,13 +73,17 @@ namespace ss
 		/*----------------Member variables------------------*/
 		/*--------------------------------------------------*/
 	private:
-		//SDL_Event	Event_;
-		//ICM			ICM_;
-		std::vector<Uint32>	ET_;
-		
-		std::array<SDL_Event   , 10> EC_;
-		std::array<char const* , 10> EM_;
 
+		//std::vector<Uint32>	ET_;
+		// 
+		// actual highest value is 282? i believe
+		std::array<bool, 300> KSprev_;
+
+
+
+		// take event map stuff out but put it in another file to save
+		//rt init_event_map();
+		//std::map<SDL_EventType, char const*> EventMap_;
 
 		/*--------------------------------------------------*/
 

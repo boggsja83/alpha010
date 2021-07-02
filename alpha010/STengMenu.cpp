@@ -46,7 +46,7 @@ ss::rt ss::ST_eng_menu::input()
 {
 	//log("ST_eng_menu::input()");
 	
-	return Input_->input();
+	return Input_->input(ICA_);
 
 	//SDL_Event ev;
 	//SDL_PollEvent(&ev);
@@ -75,9 +75,9 @@ ss::rt ss::ST_eng_menu::draw()
 	//log("ST_eng_menu::draw()");
 
 	rt ret = rt::INITIAL;
-	SDL_RenderClear(Rend_);
-	ret = rend_cpy(Rend_, TRL_.get_text(text_name), NULL, NULL);
-	SDL_RenderPresent(Rend_);
+	SDL_RenderClear(View_->rend());
+	ret = rend_cpy(View_->rend(), TRL_.get_text(name_t), NULL, NULL);
+	SDL_RenderPresent(View_->rend());
 	
 	//TRL_.delete_all_text();
 	//TRL_.load_all_text();
@@ -90,8 +90,13 @@ ss::rt ss::ST_eng_menu::init()
 {
 	log("ST_eng_menu::init()");
 	
-	Rend_ = nullptr;
+	// init locals function needed here
+	View_ = nullptr;
+	Input_ = nullptr;
 	
+	// init ArrIC function
+	ICA_[0] = ICD_.IC_;
+
 	return rt::OK;
 }
 /*--------------------------------------------------*/

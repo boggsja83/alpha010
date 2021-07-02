@@ -75,8 +75,8 @@ namespace ss
 	ss::rt ss::init_sdl_img()
 	{
 		IMG_GetError();
-	
-		int32_t flags = IMG_INIT_PNG;
+		// move flags to properties file?
+		int32_t flags = IMG_INIT_PNG | IMG_INIT_JPG;
 		int32_t initted = IMG_Init(flags);
 
 		if ((initted & flags) != flags) 

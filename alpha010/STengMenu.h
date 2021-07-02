@@ -5,9 +5,11 @@
 #include "ALL.h"
 #include "SDP.h"
 
-#include "SDLwrapper.h"
+//#include "SDLwrapper.h"
 #include "TRLengMenu.h"
+#include "ICDengMenu.h"
 #include "InputController.h"
+#include "ViewController.h"
 
 /*--------------------------------------------------*/
 namespace ss
@@ -40,12 +42,12 @@ namespace ss
         ST_eng_menu(ST_eng_menu&) = delete;
         void* operator=(ST_eng_menu const&) = delete;
         /*--------------------------------------------------*/
-        ST_eng_menu(SDL_Renderer* _rend, InputController* _input): TRL_(_rend)
+        ST_eng_menu(ViewController* _view, InputController* _input): TRL_(_view->rend())
         /*--------------------------------------------------*/
         {
-            log("ST_eng_menu(SDL_Renderer* "<<_rend<<", InputController " << _input << ")");
+            log("ST_eng_menu("<<_view<<". " << _input << ")");
             rt ret = init();
-            this->Rend_ = _rend;
+            this->View_ = _view;
             this->Input_ = _input;
         }
         /*--------------------------------------------------*/
@@ -69,12 +71,20 @@ namespace ss
         /*--------------------------------------------------*/
         /*-----------------Member Variables-----------------*/
         /*--------------------------------------------------*/
-    public:
-        char const*     text_name = "menu-main";
+    //public:
     private:
-        SDL_Renderer*   Rend_;
-        TRL_em          TRL_;
-        InputController* Input_;
+        char const*         name_t = "red";
+    //private:
+        // controllers (make a passthrough object...)
+        ViewController*     View_;
+        InputController*    Input_;
+        
+        // texture resource list
+        TRLengMenu          TRL_;
+        
+        // input context
+        ICDengMenu          ICD_;
+        ArrIC               ICA_;
         /*--------------------------------------------------*/
 
         /*--------------------------------------------------*/
@@ -82,19 +92,13 @@ namespace ss
         /*--------------------------------------------------*/
     public:
         /*--------------------------------------------------*/
-        inline void     rend(SDL_Renderer* _rend) 
+        inline char const*      text_name() const
         /*--------------------------------------------------*/
-                            { Rend_=_rend; }
-        /*--------------------------------------------------*/
-
-        /*--------------------------------------------------*/
-        /*-----------------Setter Functions-----------------*/
-        /*--------------------------------------------------*/
-    public:
+                                    { return name_t; }
         /*--------------------------------------------------*/
         inline SDL_Renderer*    rend() const
         /*--------------------------------------------------*/
-                                    { return Rend_; }
+                                    { return View_->rend(); }
         /*--------------------------------------------------*/
         inline TRL&             trl()
         /*--------------------------------------------------*/

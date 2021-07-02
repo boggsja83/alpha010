@@ -61,6 +61,9 @@
     <Filter Include="Controller\Input\Model">
       <UniqueIdentifier>{b0d60dca-e19a-4818-9d36-7a81883b596f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility\ControlMap">
+      <UniqueIdentifier>{8681448e-301e-4289-96b0-0b79b20668b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -139,6 +142,12 @@
     </ClInclude>
     <ClInclude Include="InputContext.h">
       <Filter>Controller\Input\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlMap.h">
+      <Filter>Utility\ControlMap</Filter>
+    </ClInclude>
+    <ClInclude Include="ICDengMenu.h">
+      <Filter>Model\States\Engine\MainMenu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
