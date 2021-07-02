@@ -203,17 +203,19 @@ namespace ss
 	//out of all available
 	int32_t ss::get_pixel_format(SDL_RendererInfo* _ri)
 	{
-		//int n = _ri->num_texture_formats;
-		//Uint32 u = 0;
-
-		//for (int i=0; i<n;++i)
-		//{
-		//	u = _ri->texture_formats[i];
-		//}
+		int n = _ri->num_texture_formats;
+		Uint32 u = 0;
+		
+		for (int i=0; i<n;++i)
+		{
+			log("Pixel formats: " <<
+				SDL_GetPixelFormatName(_ri->texture_formats[i]);
+			);
+			//u = _ri->texture_formats[i];
+		}
 		//
 		//return u;
 
-		/*return -2424;*/
 		return _ri->texture_formats[0];
 	}
 

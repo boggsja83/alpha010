@@ -93,9 +93,25 @@ ss::rt ss::ST_eng_menu::init()
 	// init locals function needed here
 	View_ = nullptr;
 	Input_ = nullptr;
-	
+	IC_ = IC::MENU;
 	// init ArrIC function
-	ICA_[0] = ICD_.IC_;
+	//for (InputContext ic : ICA_)
+	//{
+	//	ic = IC::NONE;
+	//}
+	//for (ICV icv_ : ICD_.ICVvec_)
+	//{
+	//}
+
+	//for (size_t i=0; i<ICD_.ICVvec_.size();++i)
+	//{
+	//	ICA_[i] = 
+	//}
+	
+
+	// add all InputContext's from this "level"
+	// to the InputContextArray
+	ICA_[0] = IC_;
 
 	return rt::OK;
 }

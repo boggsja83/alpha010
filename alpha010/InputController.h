@@ -2,8 +2,9 @@
 
 #include <vector>
 #include <array>
-#include <map>
-#include <tuple>
+//#include <map>
+//#include <tuple>
+#include <utility>
 
 #include "ALL.h"
 #include "SDLwrapper.h"
@@ -11,18 +12,15 @@
 #include "InputContext.h"
 #include "ControlMap.h"
 
+//context definitions
+#include "ICDengMenu.h"
+
 /*--------------------------------------------------*/
 namespace ss
 /*--------------------------------------------------*/
 {
+	typedef std::array<bool, 300> ArrKS;
 	typedef std::array<InputContext, static_cast<size_t>(IC::IC_COUNT)> ArrIC;
-/*
-	Level 1		Raw Input
-	Level 2		Convert Raw Input to Context Input
-	-calling function provides list of Contexts
-	-broadcast
-	Level 3		High-level Context Input handling
-*/
 
 /*--------------------------------------------------*/
 	class InputController
@@ -34,6 +32,7 @@ namespace ss
 	public:
 		/*--------------------------------------------------*/
 		InputController() 
+			: KS_({true,1,1,1,1,1,1,1,1,1}), KSprev_({1,0,1,0,1,0,1,0,1,0,1}), Blanks_({})
 		/*--------------------------------------------------*/
 		{ 
 			log("InputController()");
@@ -53,37 +52,36 @@ namespace ss
 		/*--------------------------------------------------*/
 	private:
 		rt init();
+		rt init_locals();
 		rt destroy();
 		/*--------------------------------------------------*/
 
 		/*--------------------------------------------------*/
 		/*----------------Member functions------------------*/
 		/*--------------------------------------------------*/
-	public:
-		//delete poll_event function
-		//SDL_Event poll_event();
-
-		rt input(ArrIC&);
-	
 	private:
-		
+		rt reset_ks(ArrKS&);
+	public:
+		rt input(ArrIC&);
+		inline rt push_icd(ICD _icd)
+		{
+			ICDvec_.push_back(_icd);
+			return rt::OK;
+		}
 		/*--------------------------------------------------*/
 
 		/*--------------------------------------------------*/
 		/*----------------Member variables------------------*/
 		/*--------------------------------------------------*/
 	private:
+		// actual highest value is 284? i believe
+		// 0,4-282 are sdl indices, 283,284 = user hardware defined?
+		ArrKS		KS_;
+		ArrKS		KSprev_;
+		ArrKS		Blanks_;
+		ControlMap	CM_;
 
-		//std::vector<Uint32>	ET_;
-		// 
-		// actual highest value is 282? i believe
-		std::array<bool, 300> KSprev_;
-
-
-
-		// take event map stuff out but put it in another file to save
-		//rt init_event_map();
-		//std::map<SDL_EventType, char const*> EventMap_;
+		std::vector<ICD>		ICDvec_;
 
 		/*--------------------------------------------------*/
 

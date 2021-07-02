@@ -10,6 +10,9 @@ ss::rt ss::InputController::init()
 	//ret = init_event_map();
 	//if (ret != rt::OK) return ret;
 
+	ret = init_locals();
+	if (ret != rt::OK) return ret;
+
 	ret = init_sdl_input();
 	if (ret != rt::OK) return ret;
 
@@ -51,20 +54,38 @@ ss::rt ss::InputController::destroy()
 ss::rt ss::InputController::input(ArrIC& _arr)
 {
 	SDL_Event ev;
+	rt ret = rt::OK;
 
 	while (SDL_PollEvent(&ev))
 	{
+		//log("size: "<<_arr.size());
+		//for (size_t cxt = 0; cxt < _arr.size(); ++cxt)
+		//{
+		//	if (_arr[cxt] == IC::NONE)
+		//	{
+		//		log("IC::NONE hit");
+		//		break;
+		//	}
+		//	else
+		//		log("ICV: " << (int)_arr[cxt] << " key: " << CM_.CM_[(int)_arr[cxt]].K);
+		//}
+		SDL_Scancode temp_sc = ev.key.keysym.scancode;
+
 		switch (ev.type)
 		{
 		case SDL_QUIT:
 			return rt::QUIT;
 		case SDL_KEYDOWN:
+			KS_[temp_sc] = true;
 			break;
 		case SDL_KEYUP:
+			KS_[temp_sc] = false;
 			break;
 		default:;
 		} // End switch
 	} // End while
+
+	  //process input
 
 	return rt::INPUT_RECEIVED;
 
@@ -101,6 +122,35 @@ ss::rt ss::InputController::input(ArrIC& _arr)
 	//if(!waiting){ log("done processing "<<ET_.size()<<" events"); }
 
 	//return rt::INPUT_RECEIVED;
+}
+
+ss::rt ss::InputController::init_locals()
+{
+	rt ret = rt::INITIAL;
+
+	KS_ = std::move(KSprev_);
+	ret = reset_ks(KS_);
+	ret = reset_ks(KSprev_);
+	
+
+	ret = push_icd(ICD_em());//do this in "level"?? (dynamically load contexts?) -maybe not
+
+	//for (size_t i =0; i<KSprev_.size();++i)
+	//{
+	//	KSprev_[i] = false;
+	//}
+	return rt::OK;
+}
+
+ss::rt ss::InputController::reset_ks(ArrKS& _ks)
+{
+	//try to use std::move with std::array
+	//if i cant get this to work, eliminate 
+	//std::array and use c++ array
+
+	_ks = std::move(Blanks_);
+
+	return rt::OK;
 }
 
 //ss::rt ss::InputController::init_event_map()

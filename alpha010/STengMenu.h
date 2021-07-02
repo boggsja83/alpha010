@@ -83,7 +83,8 @@ namespace ss
         TRLengMenu          TRL_;
         
         // input context
-        ICDengMenu          ICD_;
+        //ICDengMenu          ICD_;
+        InputContext        IC_;
         ArrIC               ICA_;
         /*--------------------------------------------------*/
 

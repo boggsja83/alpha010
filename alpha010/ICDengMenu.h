@@ -20,5 +20,5 @@ namespace ss
 			ICVvec_.push_back(ICV::MENU_NEXT);
 			ICVvec_.push_back(ICV::MENU_PREV);
 		}
-	} ICD_mm;
+	} ICD_em;
 } // END	namespace ss
