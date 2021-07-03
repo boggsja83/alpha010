@@ -14,6 +14,7 @@
 
 //context definitions
 #include "ICDengMenu.h"
+#include "ICDtest.h"
 
 /*--------------------------------------------------*/
 namespace ss
@@ -32,7 +33,7 @@ namespace ss
 	public:
 		/*--------------------------------------------------*/
 		InputController() 
-			: KS_({true,1,1,1,1,1,1,1,1,1}), KSprev_({1,0,1,0,1,0,1,0,1,0,1}), Blanks_({})
+			: KS_({true,1,1,1,1,1,1,1,1,1}), KSprev_({1,0,1,0,1,0,1,0,1,0,1}), Blank_KS_({})
 		/*--------------------------------------------------*/
 		{ 
 			log("InputController()");
@@ -60,10 +61,14 @@ namespace ss
 		/*----------------Member functions------------------*/
 		/*--------------------------------------------------*/
 	private:
-		rt reset_ks(ArrKS&);
+		rt			reset_ks(ArrKS&);
+		rt			process_input(ArrIC&);
+		ICD			get_icd(InputContext);
+		size_t		get_icd_i(InputContext);
 	public:
-		rt input(ArrIC&);
-		inline rt push_icd(ICD _icd)
+		rt			input(ArrIC&);
+
+		inline rt	push_icd(ICD _icd)
 		{
 			ICDvec_.push_back(_icd);
 			return rt::OK;
@@ -78,7 +83,10 @@ namespace ss
 		// 0,4-282 are sdl indices, 283,284 = user hardware defined?
 		ArrKS		KS_;
 		ArrKS		KSprev_;
-		ArrKS		Blanks_;
+		ArrKS		Blank_KS_;
+
+		ICDblank	Blank_ICD_;
+
 		ControlMap	CM_;
 
 		std::vector<ICD>		ICDvec_;
@@ -87,5 +95,6 @@ namespace ss
 
 
 	}; // END	class InputController
+
 } // END	namespace ss
 

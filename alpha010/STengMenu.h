@@ -73,7 +73,7 @@ namespace ss
         /*--------------------------------------------------*/
     //public:
     private:
-        char const*         name_t = "red";
+        char const*         Name_tex_ = "red";
     //private:
         // controllers (make a passthrough object...)
         ViewController*     View_;
@@ -95,7 +95,7 @@ namespace ss
         /*--------------------------------------------------*/
         inline char const*      text_name() const
         /*--------------------------------------------------*/
-                                    { return name_t; }
+                                    { return Name_tex_; }
         /*--------------------------------------------------*/
         inline SDL_Renderer*    rend() const
         /*--------------------------------------------------*/

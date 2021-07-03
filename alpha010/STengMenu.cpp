@@ -46,7 +46,12 @@ ss::rt ss::ST_eng_menu::input()
 {
 	//log("ST_eng_menu::input()");
 	
-	return Input_->input(ICA_);
+	rt ret = rt::INITIAL;
+	
+	ret = Input_->input(ICA_);
+
+
+	return ret;
 
 	//SDL_Event ev;
 	//SDL_PollEvent(&ev);
@@ -76,7 +81,7 @@ ss::rt ss::ST_eng_menu::draw()
 
 	rt ret = rt::INITIAL;
 	SDL_RenderClear(View_->rend());
-	ret = rend_cpy(View_->rend(), TRL_.get_text(name_t), NULL, NULL);
+	ret = rend_cpy(View_->rend(), TRL_.get_text(Name_tex_), NULL, NULL);
 	SDL_RenderPresent(View_->rend());
 	
 	//TRL_.delete_all_text();
@@ -112,6 +117,7 @@ ss::rt ss::ST_eng_menu::init()
 	// add all InputContext's from this "level"
 	// to the InputContextArray
 	ICA_[0] = IC_;
+	ICA_[1] = IC::TEST1;
 
 	return rt::OK;
 }

@@ -55,20 +55,13 @@ ss::rt ss::InputController::input(ArrIC& _arr)
 {
 	SDL_Event ev;
 	rt ret = rt::OK;
+	bool ks_change = false;
 
 	while (SDL_PollEvent(&ev))
 	{
-		//log("size: "<<_arr.size());
-		//for (size_t cxt = 0; cxt < _arr.size(); ++cxt)
-		//{
-		//	if (_arr[cxt] == IC::NONE)
-		//	{
-		//		log("IC::NONE hit");
-		//		break;
-		//	}
-		//	else
-		//		log("ICV: " << (int)_arr[cxt] << " key: " << CM_.CM_[(int)_arr[cxt]].K);
-		//}
+	//SDL_PollEvent(&ev);
+
+		ks_change = false;
 		SDL_Scancode temp_sc = ev.key.keysym.scancode;
 
 		switch (ev.type)
@@ -77,15 +70,39 @@ ss::rt ss::InputController::input(ArrIC& _arr)
 			return rt::QUIT;
 		case SDL_KEYDOWN:
 			KS_[temp_sc] = true;
+			ks_change = true;
 			break;
 		case SDL_KEYUP:
 			KS_[temp_sc] = false;
+			ks_change = true;
 			break;
 		default:;
 		} // End switch
+
+
+
+		//size_t ct = 0;
+		//for (bool boo : KS_)
+		//{
+		//	if (ct < 100)
+		//	{
+		//		const char* tc = (boo) ? "true" : "false";
+		//		log(ct++ << ":" << tc);
+		//	}
+		//}
+
+
+
+			  //process input
+		if (ks_change)
+		{
+			ret = process_input(_arr);
+			if (ret != rt::OK)return ret;
+		}
 	} // End while
 
-	  //process input
+
+
 
 	return rt::INPUT_RECEIVED;
 
@@ -124,15 +141,122 @@ ss::rt ss::InputController::input(ArrIC& _arr)
 	//return rt::INPUT_RECEIVED;
 }
 
+ss::rt ss::InputController::process_input(ArrIC& _ic)
+{
+	//figure out inputs according to
+	// Contexts loaded into _ic
+	// 
+	// For each Context in _ic,
+	//		Get Definition from ICDvec_
+	//		For each Value in Definition
+	//			evaluate based on KS_ and KSprev_
+
+	//size_t ct = 0;
+	//for (bool boo : KS_)
+	//{
+	//	if (ct < 100)
+	//	{
+	//		const char* tc = (boo) ? "true" : "false";
+	//		log(ct++ << ":" << tc);
+	//	}
+	//}
+
+
+	// look over each context in _ic
+	for (size_t i_cxt=0;i_cxt<_ic.size();++i_cxt)
+	{
+		// get definition of current Context
+		// if not IC::NONE
+
+		IC temp_ic = _ic[i_cxt];
+		if (temp_ic == IC::NONE)
+		{
+			//
+		}
+		else
+		{
+			// current Context definition
+			ICD temp_icd = get_icd(temp_ic);
+			if (temp_icd.IC_ == Blank_ICD_.IC_)
+			{
+				// definition not found->exit
+			}
+			else
+			{
+				// Context definition found
+				// 
+				// iterate each ICV
+				for(size_t i_def=0; i_def<temp_icd.ICVvec_.size(); ++i_def)
+				{
+					// current ICV in ICD
+					ICV temp_icv = temp_icd.ICVvec_[i_def];
+
+					if (temp_icv == ICV::NONE)
+					{
+						//log("context: "<<(int)temp_ic<<" listing complete");
+					}
+					else
+					{
+						// valid ICV
+						SDL_Scancode temp_sc = CM_.CM_[(size_t)temp_icv].K;
+						//log(
+						//	"context: " << (size_t)temp_ic <<
+						//	" value: " << (size_t)temp_icv <<
+						//	" scancode: " << (size_t)temp_sc
+						//);
+
+						bool is_down = KS_[temp_sc];
+						if (is_down)
+						{
+							//key is currently down
+							//log((size_t)CM_.CM_[(size_t)temp_icv].V << " IS DOWN!");
+							log("valid context key down");
+						}
+						else
+						{
+							//key not currently down
+							//log((size_t)CM_.CM_[(size_t)temp_icv].V << " IS UP!");
+							//log("not valid context key");
+						}
+
+
+					}
+				}
+			}
+
+		}
+	}
+
+	return rt::OK;
+}
+
+ss::ICD ss::InputController::get_icd(InputContext _ic)
+{
+	size_t i = get_icd_i(_ic);
+
+	if (i == rerr_sizet)
+		return Blank_ICD_;
+	else
+		return ICDvec_[i];
+}
+
+size_t ss::InputController::get_icd_i(InputContext _ic)
+{
+	for (size_t i = 0; i < ICDvec_.size(); ++i)
+		{ if (ICDvec_[i].IC_ == _ic) { return i; } }
+
+	return rerr_sizet;
+}
+
 ss::rt ss::InputController::init_locals()
 {
 	rt ret = rt::INITIAL;
 
-	KS_ = std::move(KSprev_);
+	//KS_ = std::move(KSprev_);
 	ret = reset_ks(KS_);
 	ret = reset_ks(KSprev_);
 	
-
+	ret = push_icd(ICD_t1());
 	ret = push_icd(ICD_em());//do this in "level"?? (dynamically load contexts?) -maybe not
 
 	//for (size_t i =0; i<KSprev_.size();++i)
@@ -148,7 +272,7 @@ ss::rt ss::InputController::reset_ks(ArrKS& _ks)
 	//if i cant get this to work, eliminate 
 	//std::array and use c++ array
 
-	_ks = std::move(Blanks_);
+	_ks = std::move(Blank_KS_);
 
 	return rt::OK;
 }

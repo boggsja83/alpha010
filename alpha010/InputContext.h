@@ -6,16 +6,19 @@
 
 namespace ss
 {
-	typedef enum class InputContext
+	typedef enum class InputContext : size_t
 	{
-		NONE, MENU,
+		NONE, MENU, TEST1,
+
 		IC_COUNT
 	} IC;
 
-	typedef enum class InputContextValue
+	typedef enum class InputContextValue : size_t
 	{
 		NONE,			MENU_SELECT,	MENU_UP,	
 		MENU_NEXT,		MENU_PREV,		MENU_DOWN,
+		TESTVAL1,TESTVAL2,
+
 		ICV_COUNT
 	} ICV;
 
@@ -43,14 +46,20 @@ namespace ss
 			IC_ = IC::NONE;
 			ICVvec_.reserve(10); 
 		}
-		//InputContextDef(IC _ic)
-		//{
-		//	IC_ = _ic;
-		//	ICVvec_.reserve(10);
-		//}
 	} ICD;
 
-	// move this into object itself (STengMenu)
+	typedef struct ICDblank : InputContextDef
+	{
+		//InputContext	IC_;
+		//std::vector<InputContextValue> ICVvec_;
+
+		ICDblank()
+		{
+			IC_ = IC::NONE;
+			ICVvec_.clear();
+		}
+	} ICD_b;
+	// move this into object itself (STengMenu)??
 	//typedef struct ICDengMenu : InputContextDef
 	//{
 	//	//InputContext	IC_;

@@ -61,8 +61,14 @@
     <Filter Include="Controller\Input\Model">
       <UniqueIdentifier>{b0d60dca-e19a-4818-9d36-7a81883b596f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utility\ControlMap">
+    <Filter Include="Model\ControlMap">
       <UniqueIdentifier>{8681448e-301e-4289-96b0-0b79b20668b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\TRL">
+      <UniqueIdentifier>{06607292-4969-4e01-9cde-465020e2eb69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\ICD">
+      <UniqueIdentifier>{040fd1ff-6bf6-4f41-928a-db85fea95633}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -131,9 +137,6 @@
     <ClInclude Include="STengMenu.h">
       <Filter>Model\States\Engine\MainMenu</Filter>
     </ClInclude>
-    <ClInclude Include="TRLengMenu.h">
-      <Filter>Model\States\Engine\MainMenu</Filter>
-    </ClInclude>
     <ClInclude Include="TRL.h">
       <Filter>View\Model</Filter>
     </ClInclude>
@@ -144,10 +147,16 @@
       <Filter>Controller\Input\Model</Filter>
     </ClInclude>
     <ClInclude Include="ControlMap.h">
-      <Filter>Utility\ControlMap</Filter>
+      <Filter>Model\ControlMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TRLengMenu.h">
+      <Filter>Model\TRL</Filter>
     </ClInclude>
     <ClInclude Include="ICDengMenu.h">
-      <Filter>Model\States\Engine\MainMenu</Filter>
+      <Filter>Model\ICD</Filter>
+    </ClInclude>
+    <ClInclude Include="ICDtest.h">
+      <Filter>Model\ICD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
