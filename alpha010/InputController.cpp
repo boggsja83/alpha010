@@ -202,23 +202,12 @@ ss::rt ss::InputController::init_locals()
 	ret = push_icd(ICD_em());//do this in "level"?? (dynamically load contexts?) -maybe not
 	ret = push_icd(ICD_t2());
 
-	//for (size_t i =0; i<KSprev_.size();++i)
-	//{
-	//	KSprev_[i] = false;
-	//}
 	return rt::OK;
 }
 
 ss::rt ss::InputController::reset_ks(ArrKS& _ks)
 {
-	//try to use std::move with std::array
-	//if i cant get this to work, eliminate 
-	//std::array and use c++ array
-
-	//_ks = std::move(Blank_KS_);
-
 	std::memcpy(&_ks, &Blank_KS_, size_KS);
-
 	return rt::OK;
 }
 
@@ -227,60 +216,3 @@ ss::rt ss::InputController::copy_ks(ArrKS& _dst, ArrKS& _src, size_t _size)
 	std::memcpy(&_dst,&_src,_size);
 	return rt::OK;
 }
-
-//ss::rt ss::InputController::init_event_map()
-//{
-//	EventMap_.insert({ SDL_FIRSTEVENT				, "SDL_FIRSTEVENT" });
-//	EventMap_.insert({ SDL_QUIT						, "SDL_QUIT" });
-//	EventMap_.insert({ SDL_APP_TERMINATING			, "SDL_APP_TERMINATING" });
-//	EventMap_.insert({ SDL_APP_LOWMEMORY			, "SDL_APP_LOWMEMORY" });
-//	EventMap_.insert({ SDL_APP_WILLENTERBACKGROUND	, "SDL_APP_WILLENTERBACKGROUND" });
-//	EventMap_.insert({ SDL_APP_DIDENTERBACKGROUND	, "SDL_APP_DIDENTERBACKGROUND" });
-//	EventMap_.insert({ SDL_APP_WILLENTERFOREGROUND	, "SDL_APP_WILLENTERFOREGROUND" });
-//	EventMap_.insert({ SDL_APP_DIDENTERFOREGROUND	, "SDL_APP_DIDENTERFOREGROUND" });
-//	EventMap_.insert({ SDL_DISPLAYEVENT				, "SDL_DISPLAYEVENT" });
-//	EventMap_.insert({ SDL_WINDOWEVENT				, "SDL_WINDOWEVENT" });
-//	EventMap_.insert({ SDL_SYSWMEVENT				, "SDL_SYSWMEVENT" });
-//	EventMap_.insert({ SDL_KEYDOWN					, "SDL_KEYDOWN" });
-//	EventMap_.insert({ SDL_KEYUP					, "SDL_KEYUP" });
-//	EventMap_.insert({ SDL_TEXTEDITING				, "SDL_TEXTEDITING" });
-//	EventMap_.insert({ SDL_TEXTINPUT				, "SDL_TEXTINPUT" });
-//	EventMap_.insert({ SDL_KEYMAPCHANGED			, "SDL_KEYMAPCHANGED" });
-//	EventMap_.insert({ SDL_MOUSEMOTION				, "SDL_MOUSEMOTION" });
-//	EventMap_.insert({ SDL_MOUSEBUTTONDOWN			, "SDL_MOUSEBUTTONDOWN" });
-//	EventMap_.insert({ SDL_MOUSEBUTTONUP			, "SDL_MOUSEBUTTONUP" });
-//	EventMap_.insert({ SDL_MOUSEWHEEL				, "SDL_MOUSEWHEEL" });
-//	EventMap_.insert({ SDL_JOYAXISMOTION			, "SDL_JOYAXISMOTION" });
-//	EventMap_.insert({ SDL_JOYBALLMOTION			, "SDL_JOYBALLMOTION" });
-//	EventMap_.insert({ SDL_JOYHATMOTION				, "SDL_JOYHATMOTION" });
-//	EventMap_.insert({ SDL_JOYBUTTONDOWN			, "SDL_JOYBUTTONDOWN" });
-//	EventMap_.insert({ SDL_JOYBUTTONUP				, "SDL_JOYBUTTONUP" });
-//	EventMap_.insert({ SDL_JOYDEVICEADDED			, "SDL_JOYDEVICEADDED" });
-//	EventMap_.insert({ SDL_JOYDEVICEREMOVED			, "SDL_JOYDEVICEREMOVED" });
-//	EventMap_.insert({ SDL_CONTROLLERAXISMOTION		, "SDL_CONTROLLERAXISMOTION" });
-//	EventMap_.insert({ SDL_CONTROLLERBUTTONDOWN		, "SDL_CONTROLLERBUTTONDOWN" });
-//	EventMap_.insert({ SDL_CONTROLLERBUTTONUP		, "SDL_CONTROLLERBUTTONUP" });
-//	EventMap_.insert({ SDL_CONTROLLERDEVICEADDED	, "SDL_CONTROLLERDEVICEADDED" });
-//	EventMap_.insert({ SDL_CONTROLLERDEVICEREMOVED	, "SDL_CONTROLLERDEVICEREMOVED" });
-//	EventMap_.insert({ SDL_CONTROLLERDEVICEREMAPPED	, "SDL_CONTROLLERDEVICEREMAPPED" });
-//	EventMap_.insert({ SDL_FINGERDOWN				, "SDL_FINGERDOWN" });
-//	EventMap_.insert({ SDL_FINGERUP					, "SDL_FINGERUP" });
-//	EventMap_.insert({ SDL_FINGERMOTION				, "SDL_FINGERMOTION" });
-//	EventMap_.insert({ SDL_DOLLARGESTURE			, "SDL_DOLLARGESTURE" });
-//	EventMap_.insert({ SDL_DOLLARRECORD				, "SDL_DOLLARRECORD" });
-//	EventMap_.insert({ SDL_MULTIGESTURE				, "SDL_MULTIGESTURE" });
-//	EventMap_.insert({ SDL_CLIPBOARDUPDATE			, "SDL_CLIPBOARDUPDATE" });
-//	EventMap_.insert({ SDL_DROPFILE					, "SDL_DROPFILE" });
-//	EventMap_.insert({ SDL_DROPTEXT					, "SDL_DROPTEXT" });
-//	EventMap_.insert({ SDL_DROPBEGIN				, "SDL_DROPBEGIN" });
-//	EventMap_.insert({ SDL_DROPCOMPLETE				, "SDL_DROPCOMPLETE" });
-//	EventMap_.insert({ SDL_AUDIODEVICEADDED			, "SDL_AUDIODEVICEADDED" });
-//	EventMap_.insert({ SDL_AUDIODEVICEREMOVED		, "SDL_AUDIODEVICEREMOVED" });
-//	EventMap_.insert({ SDL_SENSORUPDATE				, "SDL_SENSORUPDATE" });
-//	EventMap_.insert({ SDL_RENDER_TARGETS_RESET		, "SDL_RENDER_TARGETS_RESET" });
-//	EventMap_.insert({ SDL_RENDER_DEVICE_RESET		, "SDL_RENDER_DEVICE_RESET" });
-//	EventMap_.insert({ SDL_USEREVENT				, "SDL_USEREVENT" });
-//	EventMap_.insert({ SDL_LASTEVENT				, "SDL_LASTEVENT" });
-//
-//	return rt::OK;
-//}
