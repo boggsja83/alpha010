@@ -5,6 +5,7 @@
 //#include <map>
 //#include <tuple>
 #include <utility>
+#include <string>
 
 #include "ALL.h"
 #include "SDLwrapper.h"
@@ -15,6 +16,7 @@
 //context definitions
 #include "ICDengMenu.h"
 #include "ICDtest.h"
+#include "ICDtest2.h"
 
 /*--------------------------------------------------*/
 namespace ss
@@ -22,7 +24,7 @@ namespace ss
 {
 	typedef std::array<bool, 300> ArrKS;
 	typedef std::array<InputContext, static_cast<size_t>(IC::IC_COUNT)> ArrIC;
-
+	size_t constexpr size_KS = sizeof(bool) * 300;
 /*--------------------------------------------------*/
 	class InputController
 /*--------------------------------------------------*/
@@ -33,7 +35,9 @@ namespace ss
 	public:
 		/*--------------------------------------------------*/
 		InputController() 
-			: KS_({true,1,1,1,1,1,1,1,1,1}), KSprev_({1,0,1,0,1,0,1,0,1,0,1}), Blank_KS_({})
+			:	KS_({}),
+				KSprev_({}),
+				Blank_KS_({})
 		/*--------------------------------------------------*/
 		{ 
 			log("InputController()");
@@ -62,6 +66,7 @@ namespace ss
 		/*--------------------------------------------------*/
 	private:
 		rt			reset_ks(ArrKS&);
+		rt			copy_ks(ArrKS&, ArrKS&, size_t);
 		rt			process_input(ArrIC&);
 		ICD			get_icd(InputContext);
 		size_t		get_icd_i(InputContext);

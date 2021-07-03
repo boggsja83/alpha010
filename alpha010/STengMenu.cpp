@@ -118,6 +118,7 @@ ss::rt ss::ST_eng_menu::init()
 	// to the InputContextArray
 	ICA_[0] = IC_;
 	ICA_[1] = IC::TEST1;
+	ICA_[2] = IC::TEST2;
 
 	return rt::OK;
 }

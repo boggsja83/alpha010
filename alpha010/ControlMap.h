@@ -32,11 +32,17 @@ namespace ss
 			CM_[i].V	= ICV::MENU_DOWN;
 			CM_[i++].K	= SDL_SCANCODE_DOWN;
 
-			CM_[i].V = ICV::TESTVAL1;
-			CM_[i++].K = SDL_SCANCODE_1;
+			CM_[i].V	= ICV::TESTVAL1;
+			CM_[i++].K	= SDL_SCANCODE_W;
 
-			CM_[i].V = ICV::TESTVAL2;
-			CM_[i++].K = SDL_SCANCODE_2;
+			CM_[i].V	= ICV::TESTVAL2;
+			CM_[i++].K	= SDL_SCANCODE_A;
+
+			CM_[i].V	= ICV::TESTVAL3;
+			CM_[i++].K	= SDL_SCANCODE_S;
+
+			CM_[i].V	= ICV::TESTVAL4;
+			CM_[i++].K	= SDL_SCANCODE_D;
 			
 			
 			//CM_[i++] = ICM(ICV::MENU_SELECT, SDL_SCANCODE_RETURN);

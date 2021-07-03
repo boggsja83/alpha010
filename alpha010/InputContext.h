@@ -8,7 +8,7 @@ namespace ss
 {
 	typedef enum class InputContext : size_t
 	{
-		NONE, MENU, TEST1,
+		NONE, MENU, TEST1, TEST2,
 
 		IC_COUNT
 	} IC;
@@ -17,7 +17,7 @@ namespace ss
 	{
 		NONE,			MENU_SELECT,	MENU_UP,	
 		MENU_NEXT,		MENU_PREV,		MENU_DOWN,
-		TESTVAL1,TESTVAL2,
+		TESTVAL1,TESTVAL2,TESTVAL3,TESTVAL4,
 
 		ICV_COUNT
 	} ICV;

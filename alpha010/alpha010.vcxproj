@@ -153,8 +153,10 @@
     <ClInclude Include="DimType.h" />
     <ClInclude Include="ICDengMenu.h" />
     <ClInclude Include="ICDtest.h" />
+    <ClInclude Include="ICDtest2.h" />
     <ClInclude Include="InputContext.h" />
     <ClInclude Include="InputController.h" />
+    <ClInclude Include="RTinput.h" />
     <ClInclude Include="TextRes.h" />
     <ClInclude Include="PosType.h" />
     <ClInclude Include="QuickSort.h" />

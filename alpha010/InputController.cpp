@@ -53,16 +53,17 @@ ss::rt ss::InputController::destroy()
 
 ss::rt ss::InputController::input(ArrIC& _arr)
 {
-	SDL_Event ev;
-	rt ret = rt::OK;
-	bool ks_change = false;
+	SDL_Event		ev;
+	SDL_Scancode	temp_sc = SDL_SCANCODE_UNKNOWN;
+	rt				ret = rt::OK;
+	bool			ks_change =	false;
 
 	while (SDL_PollEvent(&ev))
 	{
 	//SDL_PollEvent(&ev);
 
 		ks_change = false;
-		SDL_Scancode temp_sc = ev.key.keysym.scancode;
+		temp_sc = ev.key.keysym.scancode;
 
 		switch (ev.type)
 		{
@@ -79,89 +80,24 @@ ss::rt ss::InputController::input(ArrIC& _arr)
 		default:;
 		} // End switch
 
-
-
-		//size_t ct = 0;
-		//for (bool boo : KS_)
-		//{
-		//	if (ct < 100)
-		//	{
-		//		const char* tc = (boo) ? "true" : "false";
-		//		log(ct++ << ":" << tc);
-		//	}
-		//}
-
-
-
-			  //process input
+		//process input
 		if (ks_change)
 		{
 			ret = process_input(_arr);
-			if (ret != rt::OK)return ret;
+			if (ret != rt::OK) return ret;
+		}
+		else
+		{
+			ret = reset_ks(KS_);
+			ret = reset_ks(KSprev_);
 		}
 	} // End while
 
-
-
-
 	return rt::INPUT_RECEIVED;
-
-	//SDL_Event temp_e;
-	//bool waiting = true;
-	//ET_.clear();
-
-	//while(SDL_PollEvent(&temp_e))
-	//{
-		//auto ret = EventMap_.find(
-		//	static_cast<SDL_EventType>(temp_e.type));
-
-		//if (ret != EventMap_.end()) { log("processing event: " << ret->second); }			
-		//else { log("***[unrecognized event]: " << temp_e.type); }
-		// 
-		//ET_.push_back(temp_e.type);
-		//waiting = false;
-		//
-		//switch(temp_e.type)
-		//{
-		//	case SDL_QUIT:
-		//		return rt::QUIT;
-		//		break;
-			//case SDL_KEYDOWN:
-			//	return rt::INPUT_RECEIVED;
-			//	break;
-			//case SDL_KEYUP:
-			//	break;
-	//		default:
-	//		break;
-	//	}	
-	//}
-
-	//if(!waiting){ log("done processing "<<ET_.size()<<" events"); }
-
-	//return rt::INPUT_RECEIVED;
 }
 
 ss::rt ss::InputController::process_input(ArrIC& _ic)
 {
-	//figure out inputs according to
-	// Contexts loaded into _ic
-	// 
-	// For each Context in _ic,
-	//		Get Definition from ICDvec_
-	//		For each Value in Definition
-	//			evaluate based on KS_ and KSprev_
-
-	//size_t ct = 0;
-	//for (bool boo : KS_)
-	//{
-	//	if (ct < 100)
-	//	{
-	//		const char* tc = (boo) ? "true" : "false";
-	//		log(ct++ << ":" << tc);
-	//	}
-	//}
-
-
 	// look over each context in _ic
 	for (size_t i_cxt=0;i_cxt<_ic.size();++i_cxt)
 	{
@@ -210,22 +146,29 @@ ss::rt ss::InputController::process_input(ArrIC& _ic)
 						{
 							//key is currently down
 							//log((size_t)CM_.CM_[(size_t)temp_icv].V << " IS DOWN!");
-							log("valid context key down");
+							log(
+								"Context: "		<<(size_t)temp_ic	<<
+								" Scancode: "	<<(size_t)temp_sc
+							);
 						}
 						else
 						{
 							//key not currently down
 							//log((size_t)CM_.CM_[(size_t)temp_icv].V << " IS UP!");
 							//log("not valid context key");
-						}
 
+						} // confirm if KS_ true/false
+					} // if valid context value
+				} // for each context value
+			}// If good context definition
 
-					}
-				}
-			}
+		}// If good context
+	}// End main for
 
-		}
-	}
+	rt ret = rt::INITIAL;
+
+	ret = copy_ks(KSprev_, KS_, size_KS);
+	ret = reset_ks(KS_);
 
 	return rt::OK;
 }
@@ -252,12 +195,12 @@ ss::rt ss::InputController::init_locals()
 {
 	rt ret = rt::INITIAL;
 
-	//KS_ = std::move(KSprev_);
 	ret = reset_ks(KS_);
 	ret = reset_ks(KSprev_);
 	
 	ret = push_icd(ICD_t1());
 	ret = push_icd(ICD_em());//do this in "level"?? (dynamically load contexts?) -maybe not
+	ret = push_icd(ICD_t2());
 
 	//for (size_t i =0; i<KSprev_.size();++i)
 	//{
@@ -272,8 +215,16 @@ ss::rt ss::InputController::reset_ks(ArrKS& _ks)
 	//if i cant get this to work, eliminate 
 	//std::array and use c++ array
 
-	_ks = std::move(Blank_KS_);
+	//_ks = std::move(Blank_KS_);
 
+	std::memcpy(&_ks, &Blank_KS_, size_KS);
+
+	return rt::OK;
+}
+
+ss::rt ss::InputController::copy_ks(ArrKS& _dst, ArrKS& _src, size_t _size)
+{
+	std::memcpy(&_dst,&_src,_size);
 	return rt::OK;
 }
 

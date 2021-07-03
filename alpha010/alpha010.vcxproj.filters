@@ -158,6 +158,12 @@
     <ClInclude Include="ICDtest.h">
       <Filter>Model\ICD</Filter>
     </ClInclude>
+    <ClInclude Include="ICDtest2.h">
+      <Filter>Model\ICD</Filter>
+    </ClInclude>
+    <ClInclude Include="RTinput.h">
+      <Filter>Controller\Input\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="alpha010.ruleset" />
