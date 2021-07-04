@@ -8,41 +8,41 @@ namespace ss
 {
 	typedef struct ControlMap
 	{
-		std::array<InputContextMapping,static_cast<size_t>(ICV::ICV_COUNT)> CM_;
+		std::array<InputContextMapping,static_cast<size_t>(ICV::ICV_COUNT)> Map;
 
 		ControlMap()
 		{
 			size_t i = 0;
 			
-			CM_[i].V	= ICV::NONE;
-			CM_[i++].K	= SDL_SCANCODE_UNKNOWN;
+			Map[i].V	= ICV::NONE;
+			Map[i++].K	= SDL_SCANCODE_UNKNOWN;
 
-			CM_[i].V	= ICV::MENU_SELECT;
-			CM_[i++].K	= SDL_SCANCODE_RETURN;
+			Map[i].V	= ICV::MENU_SELECT;
+			Map[i++].K	= SDL_SCANCODE_RETURN;
 
-			CM_[i].V	= ICV::MENU_UP;
-			CM_[i++].K	= SDL_SCANCODE_UP;
+			Map[i].V	= ICV::MENU_UP;
+			Map[i++].K	= SDL_SCANCODE_UP;
 
-			CM_[i].V	= ICV::MENU_NEXT;
-			CM_[i++].K	= SDL_SCANCODE_RIGHT;
+			Map[i].V	= ICV::MENU_NEXT;
+			Map[i++].K	= SDL_SCANCODE_RIGHT;
 
-			CM_[i].V	= ICV::MENU_PREV;
-			CM_[i++].K	= SDL_SCANCODE_LEFT;
+			Map[i].V	= ICV::MENU_PREV;
+			Map[i++].K	= SDL_SCANCODE_LEFT;
 
-			CM_[i].V	= ICV::MENU_DOWN;
-			CM_[i++].K	= SDL_SCANCODE_DOWN;
+			Map[i].V	= ICV::MENU_DOWN;
+			Map[i++].K	= SDL_SCANCODE_DOWN;
 
-			CM_[i].V	= ICV::TESTVAL1;
-			CM_[i++].K	= SDL_SCANCODE_W;
+			Map[i].V	= ICV::TESTVAL1;
+			Map[i++].K	= SDL_SCANCODE_W;
 
-			CM_[i].V	= ICV::TESTVAL2;
-			CM_[i++].K	= SDL_SCANCODE_A;
+			Map[i].V	= ICV::TESTVAL2;
+			Map[i++].K	= SDL_SCANCODE_A;
 
-			CM_[i].V	= ICV::TESTVAL3;
-			CM_[i++].K	= SDL_SCANCODE_S;
+			Map[i].V	= ICV::TESTVAL3;
+			Map[i++].K	= SDL_SCANCODE_S;
 
-			CM_[i].V	= ICV::TESTVAL4;
-			CM_[i++].K	= SDL_SCANCODE_D;
+			Map[i].V	= ICV::TESTVAL4;
+			Map[i++].K	= SDL_SCANCODE_D;
 		
 		}
 		

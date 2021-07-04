@@ -5,6 +5,8 @@
 #include "ALL.h"
 #include "SDP.h"
 
+#include "Object.h" //.tetsing!
+
 //#include "SDLwrapper.h"
 #include "TRLengMenu.h"
 #include "ICDengMenu.h"
@@ -73,19 +75,22 @@ namespace ss
         /*--------------------------------------------------*/
     //public:
     private:
-        char const*         Name_tex_ = "red";
-    //private:
+        char const*         Name_text_ = "red";
+    
+        Object testing; // delete!
+
         // controllers (make a passthrough object...)
         ViewController*     View_;
         InputController*    Input_;
         
         // texture resource list
-        TRLengMenu          TRL_;
+        //can convert this to array?
+        TRLengMenu          TRL_;//this objects TRL
         
         // input context
         //ICDengMenu          ICD_;
-        InputContext        IC_;
-        ArrIC               ICA_;
+        InputContext        IC_;//this objects IC
+        ArrIC               ICA_;//holds all contexts involved in this state
         /*--------------------------------------------------*/
 
         /*--------------------------------------------------*/
@@ -95,7 +100,7 @@ namespace ss
         /*--------------------------------------------------*/
         inline char const*      text_name() const
         /*--------------------------------------------------*/
-                                    { return Name_tex_; }
+                                    { return Name_text_; }
         /*--------------------------------------------------*/
         inline SDL_Renderer*    rend() const
         /*--------------------------------------------------*/

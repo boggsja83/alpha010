@@ -70,6 +70,12 @@
     <Filter Include="Model\ICD">
       <UniqueIdentifier>{040fd1ff-6bf6-4f41-928a-db85fea95633}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Model\Object">
+      <UniqueIdentifier>{22c1b754-7e11-4096-b931-779666be171c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model\Properties">
+      <UniqueIdentifier>{84f4e26c-1c7a-4f47-8b79-c99b41727342}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -161,8 +167,8 @@
     <ClInclude Include="ICDtest2.h">
       <Filter>Model\ICD</Filter>
     </ClInclude>
-    <ClInclude Include="RTinput.h">
-      <Filter>Controller\Input\Model</Filter>
+    <ClInclude Include="Object.h">
+      <Filter>Model\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

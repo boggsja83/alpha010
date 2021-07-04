@@ -14,8 +14,8 @@ namespace ss
 		{
 			IC_ = IC::TEST2;
 
-			//ICVvec_.push_back(ICV::TESTVAL1);
-			//ICVvec_.push_back(ICV::TESTVAL2);
+			ICVvec_.push_back(ICV::TESTVAL1);
+			ICVvec_.push_back(ICV::TESTVAL2);
 			ICVvec_.push_back(ICV::TESTVAL3);
 			ICVvec_.push_back(ICV::TESTVAL4);
 		}

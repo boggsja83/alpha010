@@ -156,7 +156,7 @@
     <ClInclude Include="ICDtest2.h" />
     <ClInclude Include="InputContext.h" />
     <ClInclude Include="InputController.h" />
-    <ClInclude Include="RTinput.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="TextRes.h" />
     <ClInclude Include="PosType.h" />
     <ClInclude Include="QuickSort.h" />

@@ -51,7 +51,7 @@ ss::rt ss::InputController::destroy()
 //	return Event_;
 //}
 
-ss::rt ss::InputController::input(ArrIC& _arr)
+ss::rt ss::InputController::input(ArrIC& _arr, IRAO& _irao)
 {
 	SDL_Event		ev;
 	SDL_Scancode	temp_sc = SDL_SCANCODE_UNKNOWN;
@@ -83,7 +83,7 @@ ss::rt ss::InputController::input(ArrIC& _arr)
 		//process input
 		if (ks_change)
 		{
-			ret = process_input(_arr);
+			ret = process_input(_arr, _irao);
 			if (ret != rt::OK) return ret;
 		}
 		else
@@ -96,8 +96,9 @@ ss::rt ss::InputController::input(ArrIC& _arr)
 	return rt::INPUT_RECEIVED;
 }
 
-ss::rt ss::InputController::process_input(ArrIC& _ic)
+ss::rt ss::InputController::process_input(ArrIC& _ic, IRAO& _irao)
 {
+	size_t ir = 0;
 	// look over each context in _ic
 	for (size_t i_cxt=0;i_cxt<_ic.size();++i_cxt)
 	{
@@ -134,7 +135,7 @@ ss::rt ss::InputController::process_input(ArrIC& _ic)
 					else
 					{
 						// valid ICV
-						SDL_Scancode temp_sc = CM_.CM_[(size_t)temp_icv].K;
+						SDL_Scancode temp_sc = CM_.Map[(size_t)temp_icv].K;
 						//log(
 						//	"context: " << (size_t)temp_ic <<
 						//	" value: " << (size_t)temp_icv <<
@@ -145,11 +146,13 @@ ss::rt ss::InputController::process_input(ArrIC& _ic)
 						if (is_down)
 						{
 							//key is currently down
-							//log((size_t)CM_.CM_[(size_t)temp_icv].V << " IS DOWN!");
+							
 							log(
-								"Context: "		<<(size_t)temp_ic	<<
-								" Scancode: "	<<(size_t)temp_sc
+								"Context: " << (size_t)temp_ic <<
+								" | Scancode: " << (size_t)temp_sc <<
+								" | IRAO flag set: " << (size_t)temp_icv;
 							);
+							_irao[(size_t)temp_icv] = true;
 						}
 						else
 						{
@@ -167,7 +170,7 @@ ss::rt ss::InputController::process_input(ArrIC& _ic)
 
 	rt ret = rt::INITIAL;
 
-	ret = copy_ks(KSprev_, KS_, size_KS);
+	ret = copy_ks(KSprev_, KS_);
 	ret = reset_ks(KS_);
 
 	return rt::OK;
@@ -191,6 +194,16 @@ size_t ss::InputController::get_icd_i(InputContext _ic)
 	return rerr_sizet;
 }
 
+bool ss::InputController::icd_contains_ic(ICD _icd, ICV _icv)
+{
+	for (size_t i=0;i<_icd.ICVvec_.size();++i)
+	{
+		if (_icv == _icd.ICVvec_[i])
+			return true;
+	}
+	return false;
+}
+
 ss::rt ss::InputController::init_locals()
 {
 	rt ret = rt::INITIAL;
@@ -211,8 +224,20 @@ ss::rt ss::InputController::reset_ks(ArrKS& _ks)
 	return rt::OK;
 }
 
-ss::rt ss::InputController::copy_ks(ArrKS& _dst, ArrKS& _src, size_t _size)
+ss::rt ss::InputController::reset_irao(IRAO& _irao)
 {
-	std::memcpy(&_dst,&_src,_size);
+	std::memcpy(&_irao, &Blank_IRAO_, size_IRAO);
+	return rt::OK;
+}
+
+ss::rt ss::InputController::copy_ks(ArrKS& _dst, ArrKS& _src)
+{
+	std::memcpy(&_dst, &_src, size_KS);
+	return rt::OK;
+}
+
+ss::rt ss::InputController::copy_irao(IRAO& _dst, IRAO& _src)
+{
+	std::memcpy(&_dst, &_src, size_IRAO);
 	return rt::OK;
 }

@@ -23,8 +23,10 @@ namespace ss
 /*--------------------------------------------------*/
 {
 	typedef std::array<bool, 300> ArrKS;
+	typedef std::array<bool, static_cast<size_t>(ICV::ICV_COUNT)> IRAO;
 	typedef std::array<InputContext, static_cast<size_t>(IC::IC_COUNT)> ArrIC;
 	size_t constexpr size_KS = sizeof(bool) * 300;
+	size_t constexpr size_IRAO = sizeof(bool)* static_cast<size_t>(ICV::ICV_COUNT);
 /*--------------------------------------------------*/
 	class InputController
 /*--------------------------------------------------*/
@@ -37,7 +39,8 @@ namespace ss
 		InputController() 
 			:	KS_({}),
 				KSprev_({}),
-				Blank_KS_({})
+				Blank_KS_({}),
+				Blank_IRAO_({})
 		/*--------------------------------------------------*/
 		{ 
 			log("InputController()");
@@ -66,12 +69,17 @@ namespace ss
 		/*--------------------------------------------------*/
 	private:
 		rt			reset_ks(ArrKS&);
-		rt			copy_ks(ArrKS&, ArrKS&, size_t);
-		rt			process_input(ArrIC&);
+		rt			reset_irao(IRAO&);
+		rt			copy_ks(ArrKS&, ArrKS&);
+		rt			copy_irao(IRAO&, IRAO&);
+		rt			process_input(ArrIC&, IRAO&);
+
+	public:
+		rt			input(ArrIC&, IRAO&);
+
 		ICD			get_icd(InputContext);
 		size_t		get_icd_i(InputContext);
-	public:
-		rt			input(ArrIC&);
+		bool		icd_contains_ic(ICD,ICV);
 
 		inline rt	push_icd(ICD _icd)
 		{
@@ -88,13 +96,16 @@ namespace ss
 		// 0,4-282 are sdl indices, 283,284 = user hardware defined?
 		ArrKS		KS_;
 		ArrKS		KSprev_;
-		ArrKS		Blank_KS_;
-
-		ICDblank	Blank_ICD_;
 
 		ControlMap	CM_;
-
 		std::vector<ICD>		ICDvec_;
+
+	public:
+		ArrKS		Blank_KS_;
+		ICDblank	Blank_ICD_;
+		IRAO		Blank_IRAO_;
+
+		
 
 		/*--------------------------------------------------*/
 

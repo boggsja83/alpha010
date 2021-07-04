@@ -59,21 +59,15 @@ namespace ss
 			ICVvec_.clear();
 		}
 	} ICD_b;
-	// move this into object itself (STengMenu)??
-	//typedef struct ICDengMenu : InputContextDef
+
+	// InputController. has functions get_icd() that can
+	// be usedi nplace of this (do i want to?)
+	//static bool isICVinICD(ICV _icv, ICD _icd)
 	//{
-	//	//InputContext	IC_;
-	//	//std::vector<InputContextValue> ICVvec_;
-
-	//	ICDengMenu()
+	//	for (size_t i=0;i<_icd.ICVvec_.size();++i)
 	//	{
-	//		IC_ = IC::MENU;
-
-	//		ICVvec_.push_back(ICV::MENU_SELECT);
-	//		ICVvec_.push_back(ICV::MENU_UP);
-	//		ICVvec_.push_back(ICV::MENU_DOWN);
-	//		ICVvec_.push_back(ICV::MENU_NEXT);
-	//		ICVvec_.push_back(ICV::MENU_PREV);
+	//		if (_icv == _icd.ICVvec_[i]) return true;
 	//	}
-	//} ICD_mm;
+	//	return false;
+	//};
 } // END	namespace ss
