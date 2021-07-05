@@ -15,14 +15,14 @@ namespace ss
 		{ 
 			log("ViewController()"); 
 			rt ret = init(); 
-			log("ViewController::init() ret: " << c2m(ret));
+			log("ViewController::init() ret: " << hr(ret));
 		}
 		
 		~ViewController() 
 		{ 
 			log("~ViewController()"); 
 			rt ret = destroy(); 
-			log("ViewController::destroy() ret: " << c2m(ret));
+			log("ViewController::destroy() ret: " << hr(ret));
 		}
 
 		rt		init();

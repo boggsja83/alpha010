@@ -44,7 +44,7 @@ namespace ss
 		{
 			log("Engine()");
 			rt ret = init();
-			log("Engine::init() ret: " << c2m(ret));
+			log("Engine::init() ret: " << hr(ret));
 		}
 		/*--------------------------------------------------*/
 		~Engine()
@@ -52,7 +52,7 @@ namespace ss
 		{
 			log("~Engine()");
 			rt ret = destroy();
-			log("Engine::destroy() ret: " << c2m(ret));
+			log("Engine::destroy() ret: " << hr(ret));
 		}
 		/*--------------------------------------------------*/
 

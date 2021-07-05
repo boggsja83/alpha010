@@ -73,7 +73,7 @@ namespace ss
 		"COUNT_RET_T"
 	};
 
-	static constexpr char const* c2m(rt _code)
+	static constexpr char const* hr(rt _code)
 	{
 		size_t temp_s = static_cast<size_t>(_code);
 		if ((temp_s >= 0) && (temp_s < static_cast<size_t>(rt::COUNT_RET_T)))
@@ -81,25 +81,25 @@ namespace ss
 		else return "RET_CODE_OUT_OF_BOUNDS";
 	}
 
-	static constexpr char const* c2m(size_t _code)
-	{
-		if ((_code >= 0) && (_code < static_cast<size_t>(rt::COUNT_RET_T)))
-			return rt_ret_m[_code];
-		else return "RET_CODE_OUT_OF_BOUNDS";
-	}
+	//static constexpr char const* hr(size_t _code)
+	//{
+	//	if ((_code >= 0) && (_code < static_cast<size_t>(rt::COUNT_RET_T)))
+	//		return rt_ret_m[_code];
+	//	else return "RET_CODE_OUT_OF_BOUNDS";
+	//}
 
-	static constexpr char const * c2m(int8_t _code)
-	{
-		if ( (_code >= 0) && (_code < static_cast<int8_t>(rt::COUNT_RET_T)) )
-			return rt_ret_m[_code];
-		else return "RET_CODE_OUT_OF_BOUNDS";
-	}
+	//static constexpr char const * hr(int8_t _code)
+	//{
+	//	if ( (_code >= 0) && (_code < static_cast<int8_t>(rt::COUNT_RET_T)) )
+	//		return rt_ret_m[_code];
+	//	else return "RET_CODE_OUT_OF_BOUNDS";
+	//}
 
-	static constexpr char const* c2m(int _code)
-	{
-		if ((_code >= 0) && (_code < static_cast<int>(rt::COUNT_RET_T)))
-			return rt_ret_m[_code];
-		else return "RET_CODE_OUT_OF_BOUNDS";
-	}
+	//static constexpr char const* hr(int _code)
+	//{
+	//	if ((_code >= 0) && (_code < static_cast<int>(rt::COUNT_RET_T)))
+	//		return rt_ret_m[_code];
+	//	else return "RET_CODE_OUT_OF_BOUNDS";
+	//}
 
 } // END	namespace ss

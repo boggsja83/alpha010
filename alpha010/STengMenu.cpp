@@ -51,8 +51,6 @@ ss::rt ss::ST_eng_menu::input()
 	IRAO irao({});
 	ret = Input_->input(ICA_,irao);
 
-	//size_t ic = 0;
-	//for (bool b:irao)
 
 	ICD temp_icd = Input_->get_icd(testing.ic());
 	ICV temp_icv = ICV::NONE;
@@ -64,46 +62,14 @@ ss::rt ss::ST_eng_menu::input()
 			temp_icv = static_cast<ICV>(i);
 		
 		//if context is in ... definition. object.input(ICV)
-			if (Input_->icd_contains_ic(temp_icd, temp_icv))
+			if (Input_->icd_contains_icv(temp_icd, temp_icv))
 			{
 				ret = testing.input_rx(temp_icv);
 			}
 		}
-
-		//if (b)
-		//{
-			//log("b[" << ic << "]=" << b);
-			//function isICVinIC
-			//ICD temp_icd = Input_->get_icd(testing.ic());
-			//if (temp_icd.IC_ == ICV::NONE)
-			//{
-			//	
-			//}
-		//}
-		//ic++;
 	}
 
 	return ret;
-
-	//SDL_Event ev;
-	//SDL_PollEvent(&ev);
-
-	//switch (ev.type)
-	//{
-	//case SDL_QUIT:
-	//	return rt::QUIT;
-	//	break;
-	//case SDL_KEYDOWN:
-	//	break;
-	//case SDL_KEYUP:
-	//	if (ev.key.keysym.scancode == SDL_SCANCODE_Q) { return rt::QUIT; }
-	//	if (ev.key.keysym.scancode == SDL_SCANCODE_SPACE) return rt::INPUT_RECEIVED;
-	//	break;
-	//default:
-	//	break;
-	//}
-
-	//return rt::OK;
 }
 /*--------------------------------------------------*/
 ss::rt ss::ST_eng_menu::draw()
@@ -121,9 +87,11 @@ ss::rt ss::ST_eng_menu::draw()
 	temp_r.w = w/2;
 	temp_r.h = h/2;
 
+	//temp_r = cube_to_sdl_r(testing.get_rect());
+	
 	SDL_RenderClear(View_->rend());
 	ret = rend_cpy(View_->rend(), TRL_.get_text(Name_text_), NULL, NULL);
-	ret = rend_cpy(View_->rend(), TRL_.get_text(testing.text_name()), NULL, &temp_r);
+	ret = rend_cpy(View_->rend(), TRL_.get_text(testing.text_name()), NULL, testing.get_rect());
 	SDL_RenderPresent(View_->rend());
 	
 	//TRL_.delete_all_text();
@@ -144,9 +112,9 @@ ss::rt ss::ST_eng_menu::init()
 
 	// add all InputContext's from this "level"
 	// to the InputContextArray
-	ICA_[0] = IC_;
-	ICA_[1] = IC::TEST1;
-	ICA_[1] = testing.ic();
+	ICA_[0] = IC_;//this levels IC_
+	ICA_[1] = IC::TEST1;// additional IC
+	ICA_[2] = testing.ic();// addition IC (Object testing)
 
 	return rt::OK;
 }

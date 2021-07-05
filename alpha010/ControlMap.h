@@ -43,6 +43,12 @@ namespace ss
 
 			Map[i].V	= ICV::TESTVAL4;
 			Map[i++].K	= SDL_SCANCODE_D;
+
+			Map[i].V = ICV::TESTVAL5;
+			Map[i++].K = SDL_SCANCODE_1;
+
+			Map[i].V = ICV::TESTVAL6;
+			Map[i++].K = SDL_SCANCODE_2;
 		
 		}
 		

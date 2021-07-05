@@ -17,7 +17,8 @@ namespace ss
 	{
 		NONE,			MENU_SELECT,	MENU_UP,	
 		MENU_NEXT,		MENU_PREV,		MENU_DOWN,
-		TESTVAL1,TESTVAL2,TESTVAL3,TESTVAL4,
+		TESTVAL1,TESTVAL2,TESTVAL3,
+		TESTVAL4, TESTVAL5, TESTVAL6,
 
 		ICV_COUNT
 	} ICV;
@@ -41,6 +42,21 @@ namespace ss
 		InputContext	IC_;
 		std::vector<InputContextValue> ICVvec_;
 
+		bool operator==(InputContextDef const& _rhs)
+		{
+			if (this->IC_ == _rhs.IC_)
+				return true;
+			else
+				return false;
+		}
+		bool operator<(InputContextDef const& _rhs)
+		{
+			if (this->IC_ < _rhs.IC_)
+				return true;
+			else
+				return false;
+		}
+
 		InputContextDef() 
 		{
 			IC_ = IC::NONE;
@@ -60,14 +76,34 @@ namespace ss
 		}
 	} ICD_b;
 
-	// InputController. has functions get_icd() that can
-	// be usedi nplace of this (do i want to?)
-	//static bool isICVinICD(ICV _icv, ICD _icd)
-	//{
-	//	for (size_t i=0;i<_icd.ICVvec_.size();++i)
-	//	{
-	//		if (_icv == _icd.ICVvec_[i]) return true;
-	//	}
-	//	return false;
-	//};
+
+	static char const* hr(IC _ic)
+	{
+		if (_ic<IC::NONE || _ic>IC::IC_COUNT) return nullptr;
+		
+		char const* arr[] = { 
+			"NONE", "MENU",
+			"TEST1", "TEST2",
+			"IC_COUNT"	
+		};
+
+		return arr[static_cast<size_t>(_ic)];
+	}
+
+	static char const* hr(ICV _icv)
+	{
+		if (_icv<ICV::NONE || _icv>ICV::ICV_COUNT) return nullptr;
+
+		char const* arr[] = {
+		"NONE",			"MENU_SELECT",	"MENU_UP",
+		"MENU_NEXT",		"MENU_PREV",		"MENU_DOWN",
+		"TESTVAL1","TESTVAL2","TESTVAL3",
+		"TESTVAL4", "TESTVAL5", "TESTVAL6",
+
+		"ICV_COUNT"
+		};
+
+		return arr[static_cast<size_t>(_icv)];
+	}
+
 } // END	namespace ss

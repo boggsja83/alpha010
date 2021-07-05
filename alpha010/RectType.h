@@ -9,5 +9,5 @@ namespace ss
 	{
 		xyz p;
 		wh d;
-	}rect;
+	}Cube;//renanme all this to cube.  make 2d version for rect
 }// END	namespace ss

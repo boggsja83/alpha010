@@ -4,7 +4,7 @@
 #include <array>
 //#include <map>
 //#include <tuple>
-#include <utility>
+//#include <utility>
 #include <string>
 
 #include "ALL.h"
@@ -79,7 +79,7 @@ namespace ss
 
 		ICD			get_icd(InputContext);
 		size_t		get_icd_i(InputContext);
-		bool		icd_contains_ic(ICD,ICV);
+		bool		icd_contains_icv(ICD,ICV);
 
 		inline rt	push_icd(ICD _icd)
 		{

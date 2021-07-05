@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 	ss::Engine sl1m;
 
 	ret = sl1m.loop();
-	log("Engine::loop() ret: " << c2m(ret));
+	log("Engine::loop() ret: " << hr(ret));
 
 	//ret = sl1m.TRM_.reset();
 	//if (ret != rt::SUCCESS) log(c2m(ret));

@@ -55,6 +55,7 @@ ss::rt ss::InputController::input(ArrIC& _arr, IRAO& _irao)
 {
 	SDL_Event		ev;
 	SDL_Scancode	temp_sc = SDL_SCANCODE_UNKNOWN;
+	
 	rt				ret = rt::OK;
 	bool			ks_change =	false;
 
@@ -88,8 +89,8 @@ ss::rt ss::InputController::input(ArrIC& _arr, IRAO& _irao)
 		}
 		else
 		{
-			ret = reset_ks(KS_);
-			ret = reset_ks(KSprev_);
+			//ret = reset_ks(KS_);
+			//ret = reset_ks(KSprev_);
 		}
 	} // End while
 
@@ -108,15 +109,16 @@ ss::rt ss::InputController::process_input(ArrIC& _ic, IRAO& _irao)
 		IC temp_ic = _ic[i_cxt];
 		if (temp_ic == IC::NONE)
 		{
-			//
+			// some rt return
 		}
 		else
 		{
 			// current Context definition
 			ICD temp_icd = get_icd(temp_ic);
-			if (temp_icd.IC_ == Blank_ICD_.IC_)
+			if(temp_icd==Blank_ICD_)
 			{
 				// definition not found->exit
+				// some rt return
 			}
 			else
 			{
@@ -131,16 +133,12 @@ ss::rt ss::InputController::process_input(ArrIC& _ic, IRAO& _irao)
 					if (temp_icv == ICV::NONE)
 					{
 						//log("context: "<<(int)temp_ic<<" listing complete");
+						//some rt return
 					}
 					else
 					{
 						// valid ICV
 						SDL_Scancode temp_sc = CM_.Map[(size_t)temp_icv].K;
-						//log(
-						//	"context: " << (size_t)temp_ic <<
-						//	" value: " << (size_t)temp_icv <<
-						//	" scancode: " << (size_t)temp_sc
-						//);
 
 						bool is_down = KS_[temp_sc];
 						if (is_down)
@@ -148,17 +146,18 @@ ss::rt ss::InputController::process_input(ArrIC& _ic, IRAO& _irao)
 							//key is currently down
 							
 							log(
-								"Context: " << (size_t)temp_ic <<
-								" | Scancode: " << (size_t)temp_sc <<
-								" | IRAO flag set: " << (size_t)temp_icv;
+								"Context: " << hr(temp_ic) <<// (size_t)temp_ic <<
+								" | Scancode: " << hr(temp_sc)<<//(size_t)temp_sc <<
+								" | IRAO flag set: " << hr(temp_icv)// (size_t)temp_icv;
 							);
 							_irao[(size_t)temp_icv] = true;
 						}
 						else
 						{
 							//key not currently down
-							//log((size_t)CM_.CM_[(size_t)temp_icv].V << " IS UP!");
-							//log("not valid context key");
+							
+							//check if this is down in KSprev_ and
+							//if so, return keyup value?
 
 						} // confirm if KS_ true/false
 					} // if valid context value
@@ -170,8 +169,11 @@ ss::rt ss::InputController::process_input(ArrIC& _ic, IRAO& _irao)
 
 	rt ret = rt::INITIAL;
 
-	ret = copy_ks(KSprev_, KS_);
-	ret = reset_ks(KS_);
+	//adjust current ks array before opying?
+	//sdl ks doesnt exist yet because no
+	//event generated for held key down
+	ret = copy_ks	(KSprev_, KS_);
+	ret = reset_ks	(KS_);
 
 	return rt::OK;
 }
@@ -194,7 +196,7 @@ size_t ss::InputController::get_icd_i(InputContext _ic)
 	return rerr_sizet;
 }
 
-bool ss::InputController::icd_contains_ic(ICD _icd, ICV _icv)
+bool ss::InputController::icd_contains_icv(ICD _icd, ICV _icv)
 {
 	for (size_t i=0;i<_icd.ICVvec_.size();++i)
 	{

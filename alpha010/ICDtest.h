@@ -14,8 +14,8 @@ namespace ss
 		{
 			IC_ = IC::TEST1;
 
-			ICVvec_.push_back(ICV::TESTVAL1);
-			ICVvec_.push_back(ICV::TESTVAL2);
+			ICVvec_.push_back(ICV::TESTVAL5);
+			ICVvec_.push_back(ICV::TESTVAL6);
 		}
 	} ICD_t1;
 } // END	namespace ss
