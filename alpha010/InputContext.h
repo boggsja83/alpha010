@@ -4,6 +4,14 @@
 #include "SDL.h"
 #include <vector>
 
+
+// 7/5 3:00pm 
+// -going to work on ooperator overloads...
+// working on moving all ICDs to this file,
+// put a ICMgr struct/class in here to hold
+// instances of ICDs?
+
+
 namespace ss
 {
 	typedef enum class InputContext : size_t
@@ -39,28 +47,50 @@ namespace ss
 
 	typedef struct InputContextDef
 	{
+		InputContextDef()
+		{
+			IC_ = IC::NONE;
+			ICVvec_.reserve(10);
+		}
+
 		InputContext	IC_;
 		std::vector<InputContextValue> ICVvec_;
 
-		bool operator==(InputContextDef const& _rhs)
+		inline size_t size() const { return ICVvec_.size(); }
+
+
+		inline InputContextValue& operator[](std::size_t _rhs) 
+		{ 
+			return ICVvec_[_rhs]; 
+		}
+
+		inline bool operator==(InputContext const& _rhs) const
+		{
+			if (this->IC_ == _rhs)
+				return true;
+			else
+				return false;
+		}
+		inline bool operator<(InputContext const& _rhs) const
+		{
+			if (this->IC_ < _rhs)
+				return true;
+			else
+				return false;
+		}
+		inline bool operator==(InputContextDef const& _rhs) const
 		{
 			if (this->IC_ == _rhs.IC_)
 				return true;
 			else
 				return false;
 		}
-		bool operator<(InputContextDef const& _rhs)
+		inline bool operator<(InputContextDef const& _rhs) const
 		{
 			if (this->IC_ < _rhs.IC_)
 				return true;
 			else
 				return false;
-		}
-
-		InputContextDef() 
-		{
-			IC_ = IC::NONE;
-			ICVvec_.reserve(10); 
 		}
 	} ICD;
 
@@ -74,8 +104,16 @@ namespace ss
 			IC_ = IC::NONE;
 			ICVvec_.clear();
 		}
-	} ICD_b;
+	} ICD_B;
 
+	static size_t constexpr	size_SC		=	sizeof(bool) * 300;
+	static size_t const		size_IRAO	=	sizeof(bool) * static_cast<size_t>(ICV::ICV_COUNT);
+	typedef std::array<bool, size_SC>		Flags_SC;
+	typedef std::array<bool, size_IRAO>		Flags_IR;
+	typedef std::array<InputContext, static_cast<size_t>
+							(IC::IC_COUNT)>	ArrIC;
+	typedef std::array<InputContextDef, static_cast<size_t>
+							(IC::IC_COUNT)>	ArrICD;
 
 	static char const* hr(IC _ic)
 	{
@@ -105,5 +143,24 @@ namespace ss
 
 		return arr[static_cast<size_t>(_icv)];
 	}
+
+
+
+
+	/*--------------------------------------------------*/
+	/*---------------------ICDs-------------------------*/
+	/*--------------------------------------------------*/
+	typedef struct ICDtest4:InputContextDef
+	{
+		int const size_ICDL=2;
+		enum ICDL
+		{
+			a=ICV::TESTVAL1,
+			b=ICV::TESTVAL2,
+		};
+
+	}ICD4;
+
+	/*--------------------------------------------------*/
 
 } // END	namespace ss

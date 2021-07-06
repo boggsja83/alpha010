@@ -43,46 +43,55 @@ namespace ss
 
 		/*-------------------VARIABLES----------------------*/
 	private:
-		char const*		Name_com_ = "object";
-		char const*		Name_text_ = "menu-main";
-		InputContext	IC_;
+		char const*		Name_com_	= "object";
+		char const*		Name_text_	= "menu-main";
+		IC	IC_;
 		
-		SDL_Rect			Rect_;
+		SDL_Rect		Rect_;
 
 		
 
 		std::array<char const*, 5> text_arr;
-		size_t iTA;
+		size_t			iTA;
 		/*--------------------------------------------------*/
 
 		/*-------------------FUNCTIONS----------------------*/
 	public:
-		inline rt input_rx(ICV _icv)
+		inline rt input_rx(Flags_IR& _ir)
 		{
-			log("input_rx(" << (size_t)_icv << ")");
-			switch (_icv)
+			//log("input_rx(" << _irao.size() << ")");
+
+			for (size_t i=0; i<size_IRAO; ++i)
 			{
-			case ICV::TESTVAL1:
-
-				break;
-			case ICV::TESTVAL2:
-				iTA = (iTA <= 0) ? 4 : --iTA;
-				break;
-			case ICV::TESTVAL3:
-
-				break;
-			case ICV::TESTVAL4:
-				iTA = (iTA >= 4) ? 0 : ++iTA;
-				break;
-			default:;
+				if (_ir[i])
+				{
+					switch(static_cast<ICV>(i))
+					{
+					case ICV::TESTVAL1:
+						log("1");
+						break;
+					case ICV::TESTVAL2:
+						log("2");
+						break;
+					case ICV::TESTVAL3:
+						log("3");
+						break;
+					case ICV::TESTVAL4:
+						log("4");
+						break;
+					default:
+						log("default");
+						;
+					}
+				}
 			}
+
 			return rt::OK;
 		}
 
 		inline IC			ic()			{ return IC_; }
 		inline char const*	text_name()		{ return text_arr[iTA]; }
 		inline char const*	common_name()	{ return Name_com_; }
-		//inline SDL_Rect		sdl_rect()		{ return cube_to_sdl_r(&Rect_); }
 		inline SDL_Rect*	get_rect()		{ return &Rect_; }
 		/*--------------------------------------------------*/
 

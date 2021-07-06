@@ -29,10 +29,10 @@ namespace ss
 		rt		init_locals();
 		rt		destroy();
 
-		inline SDL_Window*		win()	{ return Win_; }
-		inline SDL_Renderer*	rend()	{ return Rend_; }
-		inline SDL_Texture*		text()	{ return Texture_; }
-		inline SDL_Surface*		surf()	{ return Surface_; }
+		inline SDL_Window*		win()	const { return Win_; }
+		inline SDL_Renderer*	rend()	const { return Rend_; }
+		inline SDL_Texture*		text()	const { return Texture_; }
+		inline SDL_Surface*		surf()	const { return Surface_; }
 		
 	private:
 		SDL_Window*		Win_;

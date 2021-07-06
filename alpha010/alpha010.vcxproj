@@ -151,6 +151,7 @@
     <ClInclude Include="ALL.h" />
     <ClInclude Include="ControlMap.h" />
     <ClInclude Include="DimType.h" />
+    <ClInclude Include="ICDall.h" />
     <ClInclude Include="ICDengMenu.h" />
     <ClInclude Include="ICDtest.h" />
     <ClInclude Include="ICDtest2.h" />

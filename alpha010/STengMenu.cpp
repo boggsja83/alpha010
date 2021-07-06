@@ -48,26 +48,10 @@ ss::rt ss::ST_eng_menu::input()
 	
 	rt ret = rt::INITIAL;
 
-	IRAO irao({});
+	Flags_IR irao({});
+
 	ret = Input_->input(ICA_,irao);
-
-
-	ICD temp_icd = Input_->get_icd(testing.ic());
-	ICV temp_icv = ICV::NONE;
-
-	for (size_t i = 0; i < irao.size(); ++i)
-	{
-		if (irao[i])
-		{
-			temp_icv = static_cast<ICV>(i);
-		
-		//if context is in ... definition. object.input(ICV)
-			if (Input_->icd_contains_icv(temp_icd, temp_icv))
-			{
-				ret = testing.input_rx(temp_icv);
-			}
-		}
-	}
+	testing.input_rx(irao);
 
 	return ret;
 }
@@ -79,24 +63,15 @@ ss::rt ss::ST_eng_menu::draw()
 
 	rt ret = rt::INITIAL;
 
-	SDL_Rect temp_r(rect_win);
-	size_t w=temp_r.w, h=temp_r.h, x=temp_r.x, y=temp_r.y;
-
-	temp_r.x = (w - x) / 2 -w / 4;
-	temp_r.y = (h - y) / 2 -h / 4;
-	temp_r.w = w/2;
-	temp_r.h = h/2;
-
-	//temp_r = cube_to_sdl_r(testing.get_rect());
+	SDL_RenderClear(	View_->rend());
+	ret = rend_cpy(		View_->rend(), 
+						TRL_.get_text(Name_text_), 
+						NULL, NULL);
+	ret = rend_cpy(		View_->rend(), 
+						TRL_.get_text(testing.text_name()), 
+						NULL, testing.get_rect());
+	SDL_RenderPresent(	View_->rend());
 	
-	SDL_RenderClear(View_->rend());
-	ret = rend_cpy(View_->rend(), TRL_.get_text(Name_text_), NULL, NULL);
-	ret = rend_cpy(View_->rend(), TRL_.get_text(testing.text_name()), NULL, testing.get_rect());
-	SDL_RenderPresent(View_->rend());
-	
-	//TRL_.delete_all_text();
-	//TRL_.load_all_text();
-
 	return ret;
 }
 /*--------------------------------------------------*/
@@ -106,8 +81,8 @@ ss::rt ss::ST_eng_menu::init()
 	log("ST_eng_menu::init()");
 	
 	// init locals function needed here
-	View_ = nullptr;
-	Input_ = nullptr;
+	//View_ = nullptr;
+	//Input_ = nullptr;
 	IC_ = IC::MENU;
 
 	// add all InputContext's from this "level"

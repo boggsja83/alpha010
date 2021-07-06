@@ -170,6 +170,9 @@
     <ClInclude Include="Object.h">
       <Filter>Model\Object</Filter>
     </ClInclude>
+    <ClInclude Include="ICDall.h">
+      <Filter>Model\ICD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="alpha010.ruleset" />

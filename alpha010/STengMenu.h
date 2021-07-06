@@ -47,7 +47,7 @@ namespace ss
         ST_eng_menu(ViewController* _view, InputController* _input): TRL_(_view->rend())
         /*--------------------------------------------------*/
         {
-            log("ST_eng_menu("<<_view<<". " << _input << ")");
+            log("ST_eng_menu("<<&_view<<". " << &_input << ")");
             rt ret = init();
             this->View_ = _view;
             this->Input_ = _input;
@@ -80,8 +80,8 @@ namespace ss
         Object testing; // delete!
 
         // controllers (make a passthrough object...)
-        ViewController*     View_;
-        InputController*    Input_;
+        ViewController*    View_;
+        InputController*   Input_;
         
         // texture resource list
         //can convert this to array?
@@ -97,6 +97,11 @@ namespace ss
         /*-----------------Getter Functions-----------------*/
         /*--------------------------------------------------*/
     public:
+        inline char const* get()
+        {
+            log("GOD DAMN!");
+            return "holy shit!";
+        }
         /*--------------------------------------------------*/
         inline char const*      text_name() const
         /*--------------------------------------------------*/

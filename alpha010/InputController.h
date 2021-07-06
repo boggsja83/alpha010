@@ -22,11 +22,14 @@
 namespace ss
 /*--------------------------------------------------*/
 {
-	typedef std::array<bool, 300> ArrKS;
-	typedef std::array<bool, static_cast<size_t>(ICV::ICV_COUNT)> IRAO;
-	typedef std::array<InputContext, static_cast<size_t>(IC::IC_COUNT)> ArrIC;
-	size_t constexpr size_KS = sizeof(bool) * 300;
-	size_t constexpr size_IRAO = sizeof(bool)* static_cast<size_t>(ICV::ICV_COUNT);
+	//move some of these typedefs to InputContext.h?
+	
+	//size_t constexpr size_SC = sizeof(bool) * 300;
+	//size_t const size_IRAO = sizeof(bool) * static_cast<size_t>(ICV::ICV_COUNT);
+	//typedef std::array<bool, size_SC> ArrKS;
+	//typedef std::array<bool, static_cast<size_t>(ICV::ICV_COUNT)> IRAO;
+	//typedef std::array<InputContext, static_cast<size_t>(IC::IC_COUNT)> ArrIC;
+	
 /*--------------------------------------------------*/
 	class InputController
 /*--------------------------------------------------*/
@@ -37,10 +40,10 @@ namespace ss
 	public:
 		/*--------------------------------------------------*/
 		InputController() 
-			:	KS_({}),
-				KSprev_({}),
-				Blank_KS_({}),
-				Blank_IRAO_({})
+			:	SC_({}),
+				SCprev_({})
+				//Blank_SC_({}),
+				//Blank_IRAO_({})
 		/*--------------------------------------------------*/
 		{ 
 			log("InputController()");
@@ -56,6 +59,12 @@ namespace ss
 		/*--------------------------------------------------*/
 
 		/*--------------------------------------------------*/
+		/*----------------Overloaded functions--------------*/
+		/*--------------------------------------------------*/
+
+		/*--------------------------------------------------*/
+
+		/*--------------------------------------------------*/
 		/*-----------------Init/Destroy---------------------*/
 		/*--------------------------------------------------*/
 	private:
@@ -68,18 +77,18 @@ namespace ss
 		/*----------------Member functions------------------*/
 		/*--------------------------------------------------*/
 	private:
-		rt			reset_ks(ArrKS&);
-		rt			reset_irao(IRAO&);
-		rt			copy_ks(ArrKS&, ArrKS&);
-		rt			copy_irao(IRAO&, IRAO&);
-		rt			process_input(ArrIC&, IRAO&);
+		rt			reset_flags(Flags_SC&);
+		rt			reset_flags(Flags_IR&);
+		rt			copy_flags(Flags_SC&, Flags_SC&);
+		rt			copy_flags(Flags_IR&, Flags_IR&);
+		rt			process_input(ArrIC&, Flags_IR&);
 
 	public:
-		rt			input(ArrIC&, IRAO&);
+		rt			input(ArrIC&, Flags_IR&);
 
 		ICD			get_icd(InputContext);
 		size_t		get_icd_i(InputContext);
-		bool		icd_contains_icv(ICD,ICV);
+		bool		icd_has_icv(ICD,ICV);
 
 		inline rt	push_icd(ICD _icd)
 		{
@@ -94,16 +103,20 @@ namespace ss
 	private:
 		// actual highest value is 284? i believe
 		// 0,4-282 are sdl indices, 283,284 = user hardware defined?
-		ArrKS		KS_;
-		ArrKS		KSprev_;
+	
+		//static constexpr char const* const rr="ddd";
+
+
+		Flags_SC	SC_;
+		Flags_SC	SCprev_;
 
 		ControlMap	CM_;
-		std::vector<ICD>		ICDvec_;
+		std::vector<ICD>	ICDvec_;
 
 	public:
-		ArrKS		Blank_KS_;
-		ICDblank	Blank_ICD_;
-		IRAO		Blank_IRAO_;
+		//Flags_SC	Blank_SC_;
+		//ICDblank	Blank_ICD_;
+		//Flags_IR	Blank_IRAO_;
 
 		
 
