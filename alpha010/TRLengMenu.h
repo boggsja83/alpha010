@@ -43,7 +43,7 @@ namespace ss
 		TRL_eng_menu(SDL_Renderer* _rend) 
 		/*--------------------------------------------------*/
 		{
-			log("TRL_eng_menu_("<<_rend<<")");
+			log("TRL_eng_menu("<<_rend<<")");
 
 			menu_main.name("menu-main");
 			menu_main.path("menu-main.png");

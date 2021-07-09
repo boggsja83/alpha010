@@ -67,6 +67,12 @@ ss::rt ss::State_Holder::draw_state()
 	return Stack_.top()->draw();
 }
 
+ss::rt ss::State_Holder::update_state()
+{
+	if (Stack_.empty()) { return rt::STATE_STACK_EMPTY; }
+	return Stack_.top()->update();
+}
+
 ss::rt ss::State_Holder::init()
 {
 	return rt();

@@ -4,6 +4,8 @@
 #include "InputContext.h"
 #include <array>
 
+// SDL_Scancode are c_uint's
+
 namespace ss
 {
 	typedef struct ControlMap
@@ -13,9 +15,6 @@ namespace ss
 		inline ICM& operator[](std::size_t _rhs) { return Map_[static_cast<size_t>(_rhs)]; }
 		inline ICM& operator[](ICV _rhs) { return Map_[static_cast<size_t>(_rhs)]; }
 		
-		//int f = ICD4::size_ICDL;
-		//ICV i = static_cast<ICV>(ICD4::ICDL::a);
-
 		ControlMap()
 		{
 			// indeces coincide with InputContextValue enum's
@@ -55,7 +54,7 @@ namespace ss
 			Map_[i++].K = SDL_SCANCODE_1;
 
 			Map_[i].V = ICV::TESTVAL6;
-			Map_[i++].K = SDL_SCANCODE_2;
+			Map_[i++].K = SDL_SCANCODE_SEMICOLON;
 		
 		}
 		

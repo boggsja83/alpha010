@@ -5,7 +5,7 @@
 
 namespace ss
 {
-	typedef struct ICDengMenu : InputContextDef
+	struct ICDengMenu : InputContextDef
 	{
 		//InputContext	IC_;
 		//std::vector<InputContextValue> ICVvec_;
@@ -20,5 +20,7 @@ namespace ss
 			ICVvec_.push_back(ICV::MENU_NEXT);
 			ICVvec_.push_back(ICV::MENU_PREV);
 		}
-	} ICD_em;
+	};
+
+	ICDengMenu const ICD_em;
 } // END	namespace ss

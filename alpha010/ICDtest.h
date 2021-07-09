@@ -5,7 +5,7 @@
 
 namespace ss
 {
-	typedef struct ICDtest1 : InputContextDef
+	struct ICDtest1 : InputContextDef
 	{
 		//InputContext	IC_;
 		//std::vector<InputContextValue> ICVvec_;
@@ -17,5 +17,7 @@ namespace ss
 			ICVvec_.push_back(ICV::TESTVAL5);
 			ICVvec_.push_back(ICV::TESTVAL6);
 		}
-	} ICD_t1;
+	};
+
+	ICDtest1 const ICD_t1;
 } // END	namespace ss

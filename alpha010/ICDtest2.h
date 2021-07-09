@@ -18,5 +18,5 @@ namespace ss
 		}
 	};
 
-	static ICDtest2 const ICD_t2;
+	ICDtest2 const ICD_t2;
 } // END	namespace ss

@@ -14,7 +14,9 @@ namespace ss
 	class Object
 	{
 	public:
-		Object() { rt ret = init(); }
+		Object() :
+			ISF_({})
+		{ rt ret = init(); }
 		~Object() { rt ret = destroy(); }
 
 		/*-----------------INIT/DESTROY--------------------*/
@@ -31,10 +33,10 @@ namespace ss
 
 			iTA = 4;
 
-			Rect_.x = 25;
-			Rect_.y = 50;
-			Rect_.h = 75;
-			Rect_.w = 125;
+			Dst_.x = 25;
+			Dst_.y = 50;
+			Dst_.h = 75;
+			Dst_.w = 125;
 
 			return rt::OK;
 		};
@@ -43,11 +45,14 @@ namespace ss
 
 		/*-------------------VARIABLES----------------------*/
 	private:
-		char const*		Name_com_	= "object";
-		char const*		Name_text_	= "menu-main";
+		char const*		NameCommon_	= "object";
+		char const*		NameText_	= "menu-main";
+
 		IC	IC_;
-		
-		SDL_Rect		Rect_;
+		std::array<bool, 4> ISF_;
+
+		SDL_Rect		Src_;
+		SDL_Rect		Dst_;
 
 		
 
@@ -57,42 +62,72 @@ namespace ss
 
 		/*-------------------FUNCTIONS----------------------*/
 	public:
-		inline rt input_rx(Flags_IR& _ir)
+		inline rt input_rx(IRT& _irt)
 		{
-			//log("input_rx(" << _irao.size() << ")");
+			//log("input_rx(" << hr(_irt.IC_) << ")");
 
-			for (size_t i=0; i<size_IRAO; ++i)
+			for (size_t i = 0; i < _irt.size(); ++i)
 			{
-				if (_ir[i])
-				{
-					switch(static_cast<ICV>(i))
-					{
-					case ICV::TESTVAL1:
-						log("1");
-						break;
-					case ICV::TESTVAL2:
-						log("2");
-						break;
-					case ICV::TESTVAL3:
-						log("3");
-						break;
-					case ICV::TESTVAL4:
-						log("4");
-						break;
-					default:
-						log("default");
-						;
-					}
-				}
+				ISF_[i] = _irt[i];
 			}
+
+			return rt::OK;
+		}
+
+		inline rt update()
+		{
+			// this really should be push a state (depending on action) ???
+			// also need to implement press, range, and toggle input funcitons
+			if (ISF_[0]) { log("0"); }
+			if (ISF_[1]) 
+			{ 
+				if (iTA == 0)
+					iTA = 4;
+				else
+					--iTA;  
+			}
+			if (ISF_[2]) { log("2"); }
+			if (ISF_[3]) 
+			{ 
+				if (iTA == 4)
+					iTA = 0;
+				else
+					++iTA; 
+			}
+
+				//...switch here
+
+				// get this to work
+				// need to use ICD.ICVvec....
+			//for (size_t i = 0; i < InputStates_.size(); ++i)
+			//{
+			//	switch (static_cast<ICV>(i))
+			//	{
+			//	case ICV::TESTVAL1:
+			//		log(hr((ICV)i));
+			//		break;
+			//	case ICV::TESTVAL2:
+			//		log(hr((ICV)i));
+			//		break;
+			//	case ICV::TESTVAL3:
+			//		log(hr((ICV)i));
+			//		break;
+			//	case ICV::TESTVAL4:
+			//		log(hr((ICV)i));
+			//		break;
+			//	default:
+			//		;
+			//	}
+			//}
+
 
 			return rt::OK;
 		}
 
 		inline IC			ic()			{ return IC_; }
 		inline char const*	text_name()		{ return text_arr[iTA]; }
-		inline char const*	common_name()	{ return Name_com_; }
-		inline SDL_Rect*	get_rect()		{ return &Rect_; }
+		inline char const*	common_name()	{ return NameCommon_; }
+		inline SDL_Rect*	get_rect()		{ return &Dst_; }
 		/*--------------------------------------------------*/
 
 	}; // END	class Object

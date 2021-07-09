@@ -58,7 +58,6 @@ namespace ss
 
 		inline size_t size() const { return ICVvec_.size(); }
 
-
 		inline InputContextValue& operator[](std::size_t _rhs) 
 		{ 
 			return ICVvec_[_rhs]; 
@@ -106,10 +105,8 @@ namespace ss
 		}
 	} ICD_B;
 
-	static size_t constexpr	size_SC		=	sizeof(bool) * 300;
-	static size_t const		size_IRAO	=	sizeof(bool) * static_cast<size_t>(ICV::ICV_COUNT);
-	typedef std::array<bool, size_SC>		Flags_SC;
-	typedef std::array<bool, size_IRAO>		Flags_IR;
+	//static size_t const		size_IRAO	=	sizeof(bool) * static_cast<size_t>(ICV::ICV_COUNT);
+	//typedef std::array<bool, size_IRAO>		Flags_IR;
 	typedef std::array<InputContext, static_cast<size_t>
 							(IC::IC_COUNT)>	ArrIC;
 	typedef std::array<InputContextDef, static_cast<size_t>
@@ -144,22 +141,98 @@ namespace ss
 		return arr[static_cast<size_t>(_icv)];
 	}
 
+	typedef struct InputReturnType
+	{
+		IC	IC_ = IC::NONE;
+		std::vector<bool>	Flags_;
 
+		enum class p :size_t
+		{
+			RESERVE = 10
+		};
+
+		inline bool operator[](size_t const& _rhs) const
+		{
+			return Flags_[_rhs];
+		}
+
+		inline bool operator==(InputReturnType const& _rhs) const
+		{
+			if (this->IC_ == _rhs.IC_)
+				return true;
+			else
+				return false;
+		}
+		inline bool operator<(InputReturnType const& _rhs) const
+		{
+			if (this->IC_ < _rhs.IC_)
+				return true;
+			else
+				return false;
+		}
+		
+		InputReturnType()
+		{
+			Flags_.reserve(static_cast<size_t>(p::RESERVE));
+			//Input_RX = false;
+		}
+		InputReturnType(IC& _ic)
+		{
+			Flags_.reserve(static_cast<size_t>(p::RESERVE));
+			IC_ = _ic;
+			//Input_RX = false;
+		}
+		InputReturnType(ICD& _icd)
+		{
+			Flags_.reserve(_icd.size());
+			IC_ = _icd.IC_;
+			//Input_RX = false;
+		}
+		~InputReturnType() {}
+
+		static inline ss::rt set_irt(ICD& _icd, InputReturnType& _irt)
+		{
+			_irt.IC_ = _icd.IC_;
+
+			_irt.Flags_.clear();
+			for (size_t i = 0; i < _icd.size(); ++i)
+			{
+				_irt.Flags_.push_back(false);
+			}
+			return rt::OK;
+		}
+
+		static inline ss::rt set_irt(ArrICD& _icda, std::array<InputReturnType, static_cast<size_t>(IC::IC_COUNT)>& _irta)
+		{
+			rt ret = rt::INITIAL;
+
+			for (size_t i = 0; i < _icda.size(); ++i)
+			{
+				ret = set_irt(_icda[i], _irta[i]);
+			}
+
+			return ret;
+		}
+
+		inline size_t size() const { return Flags_.size(); }
+	} IRT;
+
+	typedef std::array<IRT, static_cast<size_t>(IC::IC_COUNT)> ArrIRT;
 
 
 	/*--------------------------------------------------*/
 	/*---------------------ICDs-------------------------*/
 	/*--------------------------------------------------*/
-	typedef struct ICDtest4:InputContextDef
-	{
-		int const size_ICDL=2;
-		enum ICDL
-		{
-			a=ICV::TESTVAL1,
-			b=ICV::TESTVAL2,
-		};
+	//typedef struct ICDtest4:InputContextDef
+	//{
+	//	int const size_ICDL=2;
+	//	enum ICDL
+	//	{
+	//		a=ICV::TESTVAL1,
+	//		b=ICV::TESTVAL2,
+	//	};
 
-	}ICD4;
+	//}ICD4;
 
 	/*--------------------------------------------------*/
 

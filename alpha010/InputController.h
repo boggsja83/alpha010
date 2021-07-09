@@ -14,21 +14,17 @@
 #include "ControlMap.h"
 
 //context definitions
-#include "ICDengMenu.h"
-#include "ICDtest.h"
-#include "ICDtest2.h"
+//#include "ICDengMenu.h"
+//#include "ICDtest.h"
+//#include "ICDtest2.h"
 
 /*--------------------------------------------------*/
 namespace ss
 /*--------------------------------------------------*/
 {
-	//move some of these typedefs to InputContext.h?
-	
-	//size_t constexpr size_SC = sizeof(bool) * 300;
-	//size_t const size_IRAO = sizeof(bool) * static_cast<size_t>(ICV::ICV_COUNT);
-	//typedef std::array<bool, size_SC> ArrKS;
-	//typedef std::array<bool, static_cast<size_t>(ICV::ICV_COUNT)> IRAO;
-	//typedef std::array<InputContext, static_cast<size_t>(IC::IC_COUNT)> ArrIC;
+
+	static size_t constexpr	size_SC = sizeof(bool) * SDL_NUM_SCANCODES;
+	typedef std::array<bool, size_SC> Flags_SC;
 	
 /*--------------------------------------------------*/
 	class InputController
@@ -40,8 +36,8 @@ namespace ss
 	public:
 		/*--------------------------------------------------*/
 		InputController() 
-			:	SC_({}),
-				SCprev_({})
+			:	SC_({})
+				//SCprev_({})
 				//Blank_SC_({}),
 				//Blank_IRAO_({})
 		/*--------------------------------------------------*/
@@ -77,24 +73,28 @@ namespace ss
 		/*----------------Member functions------------------*/
 		/*--------------------------------------------------*/
 	private:
-		rt			reset_flags(Flags_SC&);
-		rt			reset_flags(Flags_IR&);
-		rt			copy_flags(Flags_SC&, Flags_SC&);
-		rt			copy_flags(Flags_IR&, Flags_IR&);
-		rt			process_input(ArrIC&, Flags_IR&);
+		//rt			reset_flags(Flags_SC&);
+		//rt			reset_flags(Flags_IR&);
+		//rt			copy_flags(Flags_SC&, Flags_SC&);
+		//rt			copy_flags(Flags_IR&, Flags_IR&);
+		//rt			set_irt(ICD&, IRT&);
+		//rt			set_irt(ArrICD&, ArrIRT&);
+		rt			process_input(ArrICD&, ArrIRT&);
+		//rt			process_input(ArrIC&, Flags_IR&);
 
 	public:
-		rt			input(ArrIC&, Flags_IR&);
+		//rt			input(ArrIC&, Flags_IR&);
+		rt			input(ArrICD&, ArrIRT&);
 
-		ICD			get_icd(InputContext);
-		size_t		get_icd_i(InputContext);
-		bool		icd_has_icv(ICD,ICV);
+		//ICD			get_icd(InputContext);
+		//size_t		get_icd_i(InputContext);
+		//bool		icd_has_icv(ICD,ICV);
 
-		inline rt	push_icd(ICD _icd)
-		{
-			ICDvec_.push_back(_icd);
-			return rt::OK;
-		}
+		//inline rt	push_icd(ICD _icd)
+		//{
+		//	ICDvec_.push_back(_icd);
+		//	return rt::OK;
+		//}
 		/*--------------------------------------------------*/
 
 		/*--------------------------------------------------*/
@@ -108,10 +108,10 @@ namespace ss
 
 
 		Flags_SC	SC_;
-		Flags_SC	SCprev_;
+		//Flags_SC	SCprev_;
 
 		ControlMap	CM_;
-		std::vector<ICD>	ICDvec_;
+		//std::vector<ICD>	ICDvec_;
 
 	public:
 		//Flags_SC	Blank_SC_;
