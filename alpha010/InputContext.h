@@ -3,7 +3,7 @@
 #include "ALL.h"
 #include "SDL.h"
 #include <vector>
-
+#include "Timer.h"
 
 // 7/5 3:00pm 
 // -going to work on ooperator overloads...
@@ -141,6 +141,9 @@ namespace ss
 		return arr[static_cast<size_t>(_icv)];
 	}
 
+	static size_t constexpr	size_TMR = sizeof(bool) * SDL_NUM_SCANCODES;
+	typedef std::array<Timer, size_TMR> ArrTMR;
+
 	typedef struct InputReturnType
 	{
 		IC	IC_ = IC::NONE;
@@ -174,51 +177,50 @@ namespace ss
 		InputReturnType()
 		{
 			Flags_.reserve(static_cast<size_t>(p::RESERVE));
-			//Input_RX = false;
 		}
 		InputReturnType(IC& _ic)
 		{
 			Flags_.reserve(static_cast<size_t>(p::RESERVE));
 			IC_ = _ic;
-			//Input_RX = false;
 		}
 		InputReturnType(ICD& _icd)
 		{
 			Flags_.reserve(_icd.size());
 			IC_ = _icd.IC_;
-			//Input_RX = false;
 		}
 		~InputReturnType() {}
 
-		static inline ss::rt set_irt(ICD& _icd, InputReturnType& _irt)
-		{
-			_irt.IC_ = _icd.IC_;
 
-			_irt.Flags_.clear();
-			for (size_t i = 0; i < _icd.size(); ++i)
-			{
-				_irt.Flags_.push_back(false);
-			}
-			return rt::OK;
-		}
-
-		static inline ss::rt set_irt(ArrICD& _icda, std::array<InputReturnType, static_cast<size_t>(IC::IC_COUNT)>& _irta)
-		{
-			rt ret = rt::INITIAL;
-
-			for (size_t i = 0; i < _icda.size(); ++i)
-			{
-				ret = set_irt(_icda[i], _irta[i]);
-			}
-
-			return ret;
-		}
 
 		inline size_t size() const { return Flags_.size(); }
+	
 	} IRT;
 
 	typedef std::array<IRT, static_cast<size_t>(IC::IC_COUNT)> ArrIRT;
 
+	static inline ss::rt set_irt(ICD& _icd, IRT& _irt)
+	{
+		_irt.IC_ = _icd.IC_;
+
+		_irt.Flags_.clear();
+		for (size_t i = 0; i < _icd.size(); ++i)
+		{
+			_irt.Flags_.push_back(false);
+		}
+		return rt::OK;
+	}
+
+	static inline ss::rt set_irt(ArrICD& _icda, ArrIRT& _irta)
+	{
+		rt ret = rt::INITIAL;
+
+		for (size_t i = 0; i < _icda.size(); ++i)
+		{
+			ret = set_irt(_icda[i], _irta[i]);
+		}
+
+		return ret;
+	}
 
 	/*--------------------------------------------------*/
 	/*---------------------ICDs-------------------------*/

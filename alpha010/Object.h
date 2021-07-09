@@ -31,7 +31,7 @@ namespace ss
 			text_arr[3] = "test_2";
 			text_arr[4] = "red";
 
-			iTA = 4;
+			iTA = 1;
 
 			Dst_.x = 25;
 			Dst_.y = 50;
@@ -46,7 +46,7 @@ namespace ss
 		/*-------------------VARIABLES----------------------*/
 	private:
 		char const*		NameCommon_	= "object";
-		char const*		NameText_	= "menu-main";
+		char const*		NameText_	= "red";
 
 		IC	IC_;
 		std::array<bool, 4> ISF_;

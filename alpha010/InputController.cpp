@@ -54,29 +54,27 @@ ss::rt ss::InputController::destroy()
 ss::rt ss::InputController::input(ArrICD& _icd, ArrIRT& _irta)
 {
 	SDL_Event		ev;
-	//SDL_Scancode	temp_sc = SDL_SCANCODE_UNKNOWN;
-	
+	size_t temp_sc = SDL_SCANCODE_UNKNOWN;
 	rt				ret = rt::OK;
 	bool			ks_change =	false;
 
 	while (SDL_PollEvent(&ev))
 	{
-	//SDL_PollEvent(&ev);
-
+		temp_sc = ev.key.keysym.scancode;
 		ks_change = false;
-		//temp_sc = ev.key.keysym.scancode;
-		//temp_sc = ev;
 
 		switch (ev.type)
 		{
 		case SDL_QUIT:
 			return rt::QUIT;
 		case SDL_KEYDOWN:
-			SC_[ev.key.keysym.scancode] = true;
+			SC_[temp_sc] = true;
+			TMR_[temp_sc].start();
 			ks_change = true;
 			break;
 		case SDL_KEYUP:
-			SC_[ev.key.keysym.scancode] = false;
+			SC_[temp_sc] = false;
+			TMR_[temp_sc].stop();
 			ks_change = true;
 			break;
 		default:;
@@ -129,8 +127,8 @@ ss::rt ss::InputController::process_input(ArrICD& _icda, ArrIRT& _irta)
 {
 	rt ret = rt::INITIAL;
 
-	ret = IRT::set_irt(_icda, _irta);
-	if (ret != rt::OK) return ret;
+	//ret = set_irt(_icda, _irta);
+	//if (ret != rt::OK) return ret;
 
 	for (size_t icd_i=0; icd_i<_icda.size(); ++icd_i)
 	{
@@ -140,9 +138,19 @@ ss::rt ss::InputController::process_input(ArrICD& _icda, ArrIRT& _irta)
 			ICV temp_cv = temp_icd[icv_i];
 			size_t temp_sc = CM_[temp_cv].K;
 			_irta[icd_i].Flags_[icv_i] = SC_[temp_sc];
+			//if (SC_[temp_sc])
+			//{
+			//	//set time down
+			//	TMR_[temp_sc].start();
+			//}
+			//else
+			//{
+			//	//set time up
+			//	TMR_[temp_sc].stop();
+			//}
 		}
 	}
-	return ret;
+	return rt::OK;
 }
 
 //ss::rt ss::InputController::process_input(ArrIC& _ic, Flags_IR& _irao)

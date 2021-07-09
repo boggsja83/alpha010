@@ -5,10 +5,11 @@
 
 using namespace ss;
 
-Timer TmrRun;
+//Timer TmrRun;
 
 int main(int argc, char* argv[])
 {
+	Timer TmrRun;
 	TmrRun.start();
 
 	system("cls");

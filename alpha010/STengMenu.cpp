@@ -51,6 +51,9 @@ ss::rt ss::ST_eng_menu::input()
 	//Flags_IR	irao({});//delete this system, using IRT instead
 	ArrIRT		irta;
 
+	ret = set_irt(ICD_, irta);
+	if (ret != rt::OK) return ret;
+
 	ret = Input_->input(ICD_, irta);
 	
 	if(ret == rt::INPUT_RECEIVED)

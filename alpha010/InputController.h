@@ -1,11 +1,11 @@
 #pragma once
 
-#include <vector>
+//#include <vector>
 #include <array>
 //#include <map>
 //#include <tuple>
 //#include <utility>
-#include <string>
+//#include <string>
 
 #include "ALL.h"
 #include "SDLwrapper.h"
@@ -13,7 +13,9 @@
 #include "InputContext.h"
 #include "ControlMap.h"
 
-//context definitions
+#include "Timer.h"
+
+//context definitions - passed through by object calling input
 //#include "ICDengMenu.h"
 //#include "ICDtest.h"
 //#include "ICDtest2.h"
@@ -25,7 +27,7 @@ namespace ss
 
 	static size_t constexpr	size_SC = sizeof(bool) * SDL_NUM_SCANCODES;
 	typedef std::array<bool, size_SC> Flags_SC;
-	
+
 /*--------------------------------------------------*/
 	class InputController
 /*--------------------------------------------------*/
@@ -37,9 +39,6 @@ namespace ss
 		/*--------------------------------------------------*/
 		InputController() 
 			:	SC_({})
-				//SCprev_({})
-				//Blank_SC_({}),
-				//Blank_IRAO_({})
 		/*--------------------------------------------------*/
 		{ 
 			log("InputController()");
@@ -111,6 +110,8 @@ namespace ss
 		//Flags_SC	SCprev_;
 
 		ControlMap	CM_;
+
+		ArrTMR		TMR_;
 		//std::vector<ICD>	ICDvec_;
 
 	public:
