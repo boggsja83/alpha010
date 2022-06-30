@@ -5,9 +5,20 @@
 #include "ALL.h"
 #include "SDP.h"
 
-#include "SDLwrapper.h"
+#include "Object.h" //.tetsing!
+
+//#include "SDLwrapper.h"
 #include "TRLengMenu.h"
+
+//input context (this will only have menu context)
+//others will be loaded from this levels object list
+#include "ICDengMenu.h"
+#include "ICDtest.h"//remove
+#include "ICDtest2.h"//remove
+
+//controllers
 #include "InputController.h"
+#include "ViewController.h"
 
 /*--------------------------------------------------*/
 namespace ss
@@ -30,6 +41,7 @@ namespace ss
 
         virtual rt input()  override;
         virtual rt draw()   override;
+        virtual rt update()   override;
 
         /*--------------------------------------------------*/
         /*---------------Constructors/Destructor------------*/
@@ -40,12 +52,13 @@ namespace ss
         ST_eng_menu(ST_eng_menu&) = delete;
         void* operator=(ST_eng_menu const&) = delete;
         /*--------------------------------------------------*/
-        ST_eng_menu(SDL_Renderer* _rend, InputController* _input): TRL_(_rend)
+        ST_eng_menu(ViewController* _view, InputController* _input) :
+            TRL_(_view->rend())
         /*--------------------------------------------------*/
         {
-            log("ST_eng_menu(SDL_Renderer* "<<_rend<<", InputController " << _input << ")");
+            log("ST_eng_menu("<<&_view<<", " << &_input << ")");
             rt ret = init();
-            this->Rend_ = _rend;
+            this->View_ = _view;
             this->Input_ = _input;
         }
         /*--------------------------------------------------*/
@@ -69,12 +82,25 @@ namespace ss
         /*--------------------------------------------------*/
         /*-----------------Member Variables-----------------*/
         /*--------------------------------------------------*/
-    public:
-        char const*     text_name = "test_2";
+    //public:
     private:
-        SDL_Renderer*   Rend_;
-        TRL_em          TRL_;
-        InputController* Input_;
+        char const*         NameText_ = "red";
+    
+        Object              testing; // delete!
+
+        // controllers (make a passthrough object...)
+        ViewController*     View_;
+        InputController*    Input_;
+        
+        // texture resource list
+        //can convert this to array?
+        TRLengMenu          TRL_;//this objects TRL
+        
+        // input context
+        //ICDengMenu          ICD_;
+        //InputContext        IC_;//this objects IC
+       // ArrIC               ICA_;//holds all contexts involved in this state
+        ArrICD              ICD_;
         /*--------------------------------------------------*/
 
         /*--------------------------------------------------*/
@@ -82,23 +108,17 @@ namespace ss
         /*--------------------------------------------------*/
     public:
         /*--------------------------------------------------*/
-        inline void     rend(SDL_Renderer* _rend) 
+        //inline char const*      text_name() const
         /*--------------------------------------------------*/
-                            { Rend_=_rend; }
+         //                           { return Name_text_; }
         /*--------------------------------------------------*/
-
+        //inline SDL_Renderer*    rend() const
         /*--------------------------------------------------*/
-        /*-----------------Setter Functions-----------------*/
+         //                           { return View_->rend(); }
         /*--------------------------------------------------*/
-    public:
+        //inline TRL&             trl()
         /*--------------------------------------------------*/
-        inline SDL_Renderer*    rend() const
-        /*--------------------------------------------------*/
-                                    { return Rend_; }
-        /*--------------------------------------------------*/
-        inline TRL&             trl()
-        /*--------------------------------------------------*/
-                                    { return TRL_; }
+         //                           { return TRL_; }
         /*--------------------------------------------------*/
 
     }; // END  class ST_eng_menu

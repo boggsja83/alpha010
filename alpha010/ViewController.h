@@ -15,24 +15,24 @@ namespace ss
 		{ 
 			log("ViewController()"); 
 			rt ret = init(); 
-			log("ViewController::init() ret: " << c2m(ret));
+			log("ViewController::init() ret: " << hr(ret));
 		}
 		
 		~ViewController() 
 		{ 
 			log("~ViewController()"); 
 			rt ret = destroy(); 
-			log("ViewController::destroy() ret: " << c2m(ret));
+			log("ViewController::destroy() ret: " << hr(ret));
 		}
 
 		rt		init();
 		rt		init_locals();
 		rt		destroy();
 
-		inline SDL_Window*		win()	{ return Win_; }
-		inline SDL_Renderer*	rend()	{ return Rend_; }
-		inline SDL_Texture*		text()	{ return Texture_; }
-		inline SDL_Surface*		surf()	{ return Surface_; }
+		inline SDL_Window*		win()	const { return Win_; }
+		inline SDL_Renderer*	rend()	const { return Rend_; }
+		inline SDL_Texture*		text()	const { return Texture_; }
+		inline SDL_Surface*		surf()	const { return Surface_; }
 		
 	private:
 		SDL_Window*		Win_;

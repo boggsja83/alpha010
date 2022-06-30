@@ -7,7 +7,11 @@ ss::rt ss::InputController::init()
 	log("InputController::init()");
 	rt ret = rt::INITIAL;
 
-	// init_locals()
+	//ret = init_event_map();
+	//if (ret != rt::OK) return ret;
+
+	ret = init_locals();
+	if (ret != rt::OK) return ret;
 
 	ret = init_sdl_input();
 	if (ret != rt::OK) return ret;
@@ -26,25 +30,85 @@ ss::rt ss::InputController::destroy()
 
 	return ret;
 }
-/*--------------------------------------------------*/
-SDL_Event ss::InputController::poll_event()
-/*--------------------------------------------------*/
+///*--------------------------------------------------*/
+//SDL_Event ss::InputController::poll_event()
+///*--------------------------------------------------*/
+ss::rt ss::InputController::input(ArrICD& _icd, ArrIRT& _irta)
 {
-	while (SDL_PollEvent(&Event_))
+	SDL_Event		ev;
+	size_t temp_sc = SDL_SCANCODE_UNKNOWN;
+	rt				ret = rt::OK;
+	bool			ks_change =	false;
+
+	while (SDL_PollEvent(&ev))
 	{
-		log("poll_event()");
+		temp_sc = ev.key.keysym.scancode;
+		ks_change = false;
+		
+		switch (ev.type)
+		{
+		case SDL_QUIT:
+			return rt::QUIT;
+		case SDL_KEYDOWN:
+			SC_[temp_sc] = true;
+			TMR_[temp_sc].start();
+			//_irta[temp_sc].TI_ = TMR_[temp_sc];
+			//_irta[temp_sc].TI_.TPstart_ = TMR_[temp_sc].TPstart_;
+			//_irta[temp_sc].TI_.On_ = true;
+			
+			ks_change = true;
+			break;
+		case SDL_KEYUP:
+			SC_[temp_sc] = false;
+			TMR_[temp_sc].stop();
+			//_irta[temp_sc].TI_ = TMR_[temp_sc];
+			//_irta[temp_sc].TI_.TPstop_ = TMR_[temp_sc].TPstop_;
+			//_irta[temp_sc].TI_.On_ = false;
+			
+			ks_change = true;
+			break;
+		default:;
+		} // End switch
 
-	}
-	//log("done polling");
-	//if (SDL_PollEvent(&Event_))
-	//	return rt::EVENT_PENDING;
-	//else
-	//	return rt::EVENT_NOT_PENDING;
+		//process input
+		if (ks_change)
+		{
+			ret = process_input(_icd, _irta);
+			if (ret != rt::OK) return ret;
+			return rt::INPUT_RECEIVED;
+		}
+		else
+		{
+			//ret = reset_ks(KS_);
+			//ret = reset_ks(KSprev_);
+			return rt::INPUT_NOT_RECEIVED;
+		}
+	} // End while
 
-	return Event_;
+	//return rt::OK;
+	return rt::INPUT_NOT_RECEIVED;
 }
 
-ss::rt ss::InputController::input()
+ss::rt ss::InputController::process_input(ArrICD& _icda, ArrIRT& _irta)
 {
-	return rt();
+	rt ret = rt::INITIAL;
+
+	for (size_t icd_i=0; icd_i<_icda.size(); ++icd_i)
+	{
+		ICD temp_icd = _icda[icd_i];
+		for (size_t icv_i = 0; icv_i < temp_icd.size(); ++icv_i)
+		{
+			ICV temp_cv = temp_icd[icv_i];
+			size_t temp_sc = CM_[temp_cv].K;
+			_irta[icd_i].Flags_[icv_i] = SC_[temp_sc];
+		}
+	}
+	return rt::OK;
+}
+
+ss::rt ss::InputController::init_locals()
+{
+	rt ret = rt::INITIAL;
+
+	return rt::OK;
 }

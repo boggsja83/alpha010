@@ -31,7 +31,7 @@ namespace ss
 		inline rt load_text(SDL_Renderer*);
 		inline rt delete_text();
 
-		inline bool operator==(TextRes const &_rhs)
+		inline bool operator==(TextRes const &_rhs) const
 		{
 			//only care about paths being equal??
 			//(we cant have same names either...)

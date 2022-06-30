@@ -2,6 +2,8 @@
 
 #include "ALL.h"
 
+#include "RectType.h"
+
 #include "SDL.h"
 #include "SDL_image.h"
 
@@ -11,6 +13,9 @@ namespace ss
 	static rt				init_sdl_video();
 	static rt				init_sdl_input();
 	static rt				init_sdl_img();
+
+	static char const*		hr(SDL_Scancode);
+	static SDL_Rect			cube_to_sdl_r(Cube*);
 
 	static SDL_Window*		create_win(char const*, int, int, int, int, Uint32);
 	static SDL_Renderer*	create_rend(SDL_Window*, int, Uint32);
@@ -75,8 +80,8 @@ namespace ss
 	ss::rt ss::init_sdl_img()
 	{
 		IMG_GetError();
-	
-		int32_t flags = IMG_INIT_PNG;
+		// move flags to properties file?
+		int32_t flags = IMG_INIT_PNG | IMG_INIT_JPG;
 		int32_t initted = IMG_Init(flags);
 
 		if ((initted & flags) != flags) 
@@ -86,6 +91,25 @@ namespace ss
 		}
 		log("init_sdl_img()"); 
 		return rt::OK;
+	}
+
+	char const* ss::hr(SDL_Scancode _sc)
+	{
+		return SDL_GetScancodeName(_sc);
+	}
+
+	SDL_Rect cube_to_sdl_r(Cube* _cube)
+	{
+		SDL_Rect temp_r(
+			{	
+				(int)_cube->p.x,
+				(int)_cube->p.y,
+				(int)_cube->d.w,
+				(int)_cube->d.h
+			}
+		);
+
+		return temp_r;
 	}
 
 	SDL_Window* ss::create_win(char const* _title, int _x, int _y, int _w, int _h, Uint32 _flags)
@@ -203,17 +227,19 @@ namespace ss
 	//out of all available
 	int32_t ss::get_pixel_format(SDL_RendererInfo* _ri)
 	{
-		//int n = _ri->num_texture_formats;
-		//Uint32 u = 0;
-
-		//for (int i=0; i<n;++i)
-		//{
-		//	u = _ri->texture_formats[i];
-		//}
+		int n = _ri->num_texture_formats;
+		Uint32 u = 0;
+		
+		for (int i=0; i<n;++i)
+		{
+			log("Pixel formats: " <<
+				SDL_GetPixelFormatName(_ri->texture_formats[i]);
+			);
+			//u = _ri->texture_formats[i];
+		}
 		//
 		//return u;
 
-		/*return -2424;*/
 		return _ri->texture_formats[0];
 	}
 

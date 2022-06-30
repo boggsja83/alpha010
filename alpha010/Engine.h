@@ -15,7 +15,7 @@ namespace ss
 		/*--------------State_Holder Members ---------------*/
 		/*--------------------------------------------------*/
 	public:
-		//std::stack<state*> Stack_;
+		//std::stack<State*> Stack_;
 		/*--------------------------------------------------*/
 
 		/*--------------------------------------------------*/
@@ -32,6 +32,7 @@ namespace ss
 
 		//virtual rt input_state();
 		//virtual rt draw_state();
+		//virtual rt update_state();
 		/*--------------------------------------------------*/
 		
 		/*--------------------------------------------------*/
@@ -39,12 +40,12 @@ namespace ss
 		/*--------------------------------------------------*/
 	public:
 		/*--------------------------------------------------*/
-		Engine() : ST_em_(View_.rend(), &Input_)
+		Engine() : ST_em_(&View_, &Input_)
 		/*--------------------------------------------------*/
 		{
 			log("Engine()");
 			rt ret = init();
-			log("Engine::init() ret: " << c2m(ret));
+			log("Engine::init() ret: " << hr(ret));
 		}
 		/*--------------------------------------------------*/
 		~Engine()
@@ -52,7 +53,7 @@ namespace ss
 		{
 			log("~Engine()");
 			rt ret = destroy();
-			log("Engine::destroy() ret: " << c2m(ret));
+			log("Engine::destroy() ret: " << hr(ret));
 		}
 		/*--------------------------------------------------*/
 
@@ -60,9 +61,9 @@ namespace ss
 		/*-----------------Init/Destroy---------------------*/
 		/*--------------------------------------------------*/
 	private:
-		rt init();
-		rt init_locals();
-		rt destroy();
+		rt					init();
+		rt					init_locals();
+		rt					destroy();
 		/*--------------------------------------------------*/
 
 		/*--------------------------------------------------*/
@@ -77,17 +78,18 @@ namespace ss
 		/*--------------Engine States-----------------------*/
 		/*--------------------------------------------------*/
 	private:
-		ST_eng_menu ST_em_;
+		ST_eng_menu			ST_em_;
 		/*--------------------------------------------------*/
 
 		// game loop
 	public:
-		rt loop();
+		rt					loop();
 	public:
 		//rt input();
 		//rt draw();
 		//virtual rt input_state() override;
-		bool On_;
+		bool				On_;
+		size_t				FrameNum_;
 
 	}; // END	engine class
 } // END ss

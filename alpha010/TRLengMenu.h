@@ -43,7 +43,7 @@ namespace ss
 		TRL_eng_menu(SDL_Renderer* _rend) 
 		/*--------------------------------------------------*/
 		{
-			log("TRL_eng_menu_("<<_rend<<")");
+			log("TRL_eng_menu("<<_rend<<")");
 
 			menu_main.name("menu-main");
 			menu_main.path("menu-main.png");
@@ -56,6 +56,10 @@ namespace ss
 			test2.name("test_2");
 			test2.path("test_2.png");
 			TRvec.push_back(&test2);
+
+			red.name("red");
+			red.path("red.jpg");
+			TRvec.push_back(&red);
 
 			Rend_=_rend;
 			NotFound_.load_text(Rend_);
@@ -72,10 +76,11 @@ namespace ss
 		TextRes menu_main;
 		TextRes test_tr;
 		TextRes test2;
+		TextRes red;
 		/*--------------------------------------------------*/
 
 	/*--------------------------------------------------*/
-	} TRL_em; // END	struct TRL_ENG_MENU
+	} TRLengMenu; // END	struct TRL_ENG_MENU
 	/*--------------------------------------------------*/
 } // END	namespace ss
 

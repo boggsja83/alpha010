@@ -34,6 +34,7 @@ namespace ss
 								 
 		virtual rt draw()	 = 0;
 		virtual rt input()	 = 0;
+		virtual rt update()	 = 0;
 	};	// END state
 
 	class State_Holder
@@ -63,8 +64,8 @@ namespace ss
 		// specific state functions for this project
 		virtual rt input_state();//??
 		virtual rt draw_state();//??
-
-		//d::array<state, MAX_STATE_STACK_SIZE> Stack_;
+		virtual rt update_state();//?
+		
 		std::stack<State*> Stack_;
 		rt init();
 		rt destroy();

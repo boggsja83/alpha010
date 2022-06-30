@@ -1,99 +1,61 @@
 #include "ALL.h"
 #include "Engine.h"
 
+#include "Timer.h"
+
 using namespace ss;
 
-void testes(int*&);
+//Timer TmrRun;
 
 int main(int argc, char* argv[])
 {
+	Timer TmrRun;
+	TmrRun.start();
+
 	system("cls");
 	rt ret = rt::INITIAL;
-
+	
 	ss::Engine sl1m;
 
 	ret = sl1m.loop();
-	log("Engine::loop() ret: " << c2m(ret));
-
-	//ret = sl1m.TRM_.reset();
-	//if (ret != rt::SUCCESS) log(c2m(ret));
-
-	int j = 6656;
-	int k = 21;
-	int const l = 43;		// const int
-	int* const ip = &j;		// const pointer to int [always points to j]
-	int const* ic = &l;		// pointer to const int, points to const int [always]
-	int* r = &k;
-	testes(r);
-	j = 453;
-	*ip = 4;
-	j = 9741;
- 	ic = ip;
+	log("Engine::loop() ret: " << hr(ret));
 	
-	//ip = k;
-	//ip = ic;
+	TmrRun.stop();
 
+	// test TimerInfo
+		
+	//TI test = TmrRun; //constructor [operator()(Timer const& _rhs)??]
+	//test = TmrRun; // operator=
 
-	//for (int i=0;i<(int)ss::ec_ret_t::COUNT_RET_T;++i)
-	//	log(i <<": "<<c2m(i));
+	NS temp_dur = TmrRun.TPstop_ - TmrRun.TPstart_;
 
-	//log(c2m(432));
-	//int8_t jk = 127;
-	//log(c2m(jk));
-	//
-	//int8_t j = rerr8;
-	//std::cout << (int)j << std::endl;
+	long long test_dur = TmrRun.elapsed_t_ns();
 
-	//std::cout.setf(std::ios::hex, std::ios::basefield);
-	//std::cout.setf(std::ios::showbase);
-	//std::cout.setf(std::ios::showpos);
-
-	//int8_t yyy = -1;
-	//std::cout << "yyy=" << static_cast<int>(yyy) << std::endl;
-	//std::cout << "int8_t max is: " << static_cast<int>(INT8_MAX)<<std::endl;
-	//std::cout << "int16_t max is: " << static_cast<int>(INT16_MAX)<<std::endl;
-	//std::cout << "int8_t min is: " << static_cast<int>(INT8_MIN)<<std::endl;
-	//std::cout << "int16_t min is: " << static_cast<int>(INT16_MIN)<<std::endl;
-
-	//SDL_Delay(2000);
-
-
-
-	//sdl_ view_;
-	//view_.draw();
- 
-
-	//int8_t a = 0x0;
-
-	//int b = 254;
-
-	////a = static_cast<int8_t>(b);
-	//a = b;
-	//a -= 1;
-	//a = ~(a & a);
-
-	//std::cout << a << std::endl;
-
-	//printf("a=%x\n",a);
-
-
-	//std::cout.setf(std::ios::hex, std::ios::basefield);  // set hex as the basefield
-	//std::cout.setf(std::ios::showbase);                  // activate showbase
-	//std::cout.setf(std::ios::showpos);
-	//std::cout << 69 << a << '\n';
-	//std::cout.unsetf(std::ios::showbase);  
-	//std::cout << 69 << '\n';
-	////std::cout.unsetf(std::ios::showpos);
-	//std::cout << std::dec << a << '\n';
-
-
+	std::string time_output = hr(dur_ns(temp_dur));
+	//std::string time_output2 = hr(test_dur);
+	
+	
+	log("runtime: " << time_output << " [HH:MM:SS.MS.US]");	
+	log("runtime: " << test_dur << " [HH:MM:SS.MS.US]");
 
 	return 0;
 }
 
-void testes(int* &_ip)
-{
-	*_ip = 666;
-	_ip = nullptr;
-	return;
-}
+//
+//__declspec(noinline)
+//bool is_stack_available(size_t amount)
+//{
+//	__try
+//	{
+//		_alloca(amount);
+//		return true;
+//	}
+//	__except (
+//		GetExceptionCode() == EXCEPTION_STACK_OVERFLOW
+//		? EXCEPTION_EXECUTE_HANDLER
+//		: EXCEPTION_CONTINUE_SEARCH)
+//	{
+//		_resetstkoflw();
+//		return false;
+//	}
+//}

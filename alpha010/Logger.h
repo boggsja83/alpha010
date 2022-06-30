@@ -105,6 +105,7 @@ namespace ss
 		template <typename T>
 		Logger& operator<<(T const& _rhs)
 		{
+			//constexpr char const* d = _rhs;//testing this line...[delete]
 			this->_buffer << _rhs;
 			return *this;
 		}

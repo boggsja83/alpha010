@@ -69,7 +69,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <CodeAnalysisRuleSet>alpha010.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <CodeAnalysisRuleSet>alpha010.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <CodeAnalysisRuleSet>alpha010.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <CodeAnalysisRuleSet>alpha010.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -138,9 +149,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ALL.h" />
+    <ClInclude Include="ControlMap.h" />
     <ClInclude Include="DimType.h" />
+    <ClInclude Include="ICDall.h" />
+    <ClInclude Include="ICDengMenu.h" />
+    <ClInclude Include="ICDtest.h" />
+    <ClInclude Include="ICDtest2.h" />
     <ClInclude Include="InputContext.h" />
     <ClInclude Include="InputController.h" />
+    <ClInclude Include="InputProp.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="TextRes.h" />
     <ClInclude Include="PosType.h" />
     <ClInclude Include="QuickSort.h" />
@@ -152,10 +170,14 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="SDP.h" />
     <ClInclude Include="STengMenu.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="TRL.h" />
     <ClInclude Include="TRLengMenu.h" />
     <ClInclude Include="ViewController.h" />
     <ClInclude Include="WinProp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="alpha010.ruleset" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
