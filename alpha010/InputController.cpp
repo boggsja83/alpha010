@@ -44,7 +44,7 @@ ss::rt ss::InputController::input(ArrICD& _icd, ArrIRT& _irta)
 	{
 		temp_sc = ev.key.keysym.scancode;
 		ks_change = false;
-
+		
 		switch (ev.type)
 		{
 		case SDL_QUIT:
@@ -52,11 +52,19 @@ ss::rt ss::InputController::input(ArrICD& _icd, ArrIRT& _irta)
 		case SDL_KEYDOWN:
 			SC_[temp_sc] = true;
 			TMR_[temp_sc].start();
+			//_irta[temp_sc].TI_ = TMR_[temp_sc];
+			//_irta[temp_sc].TI_.TPstart_ = TMR_[temp_sc].TPstart_;
+			//_irta[temp_sc].TI_.On_ = true;
+			
 			ks_change = true;
 			break;
 		case SDL_KEYUP:
 			SC_[temp_sc] = false;
 			TMR_[temp_sc].stop();
+			//_irta[temp_sc].TI_ = TMR_[temp_sc];
+			//_irta[temp_sc].TI_.TPstop_ = TMR_[temp_sc].TPstop_;
+			//_irta[temp_sc].TI_.On_ = false;
+			
 			ks_change = true;
 			break;
 		default:;
@@ -85,9 +93,6 @@ ss::rt ss::InputController::process_input(ArrICD& _icda, ArrIRT& _irta)
 {
 	rt ret = rt::INITIAL;
 
-	//ret = set_irt(_icda, _irta);
-	//if (ret != rt::OK) return ret;
-
 	for (size_t icd_i=0; icd_i<_icda.size(); ++icd_i)
 	{
 		ICD temp_icd = _icda[icd_i];
@@ -96,16 +101,6 @@ ss::rt ss::InputController::process_input(ArrICD& _icda, ArrIRT& _irta)
 			ICV temp_cv = temp_icd[icv_i];
 			size_t temp_sc = CM_[temp_cv].K;
 			_irta[icd_i].Flags_[icv_i] = SC_[temp_sc];
-			//if (SC_[temp_sc])
-			//{
-			//	//set time down
-			//	TMR_[temp_sc].start();
-			//}
-			//else
-			//{
-			//	//set time up
-			//	TMR_[temp_sc].stop();
-			//}
 		}
 	}
 	return rt::OK;

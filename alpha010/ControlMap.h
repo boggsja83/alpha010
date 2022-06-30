@@ -50,10 +50,10 @@ namespace ss
 			Map_[i].V	= ICV::TESTVAL4;
 			Map_[i++].K	= SDL_SCANCODE_D;
 
-			Map_[i].V = ICV::TESTVAL5;
+			Map_[i].V	= ICV::TESTVAL5;
 			Map_[i++].K = SDL_SCANCODE_1;
 
-			Map_[i].V = ICV::TESTVAL6;
+			Map_[i].V	= ICV::TESTVAL6;
 			Map_[i++].K = SDL_SCANCODE_SEMICOLON;
 		
 		}

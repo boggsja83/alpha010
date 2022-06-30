@@ -1,19 +1,15 @@
 #pragma once
 
-//#include <vector>
-#include <array>
-//#include <map>
-//#include <tuple>
-//#include <utility>
-//#include <string>
-
 #include "ALL.h"
 #include "SDLwrapper.h"
+
+#include <array>
 
 #include "InputContext.h"
 #include "ControlMap.h"
 
 #include "Timer.h"
+#include "InputProp.h"
 
 //context definitions - passed through by object calling input
 //#include "ICDengMenu.h"
@@ -25,7 +21,7 @@ namespace ss
 /*--------------------------------------------------*/
 {
 
-	static size_t constexpr	size_SC = sizeof(bool) * SDL_NUM_SCANCODES;
+	static size_t constexpr	size_SC = sizeof(bool) * 300;// SDL_NUM_SCANCODES;
 	typedef std::array<bool, size_SC> Flags_SC;
 
 /*--------------------------------------------------*/

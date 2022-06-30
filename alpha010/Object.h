@@ -24,6 +24,8 @@ namespace ss
 		inline rt init() 
 		{
 			IC_ = IC::TEST2;
+			//switch back to above! (testing) 6/29/22
+			//IC_ = IC::TEST1;
 
 			text_arr[0] = "dtdhnd";
 			text_arr[1] = "menu-main";
@@ -31,7 +33,7 @@ namespace ss
 			text_arr[3] = "test_2";
 			text_arr[4] = "red";
 
-			iTA = 1;
+			iTA = 3;
 
 			Dst_.x = 25;
 			Dst_.y = 50;
@@ -78,23 +80,30 @@ namespace ss
 		{
 			// this really should be push a state (depending on action) ???
 			// also need to implement press, range, and toggle input funcitons
-			if (ISF_[0]) { log("0"); }
-			if (ISF_[1]) 
+			
+			/**************************************************/
+			if (ISF_[0]) //ICV::TESTVAL1, because Object has ICDtest2...
+			/**************************************************/
 			{ 
-				if (iTA == 0)
-					iTA = 4;
-				else
-					--iTA;  
-			}
-			if (ISF_[2]) { log("2"); }
-			if (ISF_[3]) 
-			{ 
-				if (iTA == 4)
-					iTA = 0;
-				else
-					++iTA; 
-			}
+				log("0-W"); 
 
+			}
+			/**************************************************/
+			if (ISF_[1]) //ICV::TESTVAL2
+			/**************************************************/
+			{ 
+				iTA = (iTA - 1) % 4;//works because c++ % returns int in range of [1,n-1]
+			}
+			/**************************************************/
+			if (ISF_[2]) { log("2-S"); }//ICV::TESTVAL3
+			/**************************************************/
+			/**************************************************/
+			if (ISF_[3]) //ICV::TESTVAL4
+			/**************************************************/
+			{ 
+				iTA = (iTA + 1) % 4;
+			}
+			/**************************************************/
 				//...switch here
 
 				// get this to work
