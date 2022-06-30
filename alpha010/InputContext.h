@@ -25,7 +25,7 @@ namespace ss
 	{
 		NONE,			MENU_SELECT,	MENU_UP,	
 		MENU_NEXT,		MENU_PREV,		MENU_DOWN,
-		TESTVAL1,TESTVAL2,TESTVAL3,
+		TESTVAL1, TESTVAL2, TESTVAL3,
 		TESTVAL4, TESTVAL5, TESTVAL6,
 
 		ICV_COUNT
@@ -93,17 +93,17 @@ namespace ss
 		}
 	} ICD;
 
-	typedef struct ICDblank : InputContextDef
-	{
-		//InputContext	IC_;
-		//std::vector<InputContextValue> ICVvec_;
+	//typedef struct ICDblank : InputContextDef
+	//{
+	//	//InputContext	IC_;
+	//	//std::vector<InputContextValue> ICVvec_;
 
-		ICDblank()
-		{
-			IC_ = IC::NONE;
-			ICVvec_.clear();
-		}
-	} ICD_B;
+	//	ICDblank()
+	//	{
+	//		IC_ = IC::NONE;
+	//		ICVvec_.clear();
+	//	}
+	//} ICD_B;
 
 	//static size_t const		size_IRAO	=	sizeof(bool) * static_cast<size_t>(ICV::ICV_COUNT);
 	//typedef std::array<bool, size_IRAO>		Flags_IR;
@@ -131,9 +131,9 @@ namespace ss
 
 		char const* arr[] = {
 		"NONE",			"MENU_SELECT",	"MENU_UP",
-		"MENU_NEXT",		"MENU_PREV",		"MENU_DOWN",
-		"TESTVAL1","TESTVAL2","TESTVAL3",
-		"TESTVAL4", "TESTVAL5", "TESTVAL6",
+		"MENU_NEXT",	"MENU_PREV",	"MENU_DOWN",
+		"TESTVAL1",		"TESTVAL2",		"TESTVAL3",
+		"TESTVAL4",		"TESTVAL5",		"TESTVAL6",
 
 		"ICV_COUNT"
 		};
@@ -141,16 +141,26 @@ namespace ss
 		return arr[static_cast<size_t>(_icv)];
 	}
 
-	static size_t constexpr	size_TMR = sizeof(bool) * SDL_NUM_SCANCODES;
-	typedef std::array<Timer, size_TMR> ArrTMR;
+	//static size_t constexpr	size_TMR = sizeof(bool) * 300;//SDL_NUM_SCANCODES;
+	//typedef std::array<Timer, size_TMR> ArrTMR;
+	//moved to Timer.h
 
 	typedef struct InputReturnType
 	{
-		IC	IC_ = IC::NONE;
+		IC					IC_	= IC::NONE;
 		std::vector<bool>	Flags_;
+		TI					TI_;
+		//Timer				TMR_;
+		//add in return type structure that contains
+		// NS t1, t2 (start stop)
+		// bool On (timer on/off)
+		// duration?(not really necessary...)
 
 		enum class p :size_t
 		{
+			//	std::vector will double its size to accomodate items added,
+			//	find sweet spot for this so it is big enough to hold most cases,
+			//	but does not constantly double itself...
 			RESERVE = 10
 		};
 
@@ -174,6 +184,7 @@ namespace ss
 				return false;
 		}
 		
+		// dont use overloaded constructors....?
 		InputReturnType()
 		{
 			Flags_.reserve(static_cast<size_t>(p::RESERVE));
@@ -190,10 +201,7 @@ namespace ss
 		}
 		~InputReturnType() {}
 
-
-
 		inline size_t size() const { return Flags_.size(); }
-	
 	} IRT;
 
 	typedef std::array<IRT, static_cast<size_t>(IC::IC_COUNT)> ArrIRT;
@@ -203,6 +211,7 @@ namespace ss
 		_irt.IC_ = _icd.IC_;
 
 		_irt.Flags_.clear();
+		//_irt.TMR_ = ArrTMR();
 		for (size_t i = 0; i < _icd.size(); ++i)
 		{
 			_irt.Flags_.push_back(false);

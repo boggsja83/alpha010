@@ -48,7 +48,6 @@ ss::rt ss::ST_eng_menu::input()
 	
 	rt ret = rt::INITIAL;
 
-	//Flags_IR	irao({});//delete this system, using IRT instead
 	ArrIRT		irta;
 
 	ret = set_irt(ICD_, irta);
@@ -93,18 +92,8 @@ ss::rt ss::ST_eng_menu::init()
 {
 	log("ST_eng_menu::init()");
 	
-	// init locals function needed here
-	//View_ = nullptr;
-	//Input_ = nullptr;
-	//IC_ = IC::MENU;
-
-	// add all InputContext's from this "level"
-	// to the InputContextArray
-	//ICD_[0] = IC_;//this levels IC_
-	//ICD_[1] = IC::TEST1;// additional IC
-	//ICD_[2] = testing.ic();// addition IC (Object testing)
-
-
+	// 6/29/22
+	// these dont do anything right now.  input stuff is in Object.h
 	ICD_[0] = ICD_em;	//this objects IC
 	ICD_[1] = ICD_t1;
 	ICD_[2] = ICD_t2;

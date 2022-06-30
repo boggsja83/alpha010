@@ -18,31 +18,34 @@ namespace ss
 	typedef std::chrono::seconds SEC;
 	typedef std::chrono::minutes MIN;
 	typedef std::chrono::hours HOUR;
-
-	typedef std::chrono::steady_clock SCT;
+	typedef std::chrono::steady_clock STDYCLK;
+	typedef std::chrono::time_point<STDYCLK> TP;
+	typedef std::chrono::duration<long long, std::ratio<1, 1000000000>> DUR_T;
 	/**************************************************/
+
 
 	/**************************************************/
 	struct Timer
 	/**************************************************/
 	{
 		/**************************************************/
-		/*********************Members**********************/
+		/******************** Members *********************/
 		/**************************************************/
-		std::chrono::duration<long long, std::ratio<1,1000000000>>	Duration_;
-		std::chrono::time_point<SCT> TPstart_;
-		std::chrono::time_point<SCT> TPstop_;
-		bool On_;
+		//DUR_T	Duration_;
+		//NS		Duration_;
+		TP		TPstart_;
+		TP		TPstop_;
+		bool	On_;
 		/**************************************************/
 
 		/**************************************************/
-		/*********************Functions********************/
+		/******************** Functions *******************/
 		/**************************************************/
 		inline void start()
 		/**************************************************/
 		{
 			if (On_) return;
-			TPstart_ = SCT::now();
+			TPstart_ = STDYCLK::now();
 			On_ = true;
 		}
 		/**************************************************/
@@ -50,17 +53,40 @@ namespace ss
 		/**************************************************/
 		{
 			if (!On_) return;
-			TPstop_ = SCT::now();
+			TPstop_ = STDYCLK::now();
 			On_ = false;
-			Duration_ = TPstop_ - TPstart_;
+			//Duration_ = TPstop_ - TPstart_;
+		}
+		/**************************************************/
+		inline long long elapsed_t_ns()
+		/**************************************************/
+		{
+			return (TPstop_ - TPstart_).count();
+		}
+		/**************************************************/
+		inline long long current_t_ns()
+		{
+			TP n(STDYCLK::now());
+
+			return (n - TPstart_).count();
 		}
 		/**************************************************/
 
 		/**************************************************/
-		/***************Contructor/Destructor**************/
+		
 		/**************************************************/
-		Timer():
-			Duration_()
+		/******************** Overloads *******************/
+		/**************************************************/
+		/*void* operator=()
+		{}*/
+		/**************************************************/
+
+
+		/**************************************************/
+		/************** Contructor/Destructor *************/
+		/**************************************************/
+		Timer()//:
+			//Duration_()
 		{ 
 			On_ = false;
 		}
@@ -115,4 +141,58 @@ namespace ss
 		return sstr.str();
 	}
 
-}
+	///**************************************************/
+	//static inline std::string hr(long long _raw)
+	///**************************************************/
+	//{
+	//	std::stringstream sstr;
+
+	//	sstr.str("");
+
+	//	sstr << comp_hr(_raw).count() << ':';
+	//	sstr << comp_min(_raw).count() << ':';
+	//	sstr << comp_sec(_raw).count() << '.';
+	//	sstr << comp_ms(_raw).count() << '.';
+	//	sstr << comp_us(_raw).count() << '.';
+	//	sstr << comp_ns(_raw).count();
+
+	//	return sstr.str();
+	//}
+
+	// superfluous methinks...all info is in timer already
+	//  looks like i was going to use it in input...  well see
+	typedef struct TimerInfo
+	{
+		TP TPstart_;
+		TP TPstop_;
+		bool On_;
+
+		TimerInfo() { On_ = false; }
+		TimerInfo(Timer const& _rhs)
+		{
+			this->On_		= _rhs.On_;
+			this->TPstart_	= _rhs.TPstart_;
+			this->TPstop_	= _rhs.TPstop_;
+		}
+
+		~TimerInfo() {}
+
+		// this may be subject with TimerInfo& return type, return *this...
+		// after thinking, actually should be okay...
+		// still needs testing in input tho 9/7/21
+		TimerInfo& operator=(Timer const& _rhs)
+		{
+			this->On_ = _rhs.On_;
+			this->TPstart_ = _rhs.TPstart_;
+			this->TPstop_ = _rhs.TPstop_;
+			
+			return *this;
+		}
+
+		// add an elapsed_t func like timer
+	} TI;
+
+	static size_t constexpr	size_TMR = sizeof(bool) * 300;//SDL_NUM_SCANCODES;
+	typedef std::array<Timer, size_TMR> ArrTMR;
+
+} // END	namespace ss

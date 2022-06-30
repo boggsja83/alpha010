@@ -173,6 +173,9 @@
     <ClInclude Include="Timer.h">
       <Filter>Utility\Timer</Filter>
     </ClInclude>
+    <ClInclude Include="InputProp.h">
+      <Filter>Controller\Input\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="alpha010.ruleset" />
