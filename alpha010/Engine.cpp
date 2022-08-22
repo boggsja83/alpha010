@@ -87,6 +87,7 @@ ss::rt ss::Engine::loop()
         case rt::QUIT:
             On_ = false;
             break;
+
         default:;
         }
 
@@ -96,6 +97,11 @@ ss::rt ss::Engine::loop()
         ret = draw_state();
         if (ret != rt::OK) return ret;
 
+        //++FrameNum_;
+        if (++FrameNum_ % 60 == 0)
+        {
+            log("Frame: " << FrameNum_);
+        }
     }
     
     return ret;

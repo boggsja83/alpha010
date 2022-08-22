@@ -5,7 +5,7 @@
 #include <vector>
 #include "Timer.h"
 
-// 7/5 3:00pm 
+// 7/5/21(20?) 3:00pm 
 // -going to work on ooperator overloads...
 // working on moving all ICDs to this file,
 // put a ICMgr struct/class in here to hold
@@ -50,7 +50,8 @@ namespace ss
 		InputContextDef()
 		{
 			IC_ = IC::NONE;
-			ICVvec_.reserve(10);
+			ICVvec_.reserve(10);// 7/1/22  - this 10 is aribtrary, make sure this reflects actual number of ICDs...
+								// actually, maybe not at all...
 		}
 
 		InputContext	IC_;
@@ -110,7 +111,8 @@ namespace ss
 	typedef std::array<InputContext, static_cast<size_t>
 							(IC::IC_COUNT)>	ArrIC;
 	typedef std::array<InputContextDef, static_cast<size_t>
-							(IC::IC_COUNT)>	ArrICD;
+							(IC::IC_COUNT)>	ArrICD;	// 7-1-22 this can be down-sized to number of ICDs  
+													// that ive created, or could even dynamically size it... (dont fuss too much about this...)
 
 	static char const* hr(IC _ic)
 	{
@@ -149,8 +151,9 @@ namespace ss
 	{
 		IC					IC_	= IC::NONE;
 		std::vector<bool>	Flags_;
-		TI					TI_;
-		//Timer				TMR_;
+		//TI					TI_;	// 7/1/22 - this is the timestamp to use...
+		//TP					ks_change_tp;
+									//Timer				TMR_;
 		//add in return type structure that contains
 		// NS t1, t2 (start stop)
 		// bool On (timer on/off)
@@ -222,7 +225,7 @@ namespace ss
 	static inline ss::rt set_irt(ArrICD& _icda, ArrIRT& _irta)
 	{
 		rt ret = rt::INITIAL;
-
+		
 		for (size_t i = 0; i < _icda.size(); ++i)
 		{
 			ret = set_irt(_icda[i], _irta[i]);

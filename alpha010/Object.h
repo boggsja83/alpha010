@@ -47,19 +47,19 @@ namespace ss
 
 		/*-------------------VARIABLES----------------------*/
 	private:
-		char const*		NameCommon_	= "object";
-		char const*		NameText_	= "red";
+		char const*			NameCommon_	= "Object";
+		char const*			NameText_	= "red";
 
-		IC	IC_;
-		std::array<bool, 4> ISF_;
+		IC					IC_;
+		std::array<bool, 4>	ISF_;	// 7/1/22 - im not sure what this stands for but
+									// its just a little variable for testing this input...
+									// InputStateFlags?
 
-		SDL_Rect		Src_;
-		SDL_Rect		Dst_;
+		SDL_Rect			Src_;
+		SDL_Rect			Dst_;
 
-		
-
-		std::array<char const*, 5> text_arr;
-		size_t			iTA;
+		std::array<char const*, 5> text_arr;	// texture array
+		size_t				iTA;	// IndexTextureArray
 		/*--------------------------------------------------*/
 
 		/*-------------------FUNCTIONS----------------------*/
@@ -92,7 +92,7 @@ namespace ss
 			if (ISF_[1]) //ICV::TESTVAL2
 			/**************************************************/
 			{ 
-				iTA = (iTA - 1) % 4;//works because c++ % returns int in range of [1,n-1]
+				iTA = (iTA - 1) % 4; // works because c++ % returns int in range of [1,n-1]
 			}
 			/**************************************************/
 			if (ISF_[2]) { log("2-S"); }//ICV::TESTVAL3

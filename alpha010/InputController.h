@@ -107,7 +107,7 @@ namespace ss
 
 		ControlMap	CM_;
 
-		ArrTMR		TMR_;
+		//ArrTMR		TMR_;	// 7/1/22 - this should not be used
 		//std::vector<ICD>	ICDvec_;
 
 	public:

@@ -18,9 +18,11 @@ int main(int argc, char* argv[])
 	ss::Engine sl1m;
 
 	ret = sl1m.loop();
+	TmrRun.stop();
+	
 	log("Engine::loop() ret: " << hr(ret));
 	
-	TmrRun.stop();
+	//TmrRun.stop();
 
 	// test TimerInfo
 		
@@ -36,7 +38,10 @@ int main(int argc, char* argv[])
 	
 	
 	log("runtime: " << time_output << " [HH:MM:SS.MS.US]");	
+	//log("runtime: " << temp_dur << " [HH:MM:SS.MS.US]"); ERROR! (Logger.h)
 	log("runtime: " << test_dur << " [HH:MM:SS.MS.US]");
+
+	log("frames: " << sl1m.FrameNum_);
 
 	return 0;
 }

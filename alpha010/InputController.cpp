@@ -33,12 +33,12 @@ ss::rt ss::InputController::destroy()
 ///*--------------------------------------------------*/
 //SDL_Event ss::InputController::poll_event()
 ///*--------------------------------------------------*/
-ss::rt ss::InputController::input(ArrICD& _icd, ArrIRT& _irta)
+ss::rt ss::InputController::input(ArrICD& _icda, ArrIRT& _irta)
 {
-	SDL_Event		ev;
-	size_t temp_sc = SDL_SCANCODE_UNKNOWN;
-	rt				ret = rt::OK;
-	bool			ks_change =	false;
+	SDL_Event	ev;
+	size_t		temp_sc = SDL_SCANCODE_UNKNOWN;
+	rt			ret = rt::OK;
+	bool		ks_change =	false;
 
 	while (SDL_PollEvent(&ev))
 	{
@@ -51,7 +51,10 @@ ss::rt ss::InputController::input(ArrICD& _icd, ArrIRT& _irta)
 			return rt::QUIT;
 		case SDL_KEYDOWN:
 			SC_[temp_sc] = true;
-			TMR_[temp_sc].start();
+			
+			//TMR_[temp_sc].start();	// 7/1/22 - this should not be used
+									// should be a timestamp...
+
 			//_irta[temp_sc].TI_ = TMR_[temp_sc];
 			//_irta[temp_sc].TI_.TPstart_ = TMR_[temp_sc].TPstart_;
 			//_irta[temp_sc].TI_.On_ = true;
@@ -60,7 +63,9 @@ ss::rt ss::InputController::input(ArrICD& _icd, ArrIRT& _irta)
 			break;
 		case SDL_KEYUP:
 			SC_[temp_sc] = false;
-			TMR_[temp_sc].stop();
+			//TMR_[temp_sc].stop(); // 7/1/22 - this should not be used
+								  // should be a timestamp...
+
 			//_irta[temp_sc].TI_ = TMR_[temp_sc];
 			//_irta[temp_sc].TI_.TPstop_ = TMR_[temp_sc].TPstop_;
 			//_irta[temp_sc].TI_.On_ = false;
@@ -73,7 +78,7 @@ ss::rt ss::InputController::input(ArrICD& _icd, ArrIRT& _irta)
 		//process input
 		if (ks_change)
 		{
-			ret = process_input(_icd, _irta);
+			ret = process_input(_icda, _irta);
 			if (ret != rt::OK) return ret;
 			return rt::INPUT_RECEIVED;
 		}
@@ -91,6 +96,7 @@ ss::rt ss::InputController::input(ArrICD& _icd, ArrIRT& _irta)
 
 ss::rt ss::InputController::process_input(ArrICD& _icda, ArrIRT& _irta)
 {
+	// 7/1/22 - need to add timestamps to this...
 	rt ret = rt::INITIAL;
 
 	for (size_t icd_i=0; icd_i<_icda.size(); ++icd_i)

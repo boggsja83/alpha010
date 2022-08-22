@@ -50,10 +50,14 @@ ss::rt ss::ST_eng_menu::input()
 
 	ArrIRT		irta;
 
-	ret = set_irt(ICD_, irta);
+	// 6/29/22
+	// methinks this set_irt needs to be an init type thing,
+	// right now this is resetting every engine tick
+	// 7/2/22 = move this to state init??
+	ret = set_irt(ICDA_, irta);	
 	if (ret != rt::OK) return ret;
 
-	ret = Input_->input(ICD_, irta);
+	ret = Input_->input(ICDA_, irta);
 	
 	if(ret == rt::INPUT_RECEIVED)
 		for (size_t i = 0; i < irta.size(); ++i)
@@ -94,9 +98,9 @@ ss::rt ss::ST_eng_menu::init()
 	
 	// 6/29/22
 	// these dont do anything right now.  input stuff is in Object.h
-	ICD_[0] = ICD_em;	//this objects IC
-	ICD_[1] = ICD_t1;
-	ICD_[2] = ICD_t2;
+	ICDA_[0] = ICD_em;	//this objects IC
+	ICDA_[1] = ICD_t1;
+	ICDA_[2] = ICD_t2;
 
 	return rt::OK;
 }
