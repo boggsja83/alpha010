@@ -179,7 +179,7 @@ namespace ss
 
 		// this may be subject with TimerInfo& return type, return *this...
 		// after thinking, actually should be okay...
-		// still needs testing in input tho 9/7/21
+		// still needs testing in input tho 9/7/21(20?)
 		TimerInfo& operator=(Timer const& _rhs)
 		{
 			this->On_ = _rhs.On_;
@@ -192,7 +192,7 @@ namespace ss
 		// add an elapsed_t func like timer
 	} TI;
 
-	static size_t constexpr	size_TMR = sizeof(bool) * 300;//SDL_NUM_SCANCODES;
-	typedef std::array<Timer, size_TMR> ArrTMR;
+	//static size_t constexpr	size_TMR = sizeof(bool) * 300;//SDL_NUM_SCANCODES;
+	//typedef std::array<Timer, size_TMR> ArrTMR;  // 7/1/22 - shouldnt use this... at all
 
 } // END	namespace ss

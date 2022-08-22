@@ -88,7 +88,7 @@ namespace ss
     
         Object              testing; // delete!
 
-        // controllers (make a passthrough object...)
+        // controllers (make a passthrough object...)[put into constructor instead]
         ViewController*     View_;
         InputController*    Input_;
         
@@ -100,7 +100,7 @@ namespace ss
         //ICDengMenu          ICD_;
         //InputContext        IC_;//this objects IC
        // ArrIC               ICA_;//holds all contexts involved in this state
-        ArrICD              ICD_;
+        ArrICD              ICDA_;
         /*--------------------------------------------------*/
 
         /*--------------------------------------------------*/
